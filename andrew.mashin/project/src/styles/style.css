@@ -1,0 +1,12 @@
+@font-face {
+    font-family: 'Rubik'; /* Имя, которое будете использовать */
+    src: url('../fonts/static/Rubik-Regular.ttf') format('ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+body {
+    font-family: 'Rubik';
+    margin: 0;
+}
