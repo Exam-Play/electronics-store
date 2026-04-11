@@ -6,14 +6,14 @@
 
 body {
     font-family: 'Rubik';
-    display: flex;
-    justify-content: center;
-    background-color: #E4E7EB;
+    background-color: #FFFFFF;
+    margin: 0;
     line-height: 150%;
     -webkit-tap-highlight-color: transparent;
 }
 
 #root {
+    margin: 0 auto;
     width: 100%;
     max-width: 1240px;
     padding: 0 20px;
@@ -49,10 +49,19 @@ header {
     }
 
     .items a {
+        border-radius: 8px;
         display: flex;
         flex-direction: row;
         gap: 12px;
         padding: 12px 20px;
+    }
+
+    .items a.active {
+        background: #F3F6FA;
+    }
+
+    .items a:active {
+        background: #F3F6FA;
     }
 
     p {
