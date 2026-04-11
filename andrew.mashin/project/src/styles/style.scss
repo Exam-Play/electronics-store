@@ -3,6 +3,17 @@
     src: url('../assets/fonts/Rubik-VariableFont_wght.ttf');
 }
 
+@mixin wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    max-width: 1240px;
+}
 
 body {
     font-family: 'Rubik';
@@ -12,11 +23,10 @@ body {
     -webkit-tap-highlight-color: transparent;
 }
 
-#root {
-    margin: 0 auto;
-    width: 100%;
-    max-width: 1240px;
-    padding: 0 20px;
+h2 {
+    font-size: 24px;
+    margin: 0;
+    padding: 6px 0;
 }
 
 a {
@@ -32,36 +42,8 @@ span {
 header {
     height: 80px;
 
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-
-    h2 {
-        font-size: 24px;
-        margin: 0;
-        padding: 6px 0;
-    }
-
-    .items {
-        display: flex;
-        flex-direction: row;
-    }
-
-    .items a {
-        border-radius: 8px;
-        display: flex;
-        flex-direction: row;
-        gap: 12px;
-        padding: 12px 20px;
-    }
-
-    .items a.active {
-        background: #F3F6FA;
-    }
-
-    .items a:active {
-        background: #F3F6FA;
+    .wrapper {
+        @include wrapper;
     }
 
     p {
@@ -69,6 +51,78 @@ header {
         font-weight: 500;
         font-size: 16px;
         margin: 0;
+    }
+
+    .items {
+        flex-wrap: wrap;
+        display: flex;
+        flex-direction: row;
+
+        a {
+            border-radius: 8px;
+            display: flex;
+            flex-direction: row;
+            gap: 12px;
+            padding: 12px 20px;
+        }
+
+        a.active {
+            background: #F3F6FA;
+        }
+    }
+}
+
+/* Footer */
+footer {
+    background: #0C368A;
+    color: #B7CEFF;
+
+    h2 {
+        font-weight: 600;
+    }
+
+    p {
+        margin: 0;
+    }
+
+    .wrapper {
+        align-items: normal !important;
+        padding: 42px 0;
+        @include wrapper;
+    }
+
+    .about-company {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .phone {
+        a {
+            display: flex;
+            flex-direction: row;
+            gap: 13px;
+            color: #B7CEFF;
+        }
+
+        img {
+            width: 32px;
+            height: 32px;
+        }
+    }
+
+    .social-media {
+        display: flex;
+        gap: 20px;
+
+        a {
+            height: 36px;
+        }
+
+        img {
+            width: 36px;
+            height: 36px;
+        }
     }
 }
 

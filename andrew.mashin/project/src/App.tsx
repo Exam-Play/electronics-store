@@ -11,26 +11,26 @@ import LoginPage from './pages/ProfilePage'
 import NotFoundPage from './pages/NotFoundPage'
 
 function App() {
-  const location = useLocation();
+	const location = useLocation();
 
-  if (!["/", "/catalog", "/cart", "/profile"].includes(location.pathname)) {
-    return <NotFoundPage />;
-  }
+	if (!["/", "/catalog", "/cart", "/profile"].includes(location.pathname)) {
+		return <NotFoundPage />;
+	}
 
-  return (
-    <>
-      <Header />
+	return (
+		<>
+			<Header />
 
-      <Routes>
-        <Route path="/" element={<HomePage />}></Route>
-        <Route path="/catalog" element={<CatalogPage />}></Route>
-        <Route path="/cart" element={<CartPage />}></Route>
-        <Route path="/profile" element={<LoginPage />}></Route>
-      </Routes>
+			<Routes>
+				<Route path="/" element={<HomePage />}></Route>
+				<Route path="/catalog" element={<CatalogPage />}></Route>
+				<Route path="/cart" element={<CartPage />}></Route>
+				<Route path="/profile" element={<LoginPage />}></Route>
+			</Routes>
 
-      <Footer />
-    </>
-  );
+			<Footer />
+		</>
+	);
 }
 
 export default App;
