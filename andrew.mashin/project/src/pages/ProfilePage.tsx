@@ -1,6 +1,6 @@
 function LoginPage() {
     return <main>
-        LoginPage
+        ProfilePage
     </main>
 }
 

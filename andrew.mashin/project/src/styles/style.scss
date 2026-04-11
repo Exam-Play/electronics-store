@@ -1,0 +1,104 @@
+@font-face {
+    font-family: 'Rubik';
+    src: url('../assets/fonts/Rubik-VariableFont_wght.ttf');
+}
+
+
+body {
+    font-family: 'Rubik';
+    display: flex;
+    justify-content: center;
+    background-color: #E4E7EB;
+    line-height: 150%;
+    -webkit-tap-highlight-color: transparent;
+}
+
+#root {
+    width: 100%;
+    max-width: 1240px;
+    padding: 0 20px;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+span {
+    color: #115EFB;
+}
+
+/* header */
+header {
+    height: 80px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    h2 {
+        font-size: 24px;
+        margin: 0;
+        padding: 6px 0;
+    }
+
+    .items {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .items a {
+        display: flex;
+        flex-direction: row;
+        gap: 12px;
+        padding: 12px 20px;
+    }
+
+    p {
+        color: #115EFB;
+        font-weight: 500;
+        font-size: 16px;
+        margin: 0;
+    }
+}
+
+/* Страница 404 */
+.not-found-page {
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    h1 {
+        margin: 0 auto;
+        font-size: 140px;
+        color: #FFEC41;
+        font-weight: 200;
+        text-shadow: 2px 4px 4px rgba(132, 132, 132, 0.5);
+    }
+
+    h2 {
+        font-weight: bold;
+        font-size: 28px;
+    }
+
+    .home-link {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        
+        padding: 10px 25px;
+        background: #115EFB;
+        border-radius: 10px;
+
+        box-shadow: 0 5px 10px rgba(0,0,0,0.25);
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .home-link:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 12px rgba(0,0,0,0.3);
+    }
+}
