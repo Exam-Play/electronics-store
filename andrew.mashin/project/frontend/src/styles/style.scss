@@ -23,6 +23,10 @@ body {
     -webkit-tap-highlight-color: transparent;
 }
 
+h1 {
+    margin: 0;
+}
+
 h2 {
     font-size: 24px;
     margin: 0;
@@ -66,7 +70,7 @@ header {
             padding: 12px 20px;
         }
 
-        a.active {
+        a.active, a:hover {
             background: #F3F6FA;
         }
     }
@@ -86,9 +90,10 @@ footer {
     }
 
     .wrapper {
+        @include wrapper;
+        
         align-items: normal !important;
         padding: 42px 0;
-        @include wrapper;
     }
 
     .about-company {
@@ -122,6 +127,63 @@ footer {
         img {
             width: 36px;
             height: 36px;
+        }
+    }
+}
+
+.login_block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #FFFFFF;
+    border-radius: 8px;
+    width: 382px;
+    height: 354px;
+
+    form {
+        display: flex;
+        flex-direction: column;
+
+        label {
+            font-size: 14px;
+            position: relative;
+
+            &::after {
+                content: '*';
+                color: #FF60C3;
+
+                position: absolute;
+                right: -9px;
+                top: 12px;
+
+                font-size: 20px;
+            }
+        }
+
+        input {
+            box-sizing: border-box;
+            width: 286px;
+            height: 48px;
+            font-size: 16px;
+            border: none;
+            background: #E4E7EB;
+            border-radius: 8px;
+            padding: 0 16px;
+            margin-bottom: 30px;
+        }
+
+        button {
+            box-sizing: border-box;
+            width: 113px;
+            height: 48px;
+            padding: 12px 32px;
+            background: #115EFB;
+            border: none;
+            border-radius: 8px;
+        
+            font-size: 16px;
+            color: #FFFFFF;
         }
     }
 }
