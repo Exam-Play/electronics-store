@@ -123,7 +123,7 @@ header {
     gap: 40px;
     justify-content: center;
     align-items: center;
-
+    
     height: 960px;
     background-color: #E5EEFF;
     background-image: url(../assets/images/backgrounds/background-login.svg);
@@ -143,6 +143,12 @@ header {
         form {
             display: flex;
             flex-direction: column;
+
+            p {
+                margin: 0 0 15px 0;
+                font-size: 14px;
+                color: #E6626A;
+            }
 
             label {
                 font-size: 14px;

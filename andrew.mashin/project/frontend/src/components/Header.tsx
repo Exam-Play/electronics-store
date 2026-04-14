@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import catalogLogo from '../assets/images/icons/catalog.svg'
 import profileLogo from '../assets/images/icons/profile.svg'
@@ -7,31 +6,38 @@ import cardLogo from '../assets/images/icons/card.svg'
 
 import Title from './Title';
 
-function Header() {
-    const location = useLocation();
-    const [active, setActive] = useState(location.pathname.slice(1));
-
+function Header({
+    isLoggedIn,
+    setIsLoggedIn,
+    activeItem,
+    setActiveItem
+}:{
+    isLoggedIn: boolean,
+    setIsLoggedIn: (v:boolean)=>void,
+    activeItem: string,
+    setActiveItem: (v:string)=>void
+}){
     return <header>
         <div className='wrapper'>
-            <Link to="/" onClick={() => setActive('home')}>
+            <Link to="/" onClick={() => setActiveItem('home')}>
                 <Title />
             </Link>
 
             <div className='items'>
                 <Link
                     to="/catalog"
-                    className={active === 'catalog' ? 'active' : ''}
-                    onClick={() => setActive('catalog')}
+                    className={activeItem === 'catalog' ? 'active' : ''}
+                    onClick={() => setActiveItem('catalog')}
                 >
                     <img src={catalogLogo} alt='catalog-logo'/>
                     <p>Каталог</p>
                 </Link>
 
-                {true && // Здесь условие для отображения корзины, например, если пользователь авторизован
+                {isLoggedIn &&
                 <Link
                     to="/cart" 
-                    className={active === 'cart' ? 'active' : ''}
-                    onClick={() => setActive('cart')}
+                    className={activeItem === 'cart' ? 'active' : ''}
+                    onClick={() => setActiveItem('cart')}
                 >
                     <img src={cardLogo} alt='cart-logo'/>
                     <p>Корзина</p>
@@ -39,12 +45,15 @@ function Header() {
                 }
 
                 <Link
-                    to="/profile"
-                    className={active === 'profile' ? 'active' : ''}
-                    onClick={() => setActive('profile')}
-                >
+                    to={isLoggedIn ? "/" : "/profile"}
+                    className={activeItem === 'profile' ? 'active' : ''}
+                    onClick={() => {
+                        (!isLoggedIn) ? setActiveItem('profile') : setActiveItem('home');
+                        setIsLoggedIn(false);
+                    }
+                }>
                     <img src={profileLogo} alt='profile-logo'/>
-                    <p>Войти</p>
+                    <p>{isLoggedIn ? "Выйти" : "Войти"}</p>
                 </Link>
             </div>
         </div>
