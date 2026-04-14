@@ -1,0 +1,271 @@
+# .gitignore file created for free with Tower (https://www.git-tower.com/)
+# For suggestions or improvements please contact us using support@git-tower.com
+# Generated on 2026-03-24
+# Includes: node, javascript, typescript, react, intellij, vscode
+
+### Universal ###
+# Common files that should be ignored in all projects
+
+# Logs
+*.log
+# Temporary files
+*.tmp
+*~
+
+*.bak
+# Environment files (containing secrets, API keys, credentials)
+.env
+*.env
+.env.*
+
+# Local configuration that shouldn't be shared
+*.local
+
+### Node ###
+# Node.js dependency directory, logs, and environment files
+
+# Dependencies
+node_modules/
+jspm_packages/
+bower_components/
+web_modules/
+
+# Logs
+logs
+*.log
+*.launch
+connect.lock/
+
+libpeerconnection.log
+.history/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+lerna-debug.log*
+.pnpm-debug.log*
+# Diagnostic reports
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+# Runtime data
+
+pids
+*.pid
+*.seed
+*.pid.lock
+# Environment
+
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local
+# Package management
+
+.npm
+package-lock.json
+yarn.lock
+.yarn-integrity
+.yarn/cache
+
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*
+# Coverage & Test
+
+coverage/
+lib-cov
+*.lcov
+.nyc_output
+# Build output
+
+dist/
+build/
+.next/
+out/
+.nuxt
+
+.output
+# Cache & Temporary
+.cache/
+.temp/
+.grunt
+
+.lock-wscript
+.fusebox/
+.dynamodb/
+.tern-port
+.vscode-test
+
+.node_repl_history
+.webpack/
+# TypeScript
+*.tsbuildinfo
+# Optional REPL history
+
+.node_repl_history
+# Additional caches
+.eslintcache
+.stylelintcache
+.parcel-cache
+
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+# Misc
+
+*.tgz
+.serverless/
+.vuepress/dist
+.temp
+.docusaurus
+
+.svelte-kit
+
+### Javascript ###
+# javascript specific files
+
+node_modules/
+*.log
+npm-debug.log*
+yarn-debug.log*
+.cache/
+
+dist/
+coverage/
+
+### Typescript ###
+# typescript specific files
+
+*.tsbuildinfo
+node_modules/
+dist/
+
+### React ###
+# React build directory and environment files
+
+build/
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.DS_*
+**/*.backup.*
+
+**/*.back.*
+*.sublime*
+psd
+thumb
+sketch
+
+coverage/
+
+### Intellij ###
+# IntelliJ IDEA editor files and settings
+
+# IntelliJ IDEA and Other JetBrains IDEs
+.idea/
+*.iml
+*.iws
+*.ipr
+
+.idea_modules/
+out/
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/dictionaries
+
+.idea/shelf/
+.idea/contentModel.xml
+.idea/dataSources/
+.idea/dataSources.xml
+.idea/dataSources.ids
+
+.idea/dataSources.local.xml
+.idea/sqlDataSources.xml
+.idea/dynamic.xml
+.idea/uiDesigner.xml
+.idea/gradle.xml
+
+.idea/libraries
+.idea/deployment.xml
+.idea/mongoSettings.xml
+.idea/httpRequests
+.idea/caches/
+
+.idea/modules.xml
+.idea/compiler.xml
+.idea/jarRepositories.xml
+.idea/artifacts
+.idea/sonarlint/
+
+*.iml.bak
+*.ipr.bak
+*.iws.bak
+.idea_backup/
+.idea/replstate.xml
+
+.idea/checkstyle-idea.xml
+.idea/encodings.xml
+.idea/misc.xml
+.idea/vcs.xml
+.idea/jsLibraryMappings.xml
+
+.idea/assetWizardSettings.xml
+.idea/kotlinc.xml
+.idea/inspectionProfiles/
+.idea/codestream.xml
+.idea/aws.xml
+
+.idea/sonarIssues.xml
+.idea/.gitignore
+.idea/remote-mappings.xml
+.idea/**/usage.statistics.xml
+.idea/**/contentModel.xml
+
+.idea/**/dbnavigator.xml
+.idea/**/markdown-navigator.xml
+.idea/**/markdown-navigator-enh.xml
+.idea/**/markdown-navigator/
+.idea/$CACHE_FILE$
+
+.idea/**/azureSettings.xml
+com_crashlytics_export_strings.xml
+crashlytics.properties
+crashlytics-build.properties
+fabric.properties
+
+### Vscode ###
+# Visual Studio Code editor settings and workspace files
+
+# Visual Studio Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+.history/
+*.vsix
+.ionide
+
+.vs/
+*.code-workspace
+.vscode-test
+.vscodeignore
+.vscode/chrome
+
+.vscode-server/
+.vscode/sftp.json
+.vscode/tags
+.devcontainer/
+
+# venv and pycache
+
+andrew.mashin/project/backend/venv/
+andrew.mashin/project/backend/__pycache__

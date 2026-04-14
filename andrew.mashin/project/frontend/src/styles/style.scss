@@ -76,6 +76,119 @@ header {
     }
 }
 
+/* Страница 404 */
+.not-found-page {
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    h1 {
+        margin: 0 auto;
+        font-size: 140px;
+        color: #FFEC41;
+        font-weight: 200;
+        text-shadow: 2px 4px 4px rgba(132, 132, 132, 0.5);
+    }
+
+    h2 {
+        font-weight: bold;
+        font-size: 28px;
+    }
+
+    .home-link {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        
+        padding: 10px 25px;
+        background: #115EFB;
+        border-radius: 10px;
+
+        box-shadow: 0 5px 10px rgba(0,0,0,0.25);
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .home-link:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 12px rgba(0,0,0,0.3);
+    }
+}
+
+/* Страница входа в аккаунт */
+.profile {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    justify-content: center;
+    align-items: center;
+
+    height: 960px;
+    background-color: #E5EEFF;
+    background-image: url(../assets/images/backgrounds/background-login.svg);
+    background-position: 0 35px;
+    background-repeat: no-repeat;
+
+    .login_block {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        background: #FFFFFF;
+        border-radius: 8px;
+        width: 382px;
+        height: 354px;
+
+        form {
+            display: flex;
+            flex-direction: column;
+
+            label {
+                font-size: 14px;
+                position: relative;
+
+                &::after {
+                    content: '*';
+                    color: #FF60C3;
+
+                    position: absolute;
+                    right: -9px;
+                    top: 12px;
+
+                    font-size: 20px;
+                }
+            }
+
+            input {
+                box-sizing: border-box;
+                width: 286px;
+                height: 48px;
+                padding: 0 16px;
+                margin-bottom: 30px;
+                background: #E4E7EB;
+                border: none;
+                border-radius: 8px;
+                font-size: 16px;
+            }
+
+            button {
+                box-sizing: border-box;
+                cursor: pointer;
+                width: 113px;
+                height: 48px;
+                padding: 12px 32px;
+                background: #115EFB;
+                border: none;
+                border-radius: 8px;
+            
+                font-size: 16px;
+                color: #FFFFFF;
+            }
+        }
+    }
+}
+
 /* Footer */
 footer {
     background: #0C368A;
@@ -128,102 +241,5 @@ footer {
             width: 36px;
             height: 36px;
         }
-    }
-}
-
-.login_block {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background: #FFFFFF;
-    border-radius: 8px;
-    width: 382px;
-    height: 354px;
-
-    form {
-        display: flex;
-        flex-direction: column;
-
-        label {
-            font-size: 14px;
-            position: relative;
-
-            &::after {
-                content: '*';
-                color: #FF60C3;
-
-                position: absolute;
-                right: -9px;
-                top: 12px;
-
-                font-size: 20px;
-            }
-        }
-
-        input {
-            box-sizing: border-box;
-            width: 286px;
-            height: 48px;
-            font-size: 16px;
-            border: none;
-            background: #E4E7EB;
-            border-radius: 8px;
-            padding: 0 16px;
-            margin-bottom: 30px;
-        }
-
-        button {
-            box-sizing: border-box;
-            width: 113px;
-            height: 48px;
-            padding: 12px 32px;
-            background: #115EFB;
-            border: none;
-            border-radius: 8px;
-        
-            font-size: 16px;
-            color: #FFFFFF;
-        }
-    }
-}
-
-/* Страница 404 */
-.not-found-page {
-    height: 80vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    h1 {
-        margin: 0 auto;
-        font-size: 140px;
-        color: #FFEC41;
-        font-weight: 200;
-        text-shadow: 2px 4px 4px rgba(132, 132, 132, 0.5);
-    }
-
-    h2 {
-        font-weight: bold;
-        font-size: 28px;
-    }
-
-    .home-link {
-        color: white;
-        text-decoration: none;
-        font-weight: 500;
-        
-        padding: 10px 25px;
-        background: #115EFB;
-        border-radius: 10px;
-
-        box-shadow: 0 5px 10px rgba(0,0,0,0.25);
-        transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    .home-link:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 12px rgba(0,0,0,0.3);
     }
 }

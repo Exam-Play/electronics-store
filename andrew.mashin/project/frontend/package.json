@@ -17,7 +17,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start-frontend": "react-scripts start",
+    "start-backend": "cd ../backend && venv\\Scripts\\python.exe -m uvicorn main:app --reload --port 8080",
+    "start-all": "concurrently \"npm run start-frontend\" \"npm run start-backend\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -43,6 +45,7 @@
   "devDependencies": {
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
+    "concurrently": "^9.2.1",
     "sass": "^1.99.0"
   }
 }
