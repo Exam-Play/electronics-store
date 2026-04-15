@@ -42,40 +42,6 @@ span {
     color: #115EFB;
 }
 
-/* header */
-header {
-    height: 80px;
-
-    .wrapper {
-        @include wrapper;
-    }
-
-    p {
-        color: #115EFB;
-        font-weight: 500;
-        font-size: 16px;
-        margin: 0;
-    }
-
-    .items {
-        flex-wrap: wrap;
-        display: flex;
-        flex-direction: row;
-
-        a {
-            border-radius: 8px;
-            display: flex;
-            flex-direction: row;
-            gap: 12px;
-            padding: 12px 20px;
-        }
-
-        a.active, a:hover {
-            background: #F3F6FA;
-        }
-    }
-}
-
 /* Страница 404 */
 .not-found-page {
     height: 80vh;
@@ -114,6 +80,49 @@ header {
         transform: translateY(-2px);
         box-shadow: 0 8px 12px rgba(0,0,0,0.3);
     }
+}
+
+/* header */
+header {
+    height: 80px;
+
+    .wrapper {
+        @include wrapper;
+    }
+
+    p {
+        color: #115EFB;
+        font-weight: 500;
+        font-size: 16px;
+        margin: 0;
+    }
+
+    .items {
+        flex-wrap: wrap;
+        display: flex;
+        flex-direction: row;
+
+        a {
+            border-radius: 8px;
+            display: flex;
+            flex-direction: row;
+            gap: 12px;
+            padding: 12px 20px;
+        }
+
+        a.active, a:hover {
+            background: #F3F6FA;
+        }
+    }
+}
+
+/* Домашняя страница */
+.home {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Страница входа в аккаунт */
