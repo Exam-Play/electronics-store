@@ -17,6 +17,24 @@ function Header({
     activeItem: string,
     setActiveItem: (v:string)=>void
 }){
+    function clickLogout() {
+        fetch("http://127.0.0.1:8080/logout", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        .then((res) => res.json())
+        .then((data) => {
+            if (data && isLoggedIn) {
+                console.log("Сессия завершена");
+                setIsLoggedIn(false);
+                setActiveItem('home');
+            }
+        })
+        .catch(error => console.error('Ошибка:', error));
+    }
+
     return <header>
         <div className='wrapper'>
             <Link to="/" onClick={() => setActiveItem('home')}>
@@ -47,11 +65,8 @@ function Header({
                 <Link
                     to={isLoggedIn ? "/" : "/profile"}
                     className={activeItem === 'profile' ? 'active' : ''}
-                    onClick={() => {
-                        (!isLoggedIn) ? setActiveItem('profile') : setActiveItem('home');
-                        setIsLoggedIn(false);
-                    }
-                }>
+                    onClick={() => (isLoggedIn) ? clickLogout() : null}
+                >
                     <img src={profileLogo} alt='profile-logo'/>
                     <p>{isLoggedIn ? "Выйти" : "Войти"}</p>
                 </Link>

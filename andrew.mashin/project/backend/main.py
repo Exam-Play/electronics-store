@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 import json
@@ -23,7 +23,7 @@ app.add_middleware(
 
 @app.post("/login")
 async def post_login(post_data: LoginData):
-    with open("database/users.json", "r") as file:
+    with open("database/users.json", "r", encoding="utf-8") as file:
         database_data = json.load(file)
 
     for user in database_data:
@@ -31,17 +31,19 @@ async def post_login(post_data: LoginData):
         and post_data.password == user["password"]:
             return True
 
-    return False
+    raise HTTPException(status_code=401, detail="Неправильный логин или пароль")
 
 @app.post("/logout")
 def post_logout():
-    return {"message": "Goodbye user"}
+    return True
 
 
 @app.get("/goods")
 def get_goods():
-    return {"message": "Hello FastAPI"}
+    with open("database/goods.json", "r", encoding="utf-8") as file:
+        database_data = json.load(file)
 
+    return database_data
 
 @app.get("/orders")
 def get_orders():

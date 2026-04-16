@@ -34,9 +34,8 @@ function ProfilePage({
                 setErrorLogin(false);
             } else {
                 setErrorLogin(true);
-                setIsLoggedIn(false);
             }
-        });
+        })
     }
 
     return <main className='profile'>
