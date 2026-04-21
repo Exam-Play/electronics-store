@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import ratingIcon from '../../assets/images/home-page/rating.svg'
+import ratingIcon from '../../assets/images/icons/rating.svg'
 
 interface Product {
     id: number;

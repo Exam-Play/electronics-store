@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 
+import '../styles/profileStyle.scss';
+
 function ProfilePage({
     setIsLoggedIn,
     setActiveItem
@@ -38,7 +40,7 @@ function ProfilePage({
         })
     }
 
-    return <main className='profile'>
+    return <div className='profile'>
         <h1>Добро пожаловать!</h1>
         <div className='login_block'>
             <form onSubmit={handleSubmit}>
@@ -62,7 +64,7 @@ function ProfilePage({
                 <button type='submit'>Войти</button>
             </form>
         </div>
-    </main>
+    </div>
 }
 
 export default ProfilePage;

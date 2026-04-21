@@ -10,7 +10,9 @@ import phoneIcon from '../assets/images/home-page/phone.svg'
 import emailIcon from '../assets/images/home-page/email.svg'
 import locationIcon from '../assets/images/home-page/location.svg'
 
-import ProductSection from '../components/home-page/ProductSection';
+import Slider from '../components/home-page/Slider';
+
+import '../styles/homeStyle.scss';
 
 interface Product {
     id: number;
@@ -24,7 +26,6 @@ interface Product {
 function HomePage() {
     const [bestsellers, setBestsellers] = useState<Product[]>([]);
     const [novelty, setNovelty] = useState<Product[]>([]);
-    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         fetch("http://127.0.0.1:8080/goods", {
@@ -39,24 +40,21 @@ function HomePage() {
             setNovelty(data.filter((item) => item.isNovelty));
         })
         .catch(error => console.error('Ошибка:', error))
-        .finally(() => setIsLoading(false));
     }, []);
 
-    if (isLoading) return <div>Загрузка...</div>;
-
-    return <main className='home'>
+    return <div className='home'>
         <div className='banner'>
             <img src={HomeBanner} alt='home-banner'/>
         </div>
 
-        <ProductSection
+        <Slider
             nameClass="bestsellers"
             title="Хиты продаж"
             description="Тысячи покупателей уже одобрили эти товары. Самые популярные, проверенные и надежные гаджеты!"
             data={bestsellers}
         />
 
-        <ProductSection
+        <Slider
             nameClass="novelty"
             title="Новинки"
             description="Их только произвели - они уже у нас! Все самое новое и свежее на рынке электроники."
@@ -98,7 +96,7 @@ function HomePage() {
                 </div>
             </div>
         </div>
-    </main>
+    </div>
 }
 
 export default HomePage;

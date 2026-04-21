@@ -1,5 +1,8 @@
 import { Link } from 'react-router-dom';
+
 import Title from '../components/Title';
+
+import '../styles/nonFoundStyle.scss';
 
 function NotFoundPage() {
     return <div className='not-found-page'>

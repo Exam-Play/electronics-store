@@ -29,15 +29,17 @@ function App() {
 				setActiveItem={setActiveItem}
 			/>
 
-			<Routes>
-				<Route path="/" element={<HomePage />}/>
-				<Route path="/catalog" element={<CatalogPage />}/>
-				<Route path="/cart" element={<CartPage />}/>
-				<Route path="/profile" element={<ProfilePage
-					setIsLoggedIn={setIsLoggedIn}
-					setActiveItem={setActiveItem}
-				/>}/>
-			</Routes>
+			<main>
+				<Routes>
+					<Route path="/" element={<HomePage />}/>
+					<Route path="/catalog" element={<CatalogPage />}/>
+					<Route path="/cart" element={<CartPage />}/>
+					<Route path="/profile" element={<ProfilePage
+						setIsLoggedIn={setIsLoggedIn}
+						setActiveItem={setActiveItem}
+					/>}/>
+				</Routes>
+			</main>
 
 			<Footer />
 		</>

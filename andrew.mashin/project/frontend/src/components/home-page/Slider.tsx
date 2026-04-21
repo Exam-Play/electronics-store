@@ -51,10 +51,15 @@ function ProductSection({
         </div>
         <div className='cards-wrapper'>
             <img src={leftArrowIcon} className='arrow' onClick={slideLeft} alt='arrow left icon'/>
-            <div className='cards'>
-                <ProductCard type={title} dataImage={getCard(leftIndex)}/>
-                <ProductCard type={title} dataImage={getCard(leftIndex + 1)}/>
-                <ProductCard type={title} dataImage={getCard(leftIndex + 2)}/>
+            <div className="cards">
+                {[leftIndex, leftIndex + 1, leftIndex + 2].map((i) => {
+                    const card = getCard(i);
+                    return card ? (
+                        <ProductCard key={card.id} type={title} dataImage={card}/>
+                    ) : (
+                        <div key={i} className="product-card"/>
+                    );
+                })}
             </div>
             <img src={rightArrowIcon} className='arrow' onClick={slideRight} alt='arrow right icon'/>
         </div>

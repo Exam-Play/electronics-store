@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 import catalogLogo from '../assets/images/icons/catalog.svg'
 import profileLogo from '../assets/images/icons/profile.svg'
-import cardLogo from '../assets/images/icons/card.svg'
+import cartLogo from '../assets/images/icons/cart.svg'
 
 import Title from './Title';
 
@@ -57,7 +57,7 @@ function Header({
                     className={activeItem === 'cart' ? 'active' : ''}
                     onClick={() => setActiveItem('cart')}
                 >
-                    <img src={cardLogo} alt='cart-logo'/>
+                    <img src={cartLogo} alt='cart-logo'/>
                     <p>Корзина</p>
                 </Link>
                 }

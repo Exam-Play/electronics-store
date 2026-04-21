@@ -45,7 +45,7 @@
 		"price": 34990,
 		"rating": 4.7,
 		"isBestseller": false,
-		"isNovelty": true
+		"isNovelty": false
 	},
 	{
 		"id": 7,
@@ -68,7 +68,7 @@
 		"name": "Часы с GPS трекером черные",
 		"price": 8990,
 		"rating": 0.0,
-		"isBestseller": true,
+		"isBestseller": false,
 		"isNovelty": false
 	},
 	{
@@ -83,7 +83,7 @@
 		"id": 11,
 		"name": "Фитнес-браслет ASK-B19 зеленый",
 		"price": 3290,
-		"rating": 4.2,
+		"rating": 0.0,
 		"isBestseller": false,
 		"isNovelty": true
 	},
@@ -131,7 +131,7 @@
 		"id": 17,
 		"name": "Микрофон с разъемом Type-C",
 		"price": 1990,
-		"rating": 4.4,
+		"rating": 0.0,
 		"isBestseller": false,
 		"isNovelty": true
 	},
@@ -173,7 +173,7 @@
 		"price": 3299,
 		"rating": 4.4,
 		"isBestseller": false,
-		"isNovelty": true
+		"isNovelty": false
 	},
 	{
 		"id": 23,
@@ -252,6 +252,198 @@
 		"name": "Дыхательный тренажер",
 		"price": 3990,
 		"rating": 4.1,
+		"isBestseller": false,
+		"isNovelty": true
+	},
+	{
+		"id": 33,
+		"name": "Видеокарта GeForce RTX 5070 12GB",
+		"price": 69990,
+		"rating": 4.7,
+		"isBestseller": true,
+		"isNovelty": false
+	},
+	{
+		"id": 34,
+		"name": "Компьютерное кресло Ergolux Pro, черное",
+		"price": 18990,
+		"rating": 4.5,
+		"isBestseller": false,
+		"isNovelty": false
+	},
+	{
+		"id": 35,
+		"name": "Игровая приставка PlayStation 5 Slim",
+		"price": 54990,
+		"rating": 4.9,
+		"isBestseller": true,
+		"isNovelty": false
+	},
+	{
+		"id": 36,
+		"name": "Смартфон Samsung Galaxy S24 256GB серый",
+		"price": 79990,
+		"rating": 4.8,
+		"isBestseller": true,
+		"isNovelty": true
+	},
+	{
+		"id": 37,
+		"name": "Видеокарта GeForce RTX 5060 8GB",
+		"price": 33240,
+		"rating": 4.6,
+		"isBestseller": false,
+		"isNovelty": true
+	},
+	{
+		"id": 38,
+		"name": "Ноутбук OSIO FocusLine 15.6\" серебристый",
+		"price": 64990,
+		"rating": 4.4,
+		"isBestseller": false,
+		"isNovelty": false
+	},
+	{
+		"id": 39,
+		"name": "Ноутбук OSIO FocusLine 15.6\" черный",
+		"price": 64990,
+		"rating": 4.3,
+		"isBestseller": false,
+		"isNovelty": false
+	},
+	{
+		"id": 40,
+		"name": "Робот-пылесос Midea M7 Pro белый",
+		"price": 24990,
+		"rating": 4.6,
+		"isBestseller": true,
+		"isNovelty": false
+	},
+	{
+		"id": 41,
+		"name": "Планшет Huawei MatePad 11.5\" 256GB",
+		"price": 34990,
+		"rating": 4.5,
+		"isBestseller": false,
+		"isNovelty": true
+	},
+	{
+		"id": 42,
+		"name": "Ноутбук ASUS VivoBook 15 OLED серебристый",
+		"price": 59990,
+		"rating": 4.7,
+		"isBestseller": true,
+		"isNovelty": false
+	},
+	{
+		"id": 43,
+		"name": "Ноутбук ASUS VivoBook 15 OLED черный",
+		"price": 59990,
+		"rating": 4.6,
+		"isBestseller": false,
+		"isNovelty": false
+	},
+	{
+		"id": 44,
+		"name": "Смартфон realme Note 60x 128GB черный",
+		"price": 12990,
+		"rating": 4.2,
+		"isBestseller": false,
+		"isNovelty": true
+	},
+	{
+		"id": 45,
+		"name": "Игровой системный блок RTX 5070 Ti",
+		"price": 149990,
+		"rating": 0.0,
+		"isBestseller": false,
+		"isNovelty": true
+	},
+	{
+		"id": 46,
+		"name": "Оперативная память Kingston FURY 32GB DDR5",
+		"price": 41290,
+		"rating": 4.8,
+		"isBestseller": true,
+		"isNovelty": false
+	},
+	{
+		"id": 47,
+		"name": "Оперативная память Kingston FURY RGB 32GB",
+		"price": 39520,
+		"rating": 0.0,
+		"isBestseller": false,
+		"isNovelty": true
+	},
+	{
+		"id": 48,
+		"name": "Телевизор 4K UHD 55\" Smart TV черный",
+		"price": 84250,
+		"rating": 4.5,
+		"isBestseller": false,
+		"isNovelty": true
+	},
+	{
+		"id": 49,
+		"name": "Монитор MSI 32\" 4K IPS 144Hz черный",
+		"price": 46430,
+		"rating": 4.6,
+		"isBestseller": true,
+		"isNovelty": false
+	},
+	{
+		"id": 50,
+		"name": "Процессор AMD Ryzen 5 8400F",
+		"price": 12120,
+		"rating": 4.7,
+		"isBestseller": true,
+		"isNovelty": false
+	},
+	{
+		"id": 51,
+		"name": "Монитор ASUS ROG Swift 27\" 2K 165Hz черный",
+		"price": 44460,
+		"rating": 4.8,
+		"isBestseller": true,
+		"isNovelty": false
+	},
+	{
+		"id": 52,
+		"name": "Телевизор Samsung Crystal UHD 50\" черный",
+		"price": 39410,
+		"rating": 0.0,
+		"isBestseller": false,
+		"isNovelty": false
+	},
+	{
+		"id": 53,
+		"name": "Процессор AMD Ryzen 7 7800X3D BOX",
+		"price": 24230,
+		"rating": 4.9,
+		"isBestseller": true,
+		"isNovelty": false
+	},
+	{
+		"id": 54,
+		"name": "Процессор Intel Core i5-14400F OEM",
+		"price": 14350,
+		"rating": 4.6,
+		"isBestseller": false,
+		"isNovelty": false
+	},
+	{
+		"id": 55,
+		"name": "SSD Samsung 990 Pro 1TB M.2 NVMe",
+		"price": 16460,
+		"rating": 4.8,
+		"isBestseller": true,
+		"isNovelty": false
+	},
+	{
+		"id": 56,
+		"name": "SSD ADATA Legend 960 Max 1TB M.2 NVMe",
+		"price": 12340,
+		"rating": 0.0,
 		"isBestseller": false,
 		"isNovelty": true
 	}
