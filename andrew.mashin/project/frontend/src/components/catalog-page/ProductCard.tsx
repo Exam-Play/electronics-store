@@ -11,13 +11,20 @@ interface Product {
     rating: number;
     isBestseller: boolean;
     isNovelty: boolean;
+    description: string;
+    characteristics: {
+        label: string;
+        value: string
+    }[];
 }
 
 
 function ProductCard({
-    item
+    item,
+    setActiveProduct
 }:{
-    item: Product
+    item: Product,
+    setActiveProduct: (product: Product | null) => void
 }){
     const [loaded, setLoaded] = useState(false);
 
@@ -28,11 +35,9 @@ function ProductCard({
         </div>
     : null;
 
-    const backgroundStyle = {
-        background: `${item.isBestseller ? '#FF60C3' : (item.isNovelty) ? '#00E398' : 'white'}`
-    };
-
-    return <div className="product-card">
+    return <div className="product-card" onClick={() => {
+            setActiveProduct(item);
+        }}>
         <div className="img-wrapper">
             <div className="text-wrapper">
                 {item.isNovelty ?
@@ -58,7 +63,7 @@ function ProductCard({
         <p>{item.name}</p>
         {ratingBlock}
 
-        <button className="add-to-cart">
+        <button className="button-blue-template add-to-cart">
             <img src={CartIcon} alt="cart icon"/>
             <span>В корзину</span>
         </button>

@@ -10,6 +10,7 @@
     background-color: #E5EEFF;
     background-image: url(../assets/images/backgrounds/background-login.svg);
     background-position: 0 35px;
+    background-position-x: center;
     background-repeat: no-repeat;
 
     .login_block {
@@ -23,13 +24,12 @@
         height: 354px;
 
         form {
-            display: flex;
-            flex-direction: column;
-
             p {
+                max-width: 286px;
+                word-spacing: wrap;
                 margin: 0 0 15px 0;
                 font-size: 14px;
-                color: #E6626A;
+                color: #FF60C3;
             }
 
             label {
@@ -49,15 +49,8 @@
             }
 
             input {
-                box-sizing: border-box;
-                width: 286px;
-                height: 48px;
-                padding: 0 16px;
                 margin-bottom: 30px;
-                background: #E4E7EB;
-                border: none;
-                border-radius: 8px;
-                font-size: 16px;
+                width: 286px;
             }
 
             button {

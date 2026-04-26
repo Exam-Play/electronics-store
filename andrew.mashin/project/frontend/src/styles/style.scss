@@ -47,7 +47,12 @@ a {
 }
 
 span {
+    font-family: 'Rubik';
     color: #115EFB;
+}
+
+*:focus-visible {
+    outline: 2px solid #84ADFF;
 }
 
 /* header */
@@ -136,5 +141,124 @@ footer {
             width: 36px;
             height: 36px;
         }
+    }
+}
+
+/* Шаблон поля ввода */
+.input-template {
+    display: flex;
+    flex-direction: column;
+
+    label {
+        font-size: 14px;
+    }
+
+    label:has(+ input:active) {
+        color: #115EFB;
+    }
+
+    label:has(+ input:disabled) {
+        color: #B9B9B9;
+    }
+
+    input {
+        box-sizing: border-box;
+        padding: 0 16px;
+        background: #E4E7EB;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        height: 48px;
+        transition: 0.2s background;
+
+        &:hover {
+            outline: 2px solid #84ADFF;
+        }
+
+        &:active {
+            background: #F3F6FA;
+        }
+
+        &::placeholder {
+            color: #B9B9B9;
+        }
+
+        &:disabled {
+            background: #F3F6FA;
+            cursor: not-allowed;
+        }
+    }
+}
+
+// Шаблон кнопки
+button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    gap: 10px;
+    font-size: 16px;
+    padding: 15px 0;
+
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+
+    transition: 0.3s background;
+
+    img {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+.button-blue-template {
+    background: #115EFB;
+
+    &:hover {
+        background: #0C368A;
+    }
+
+    &:disabled {
+        background: #84ADFF;
+        cursor: not-allowed;
+    }
+
+    span {
+        color: #FFFFFF;
+    }
+}
+
+.button-pink-template {
+    background: #FF60C3;
+
+    &:hover {
+        background: #CD3C96;
+    }
+
+    &:disabled {
+        background: #F2A2D4;
+        cursor: not-allowed;
+    }
+
+    span {
+        color: #FFFFFF;
+    }
+}
+
+.img-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 286px;
+    height: 320px;
+    position: relative;
+    background: #ECEFF3;
+    border-radius: 20px;
+
+    img {
+        mix-blend-mode: multiply;
+        max-width: 100%;
+        max-height: 100%;
     }
 }
