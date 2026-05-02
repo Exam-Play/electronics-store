@@ -1,11 +1,34 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import CheckBox from "./CheckBox";
 import RangePrice from "./RangePrice";
 
-function Filter() {
-    const MAX = 167890;
-    const MIN = 2990;
+interface Product {
+    id: number;
+    name: string;
+    price: number;
+    rating: number;
+    isBestseller: boolean;
+    isNovelty: boolean;
+    description: string;
+    characteristics: {
+        label: string;
+        value: string;
+    }[];
+}
+
+function Filter({
+    MIN,
+    MAX
+}:{
+    MIN: number,
+    MAX: number
+}){
+    useEffect(() => {
+        if (MIN === 0 && MAX === 0) return;
+        setPriceMin(MIN);
+        setPriceMax(MAX);
+    }, [MIN, MAX]);
 
     const [priceMin, setPriceMin] = useState(MIN);
     const [priceMax, setPriceMax] = useState(MAX);

@@ -1,14 +1,447 @@
 [
     {
         "username": "ExamPlay",
-        "password": "123456"
+        "password": "123456",
+        "cart": [
+            {
+                "id": 3,
+                "name": "Bluetooth гарнитура, черный",
+                "price": 1899,
+                "rating": 4.5,
+                "isBestseller": true,
+                "isNovelty": false,
+                "description": "Беспроводная Bluetooth гарнитура с шумоподавлением микрофона для чётких звонков и музыки.",
+                "characteristics": [
+                    {
+                        "label": "Версия Bluetooth",
+                        "value": "5.1"
+                    },
+                    {
+                        "label": "Время работы",
+                        "value": "до 8 часов"
+                    },
+                    {
+                        "label": "Дальность",
+                        "value": "до 10 м"
+                    },
+                    {
+                        "label": "Микрофон",
+                        "value": "Да, с шумоподавлением"
+                    },
+                    {
+                        "label": "Зарядка",
+                        "value": "USB-C"
+                    }
+                ]
+            },
+            {
+                "id": 3,
+                "name": "Bluetooth гарнитура, черный",
+                "price": 1899,
+                "rating": 4.5,
+                "isBestseller": true,
+                "isNovelty": false,
+                "description": "Беспроводная Bluetooth гарнитура с шумоподавлением микрофона для чётких звонков и музыки.",
+                "characteristics": [
+                    {
+                        "label": "Версия Bluetooth",
+                        "value": "5.1"
+                    },
+                    {
+                        "label": "Время работы",
+                        "value": "до 8 часов"
+                    },
+                    {
+                        "label": "Дальность",
+                        "value": "до 10 м"
+                    },
+                    {
+                        "label": "Микрофон",
+                        "value": "Да, с шумоподавлением"
+                    },
+                    {
+                        "label": "Зарядка",
+                        "value": "USB-C"
+                    }
+                ]
+            },
+            {
+                "id": 8,
+                "name": "Смартфон 256 ГБ белый",
+                "price": 34990,
+                "rating": 4.6,
+                "isBestseller": false,
+                "isNovelty": true,
+                "description": "Элегантный смартфон в белом цвете с ёмким хранилищем и современным дизайном без рамок.",
+                "characteristics": [
+                    {
+                        "label": "Память",
+                        "value": "256 ГБ"
+                    },
+                    {
+                        "label": "Экран",
+                        "value": "6.7\", AMOLED, 120 Гц"
+                    },
+                    {
+                        "label": "Камера",
+                        "value": "50 Мп + 12 Мп + 5 Мп"
+                    },
+                    {
+                        "label": "Аккумулятор",
+                        "value": "5000 мАч"
+                    },
+                    {
+                        "label": "ОС",
+                        "value": "Android 14"
+                    },
+                    {
+                        "label": "ОЗУ",
+                        "value": "8 ГБ"
+                    },
+                    {
+                        "label": "Разрешение экрана",
+                        "value": "2400×1080"
+                    },
+                    {
+                        "label": "Процессор",
+                        "value": "8-ядерный"
+                    },
+                    {
+                        "label": "Фронтальная камера",
+                        "value": "16 Мп"
+                    },
+                    {
+                        "label": "Быстрая зарядка",
+                        "value": "Да"
+                    }
+                ]
+            }
+        ],
+        "orders": []
     },
     {
         "username": "admin",
-        "password": "qfdghasFD"
+        "password": "qfdghasFD",
+        "cart": [
+            {
+                "id": 1,
+                "name": "Внешний аккумулятор 10000mAh, белый",
+                "price": 2499,
+                "rating": 4.8,
+                "isBestseller": true,
+                "isNovelty": false,
+                "description": "Компактный внешний аккумулятор с ёмкостью 10000 мАч для зарядки смартфонов и планшетов в дороге.",
+                "characteristics": [
+                    {
+                        "label": "Ёмкость",
+                        "value": "10000 мАч"
+                    },
+                    {
+                        "label": "Выходной ток",
+                        "value": "2.1А"
+                    },
+                    {
+                        "label": "Разъёмы",
+                        "value": "USB-A, USB-C"
+                    },
+                    {
+                        "label": "Вес",
+                        "value": "220 г"
+                    },
+                    {
+                        "label": "Гарантия",
+                        "value": "1 год"
+                    },
+                    {
+                        "label": "Быстрая зарядка",
+                        "value": "Да"
+                    },
+                    {
+                        "label": "Индикатор заряда",
+                        "value": "LED"
+                    }
+                ]
+            },
+            {
+                "id": 1,
+                "name": "Внешний аккумулятор 10000mAh, белый",
+                "price": 2499,
+                "rating": 4.8,
+                "isBestseller": true,
+                "isNovelty": false,
+                "description": "Компактный внешний аккумулятор с ёмкостью 10000 мАч для зарядки смартфонов и планшетов в дороге.",
+                "characteristics": [
+                    {
+                        "label": "Ёмкость",
+                        "value": "10000 мАч"
+                    },
+                    {
+                        "label": "Выходной ток",
+                        "value": "2.1А"
+                    },
+                    {
+                        "label": "Разъёмы",
+                        "value": "USB-A, USB-C"
+                    },
+                    {
+                        "label": "Вес",
+                        "value": "220 г"
+                    },
+                    {
+                        "label": "Гарантия",
+                        "value": "1 год"
+                    },
+                    {
+                        "label": "Быстрая зарядка",
+                        "value": "Да"
+                    },
+                    {
+                        "label": "Индикатор заряда",
+                        "value": "LED"
+                    }
+                ]
+            },
+            {
+                "id": 1,
+                "name": "Внешний аккумулятор 10000mAh, белый",
+                "price": 2499,
+                "rating": 4.8,
+                "isBestseller": true,
+                "isNovelty": false,
+                "description": "Компактный внешний аккумулятор с ёмкостью 10000 мАч для зарядки смартфонов и планшетов в дороге.",
+                "characteristics": [
+                    {
+                        "label": "Ёмкость",
+                        "value": "10000 мАч"
+                    },
+                    {
+                        "label": "Выходной ток",
+                        "value": "2.1А"
+                    },
+                    {
+                        "label": "Разъёмы",
+                        "value": "USB-A, USB-C"
+                    },
+                    {
+                        "label": "Вес",
+                        "value": "220 г"
+                    },
+                    {
+                        "label": "Гарантия",
+                        "value": "1 год"
+                    },
+                    {
+                        "label": "Быстрая зарядка",
+                        "value": "Да"
+                    },
+                    {
+                        "label": "Индикатор заряда",
+                        "value": "LED"
+                    }
+                ]
+            },
+            {
+                "id": 1,
+                "name": "Внешний аккумулятор 10000mAh, белый",
+                "price": 2499,
+                "rating": 4.8,
+                "isBestseller": true,
+                "isNovelty": false,
+                "description": "Компактный внешний аккумулятор с ёмкостью 10000 мАч для зарядки смартфонов и планшетов в дороге.",
+                "characteristics": [
+                    {
+                        "label": "Ёмкость",
+                        "value": "10000 мАч"
+                    },
+                    {
+                        "label": "Выходной ток",
+                        "value": "2.1А"
+                    },
+                    {
+                        "label": "Разъёмы",
+                        "value": "USB-A, USB-C"
+                    },
+                    {
+                        "label": "Вес",
+                        "value": "220 г"
+                    },
+                    {
+                        "label": "Гарантия",
+                        "value": "1 год"
+                    },
+                    {
+                        "label": "Быстрая зарядка",
+                        "value": "Да"
+                    },
+                    {
+                        "label": "Индикатор заряда",
+                        "value": "LED"
+                    }
+                ]
+            },
+            {
+                "id": 1,
+                "name": "Внешний аккумулятор 10000mAh, белый",
+                "price": 2499,
+                "rating": 4.8,
+                "isBestseller": true,
+                "isNovelty": false,
+                "description": "Компактный внешний аккумулятор с ёмкостью 10000 мАч для зарядки смартфонов и планшетов в дороге.",
+                "characteristics": [
+                    {
+                        "label": "Ёмкость",
+                        "value": "10000 мАч"
+                    },
+                    {
+                        "label": "Выходной ток",
+                        "value": "2.1А"
+                    },
+                    {
+                        "label": "Разъёмы",
+                        "value": "USB-A, USB-C"
+                    },
+                    {
+                        "label": "Вес",
+                        "value": "220 г"
+                    },
+                    {
+                        "label": "Гарантия",
+                        "value": "1 год"
+                    },
+                    {
+                        "label": "Быстрая зарядка",
+                        "value": "Да"
+                    },
+                    {
+                        "label": "Индикатор заряда",
+                        "value": "LED"
+                    }
+                ]
+            },
+            {
+                "id": 2,
+                "name": "Внешний аккумулятор 10000mAh, черный",
+                "price": 2399,
+                "rating": 4.7,
+                "isBestseller": true,
+                "isNovelty": false,
+                "description": "Надёжный внешний аккумулятор в лаконичном чёрном корпусе с поддержкой быстрой зарядки.",
+                "characteristics": [
+                    {
+                        "label": "Ёмкость",
+                        "value": "10000 мАч"
+                    },
+                    {
+                        "label": "Выходной ток",
+                        "value": "2.1А"
+                    },
+                    {
+                        "label": "Разъёмы",
+                        "value": "USB-A, USB-C"
+                    },
+                    {
+                        "label": "Вес",
+                        "value": "220 г"
+                    },
+                    {
+                        "label": "Гарантия",
+                        "value": "1 год"
+                    },
+                    {
+                        "label": "Быстрая зарядка",
+                        "value": "Да"
+                    },
+                    {
+                        "label": "Индикатор заряда",
+                        "value": "LED"
+                    }
+                ]
+            },
+            {
+                "id": 2,
+                "name": "Внешний аккумулятор 10000mAh, черный",
+                "price": 2399,
+                "rating": 4.7,
+                "isBestseller": true,
+                "isNovelty": false,
+                "description": "Надёжный внешний аккумулятор в лаконичном чёрном корпусе с поддержкой быстрой зарядки.",
+                "characteristics": [
+                    {
+                        "label": "Ёмкость",
+                        "value": "10000 мАч"
+                    },
+                    {
+                        "label": "Выходной ток",
+                        "value": "2.1А"
+                    },
+                    {
+                        "label": "Разъёмы",
+                        "value": "USB-A, USB-C"
+                    },
+                    {
+                        "label": "Вес",
+                        "value": "220 г"
+                    },
+                    {
+                        "label": "Гарантия",
+                        "value": "1 год"
+                    },
+                    {
+                        "label": "Быстрая зарядка",
+                        "value": "Да"
+                    },
+                    {
+                        "label": "Индикатор заряда",
+                        "value": "LED"
+                    }
+                ]
+            },
+            {
+                "id": 2,
+                "name": "Внешний аккумулятор 10000mAh, черный",
+                "price": 2399,
+                "rating": 4.7,
+                "isBestseller": true,
+                "isNovelty": false,
+                "description": "Надёжный внешний аккумулятор в лаконичном чёрном корпусе с поддержкой быстрой зарядки.",
+                "characteristics": [
+                    {
+                        "label": "Ёмкость",
+                        "value": "10000 мАч"
+                    },
+                    {
+                        "label": "Выходной ток",
+                        "value": "2.1А"
+                    },
+                    {
+                        "label": "Разъёмы",
+                        "value": "USB-A, USB-C"
+                    },
+                    {
+                        "label": "Вес",
+                        "value": "220 г"
+                    },
+                    {
+                        "label": "Гарантия",
+                        "value": "1 год"
+                    },
+                    {
+                        "label": "Быстрая зарядка",
+                        "value": "Да"
+                    },
+                    {
+                        "label": "Индикатор заряда",
+                        "value": "LED"
+                    }
+                ]
+            }
+        ],
+        "orders": []
     },
     {
         "username": "andrew",
-        "password": "adfgjrths"
+        "password": "adfgjrths",
+        "cart": [],
+        "orders": []
     }
 ]

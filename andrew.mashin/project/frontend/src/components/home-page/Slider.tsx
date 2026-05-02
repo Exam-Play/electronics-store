@@ -21,12 +21,14 @@ function ProductSection({
     nameClass,
     title,
     description,
-    data
+    data,
+    isLoading
 }:{
     nameClass: string,
     title: string,
     description: string,
-    data: Product[]
+    data: Product[],
+    isLoading: boolean
 }){
     const isBestsellers = (title === 'Хиты продаж');
     const isNovelty = (title === 'Новинки');
@@ -52,14 +54,18 @@ function ProductSection({
         <div className='cards-wrapper'>
             <img src={leftArrowIcon} className='arrow' onClick={slideLeft} alt='arrow left icon'/>
             <div className="cards">
-                {[leftIndex, leftIndex + 1, leftIndex + 2].map((i) => {
-                    const card = getCard(i);
-                    return card ? (
-                        <ProductCard key={card.id} type={title} dataImage={card}/>
-                    ) : (
-                        <div key={i} className="product-card"/>
-                    );
-                })}
+                {isLoading ? (
+                    Array.from({ length: 3 }).map((_, i) => (
+                        <div key={i} className="product-card"></div>
+                    ))
+                ) : (
+                    [leftIndex, leftIndex + 1, leftIndex + 2].map((i) => {
+                        const card = getCard(i);
+                        return card ? (
+                            <ProductCard key={card.id} type={title} dataImage={card} />
+                        ) : null;
+                    })
+                )}
             </div>
             <img src={rightArrowIcon} className='arrow' onClick={slideRight} alt='arrow right icon'/>
         </div>

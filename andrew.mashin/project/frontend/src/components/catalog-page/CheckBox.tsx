@@ -1,10 +1,18 @@
 function CheckBox({
-    title
+    title,
+    checked,
+    onChange
 }:{
-    title: string
+    title: string,
+    checked: boolean,
+    onChange: () => void
 }) {
     return <label className="check-item" tabIndex={0}>
-        <input type="checkbox"/>
+        <input
+            type="checkbox"
+            checked={checked}
+            onChange={onChange}
+        />
         <div className="checkmark"/>
         <p>{title}</p>
     </label>

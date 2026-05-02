@@ -1,5 +1,5 @@
 import { Routes, Route, useLocation } from 'react-router-dom'
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -10,40 +10,161 @@ import CartPage from './pages/CartPage'
 import NotFoundPage from './pages/NotFoundPage'
 import ProfilePage from './pages/ProfilePage';
 
+interface Product {
+    id: number;
+    name: string;
+    price: number;
+    rating: number;
+    isBestseller: boolean;
+    isNovelty: boolean;
+    description: string;
+    characteristics: {
+        label: string;
+        value: string
+    }[];
+}
+
 function App() {
-	const location = useLocation();
-
-	const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const location = useLocation();
     const [activeItem, setActiveItem] = useState(location.pathname.slice(1));
+    const [isLoading, setIsLoading] = useState(true);
+    const [cards, setCards] = useState<Product[]>([]);
 
-	if (!["/", "/catalog", "/cart", "/profile"].includes(location.pathname)) {
-		return <NotFoundPage />;
-	}
+    const [username, setUsername] = useState<string>(() =>
+        localStorage.getItem('username') || ''
+    );
 
-	return (
-		<>
-			<Header
-				isLoggedIn={isLoggedIn}
-				setIsLoggedIn={setIsLoggedIn}
-				activeItem={activeItem}
-				setActiveItem={setActiveItem}
-			/>
+    const [isLoggedIn, setIsLoggedIn] = useState(() =>
+        localStorage.getItem('isLoggedIn') === 'true'
+    );
 
-			<main>
-				<Routes>
-					<Route path="/" element={<HomePage />}/>
-					<Route path="/catalog" element={<CatalogPage />}/>
-					<Route path="/cart" element={<CartPage />}/>
-					<Route path="/profile" element={<ProfilePage
-						setIsLoggedIn={setIsLoggedIn}
-						setActiveItem={setActiveItem}
-					/>}/>
-				</Routes>
-			</main>
+    const [cartItems, setCartItems] = useState<Product[]>(() => {
+        const user = localStorage.getItem('username');
+        if (!user) return [];
+        const saved = localStorage.getItem(`cart_${user}`);
+        return saved ? JSON.parse(saved) : [];
+    });
 
-			<Footer />
-		</>
-	);
+    useEffect(() => {
+        if (!username) return;
+        localStorage.setItem(`cart_${username}`, JSON.stringify(cartItems));
+    }, [cartItems, username]);
+
+    useEffect(() => {
+        fetch("http://127.0.0.1:8080/goods", {
+            method: "GET",
+            headers: { "Content-Type": "application/json" }
+        })
+        .then((res) => res.json())
+        .then((data: Product[]) => setCards(data))
+        .catch(error => console.error('Ошибка:', error))
+        .finally(() => setIsLoading(false));
+    }, []);
+
+    const handleLogin = (login: string) => {
+        fetch(`http://127.0.0.1:8080/cart/${login}`)
+            .then(r => r.json())
+            .then(data => {
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('username', login);
+                setIsLoggedIn(true);
+                setUsername(login);
+                setCartItems(data.cart ?? []);
+            })
+            .catch(() => {
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('username', login);
+                setIsLoggedIn(true);
+                setUsername(login);
+                setCartItems([]);
+            }
+        );
+    };
+
+    const handleLogout = () => {
+        fetch('http://127.0.0.1:8080/cart/save', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, cart: cartItems })
+        })
+        .finally(() => {
+            localStorage.removeItem(`cart_${username}`);
+            localStorage.removeItem('username');
+            localStorage.removeItem('isLoggedIn');
+            setIsLoggedIn(false);
+            setUsername('');
+            setCartItems([]);
+        });
+    };
+
+    const addToCart = (item: Product) => {
+        setCartItems(prev => [...prev, item].sort((a, b) => a.id - b.id));
+    };
+
+    const removeFromCart = (id: number) => {
+        setCartItems(prev => {
+            const index = prev.findIndex(item => item.id === id);
+            if (index === -1) return prev;
+            return [...prev.slice(0, index), ...prev.slice(index + 1)];
+        });
+    };
+
+    if (!["/", "/catalog", "/cart", "/profile"].includes(location.pathname)) {
+        return <NotFoundPage />;
+    }
+
+    return (
+        <>
+            <Header
+                isLoggedIn={isLoggedIn}
+                onLogout={handleLogout}
+                activeItem={activeItem}
+                setActiveItem={setActiveItem}
+                cartCount={cartItems.length}
+            />
+
+            <main>
+                <Routes>
+                    <Route
+                        path="/"
+                        element={<HomePage
+                            data={cards}
+                            isLoading={isLoading}
+                        />}
+                    />
+                    <Route
+                        path="/catalog"
+                        element={<CatalogPage
+                            cards={cards}
+                            cartItems={cartItems}
+                            setCards={setCards}
+                            isLoading={isLoading}
+                            addToCart={addToCart}
+                            removeFromCart={removeFromCart}
+                        />}
+                    />
+                    <Route
+                        path="/cart"
+                        element={<CartPage
+                            cartItems={cartItems}
+                            addToCart={addToCart}
+                            removeFromCart={removeFromCart}
+                            onOrderComplete={() => setCartItems([])}
+                        />}
+                    />
+                    <Route
+                        path="/profile"
+                        element={<ProfilePage
+                            onLogin={handleLogin}
+                            setActiveItem={setActiveItem}
+                        />}
+                    />
+                </Routes>
+            </main>
+            
+            <Footer />
+        </>
+    );
 }
 
 export default App;

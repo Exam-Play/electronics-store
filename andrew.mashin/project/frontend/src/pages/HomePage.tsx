@@ -23,24 +23,20 @@ interface Product {
     isNovelty: boolean;
 }
 
-function HomePage() {
+function HomePage({
+    data,
+    isLoading
+}:{
+    data: Product[],
+    isLoading: boolean
+}){
     const [bestsellers, setBestsellers] = useState<Product[]>([]);
     const [novelty, setNovelty] = useState<Product[]>([]);
 
     useEffect(() => {
-        fetch("http://127.0.0.1:8080/goods", {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
-        .then((res) => res.json())
-        .then((data: Product[]) => {
-            setBestsellers(data.filter((item) => item.isBestseller));
-            setNovelty(data.filter((item) => item.isNovelty));
-        })
-        .catch(error => console.error('Ошибка:', error))
-    }, []);
+        setBestsellers(data.filter((item) => item.isBestseller));
+        setNovelty(data.filter((item) => item.isNovelty));
+    }, [data]);
 
     return <div className='home'>
         <div className='banner'>
@@ -52,6 +48,7 @@ function HomePage() {
             title="Хиты продаж"
             description="Тысячи покупателей уже одобрили эти товары. Самые популярные, проверенные и надежные гаджеты!"
             data={bestsellers}
+            isLoading={isLoading}
         />
 
         <Slider
@@ -59,6 +56,7 @@ function HomePage() {
             title="Новинки"
             description="Их только произвели - они уже у нас! Все самое новое и свежее на рынке электроники."
             data={novelty}
+            isLoading={isLoading}
         />
 
         <div className='section advantages'>

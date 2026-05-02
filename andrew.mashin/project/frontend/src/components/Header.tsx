@@ -8,31 +8,25 @@ import Title from './Title';
 
 function Header({
     isLoggedIn,
-    setIsLoggedIn,
+    onLogout,
     activeItem,
-    setActiveItem
+    setActiveItem,
+    cartCount
 }:{
     isLoggedIn: boolean,
-    setIsLoggedIn: (v:boolean)=>void,
+    onLogout: () => void,
     activeItem: string,
-    setActiveItem: (v:string)=>void
+    setActiveItem: (v:string)=>void,
+    cartCount: number
 }){
     function clickLogout() {
+        onLogout();
+        setActiveItem('home');
+
         fetch("http://127.0.0.1:8080/logout", {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
-        .then((res) => res.json())
-        .then((data) => {
-            if (data && isLoggedIn) {
-                console.log("Сессия завершена");
-                setIsLoggedIn(false);
-                setActiveItem('home');
-            }
-        })
-        .catch(error => console.error('Ошибка:', error));
+            headers: { "Content-Type": "application/json" }
+        }).catch(error => console.error('Ошибка:', error));
     }
 
     return <header>
@@ -47,8 +41,10 @@ function Header({
                     className={activeItem === 'catalog' ? 'active' : ''}
                     onClick={() => setActiveItem('catalog')}
                 >
-                    <img src={catalogLogo} alt='catalog-logo'/>
-                    <p>Каталог</p>
+                    <div className='item'>
+                        <img src={catalogLogo} alt='catalog-logo'/>
+                        <p>Каталог</p>
+                    </div>    
                 </Link>
 
                 {isLoggedIn &&
@@ -57,8 +53,15 @@ function Header({
                     className={activeItem === 'cart' ? 'active' : ''}
                     onClick={() => setActiveItem('cart')}
                 >
-                    <img src={cartLogo} alt='cart-logo'/>
-                    <p>Корзина</p>
+                    <div className='item'>
+                        <img src={cartLogo} alt='cart-logo'/>
+                        <p>Корзина</p>
+                        {isLoggedIn && cartCount !== 0 &&
+                            <div className='amount-goods'>
+                                {cartCount}
+                            </div>
+                        }
+                    </div>    
                 </Link>
                 }
 
@@ -67,8 +70,10 @@ function Header({
                     className={activeItem === 'profile' ? 'active' : ''}
                     onClick={() => (isLoggedIn) ? clickLogout() : null}
                 >
-                    <img src={profileLogo} alt='profile-logo'/>
-                    <p>{isLoggedIn ? "Выйти" : "Войти"}</p>
+                    <div className='item'>
+                        <img src={profileLogo} alt='profile-logo'/>
+                        <p>{isLoggedIn ? "Выйти" : "Войти"}</p>
+                    </div>
                 </Link>
             </div>
         </div>

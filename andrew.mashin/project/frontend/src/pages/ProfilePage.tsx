@@ -3,19 +3,33 @@ import { useNavigate } from 'react-router-dom';
 
 import '../styles/profileStyle.scss';
 
+interface Product {
+    id: number;
+    name: string;
+    price: number;
+    rating: number;
+    isBestseller: boolean;
+    isNovelty: boolean;
+    description: string;
+    characteristics: {
+        label: string;
+        value: string;
+    }[];
+}
+
 function ProfilePage({
-    setIsLoggedIn,
+    onLogin,
     setActiveItem
 }:{
-    setIsLoggedIn: (v:boolean)=>void,
-    setActiveItem: (v:string)=>void
+    onLogin: (login: string) => void,
+    setActiveItem: (v: string) => void
 }){
     const [isErrorLogin, setErrorLogin] = useState('');
     const navigate = useNavigate();
 
     function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
         e.preventDefault();
-        const formData : FormData = new FormData(e.target);
+        const formData = new FormData(e.currentTarget);
 
         const login = formData.get('login')?.toString() || '';
         const password = formData.get('password')?.toString() || '';
@@ -23,34 +37,34 @@ function ProfilePage({
         if (login === '' || password === '') {
             setErrorLogin('empty-data'); return;
         }
-        else if (login.length < 4) {
+        if (login.length < 4) {
             setErrorLogin('size-login'); return;
         }
-        else if (password.length < 6) {
+        if (password.length < 6) {
             setErrorLogin('size-password'); return;
         }
 
         fetch("http://127.0.0.1:8080/login", {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                username: login,
-                password: password
-            })
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username: login, password })
         })
-        .then((res) => res.json())
+        .then((res) => {
+            if (!res.ok) {
+                setErrorLogin('incorrect-data');
+                return;
+            }
+            return res.json();
+        })
         .then((data) => {
             if (data === true) {
-                setIsLoggedIn(true);
+                onLogin(login);
                 navigate('/');
                 setActiveItem('home');
                 setErrorLogin('');
-            } else {
-                setErrorLogin('incorrect-data');
             }
         })
+        .catch(() => setErrorLogin('incorrect-data'));
     }
 
     return <div className='profile'>
@@ -59,28 +73,28 @@ function ProfilePage({
             <form onSubmit={handleSubmit}>
                 <div className="input-template">
                     <label htmlFor='login'>Логин</label>
-                    <input id='login' name='login' type='text'
-                        style={(isErrorLogin !== '') ? {
-                            outline: '1px #FF60C3 solid'
-                        } : {border: 'none'}
-                    }/>
+                    <input
+                        id='login'
+                        name='login'
+                        type='text'
+                        style={isErrorLogin !== '' ? { outline: '1px #FF60C3 solid' } : {}}
+                    />
                 </div>
 
                 <div className="input-template">
                     <label htmlFor='password'>Пароль</label>
-                    <input id='password' name='password' type='password'
-                        style={(isErrorLogin !== '') ? {
-                            marginBottom: '0',
-                            outline: '1px #FF60C3 solid'
-                        } : {marginBottom: '30px'}
-                    }/>
+                    <input
+                        id='password'
+                        name='password'
+                        type='password'
+                        style={isErrorLogin !== '' ? { marginBottom: '0', outline: '1px #FF60C3 solid' } : { marginBottom: '30px' }}
+                    />
                 </div>
 
-
-                {(isErrorLogin === 'incorrect-data') ? <p>{"Неправильный логин или пароль"}</p> : null}
-                {(isErrorLogin === 'empty-data') ? <p>{"Нельзя вводить пустые поля"}</p> : null}
-                {(isErrorLogin === 'size-login') ? <p>{"Длина логина не может быть меньше 4 символов"}</p> : null}
-                {(isErrorLogin === 'size-password') ? <p>{"Длина пароля не может быть меньше 6 символов"}</p> : null}
+                {isErrorLogin === 'incorrect-data' && <p>Неправильный логин или пароль</p>}
+                {isErrorLogin === 'empty-data' && <p>Нельзя вводить пустые поля</p>}
+                {isErrorLogin === 'size-login' && <p>Длина логина не может быть меньше 4 символов</p>}
+                {isErrorLogin === 'size-password' && <p>Длина пароля не может быть меньше 6 символов</p>}
 
                 <button type='submit'>Войти</button>
             </form>

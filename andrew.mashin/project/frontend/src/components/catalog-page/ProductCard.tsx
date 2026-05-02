@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import ratingIcon from '../../assets/images/icons/rating.svg'
-import CartIcon from '../../assets/images/icons/cart_white.svg'
+import ButtonCard from "./ButtonCard";
 
 
 interface Product {
@@ -21,10 +21,16 @@ interface Product {
 
 function ProductCard({
     item,
-    setActiveProduct
+    cartItems,
+    setActiveProduct,
+    addToCart,
+    removeFromCart
 }:{
     item: Product,
-    setActiveProduct: (product: Product | null) => void
+    cartItems: Product[],
+    setActiveProduct: (product: Product | null) => void,
+    addToCart: (item: Product) => void,
+    removeFromCart: (id: number) => void
 }){
     const [loaded, setLoaded] = useState(false);
 
@@ -35,38 +41,40 @@ function ProductCard({
         </div>
     : null;
 
-    return <div className="product-card" onClick={() => {
-            setActiveProduct(item);
-        }}>
-        <div className="img-wrapper">
-            <div className="text-wrapper">
-                {item.isNovelty ?
-                <div className="label novelty">
-                    <p>Новинка</p>
-                </div>
-                : null}
+    return <div className="product-card">
+        <div onClick={() => setActiveProduct(item)} style={{cursor: 'pointer'}}>
+            <div className="img-wrapper">
+                <div className="text-wrapper">
+                    {item.isNovelty ?
+                    <div className="label novelty">
+                        <p>Новинка</p>
+                    </div>
+                    : null}
 
-                {item.isBestseller ?
-                <div className="label bestseller">
-                    <p>Хит</p>
+                    {item.isBestseller ?
+                    <div className="label bestseller">
+                        <p>Хит</p>
+                    </div>
+                    : null}
                 </div>
-                : null}
+                <img
+                    src={require(`../../assets/images/goods/image_${item.id}.png`)}
+                    alt='product img'
+                    style={{ opacity: loaded ? 1 : 0, transition: 'opacity 0.3s ease-in-out' }}
+                    onLoad={() => setLoaded(true)}
+                />
             </div>
-            <img
-                src={require(`../../assets/images/goods/image_${item.id}.png`)}
-                alt='product img'
-                style={{ opacity: loaded ? 1 : 0, transition: 'opacity 0.3s ease-in-out' }}
-                onLoad={() => setLoaded(true)}
-            />
+            <h2>{item.price} ₽</h2>
+            <p>{item.name}</p>
+            {ratingBlock}
         </div>
-        <h2>{item.price} ₽</h2>
-        <p>{item.name}</p>
-        {ratingBlock}
 
-        <button className="button-blue-template add-to-cart">
-            <img src={CartIcon} alt="cart icon"/>
-            <span>В корзину</span>
-        </button>
+        <ButtonCard
+            item={item}
+            cartItems={cartItems}
+            addToCart={addToCart}
+            removeFromCart={removeFromCart}
+        />
     </div>
 }
 

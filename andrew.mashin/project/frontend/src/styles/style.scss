@@ -71,11 +71,10 @@ header {
     }
 
     .items {
-        flex-wrap: wrap;
         display: flex;
         flex-direction: row;
-
-        a {
+        
+        .item {
             border-radius: 8px;
             display: flex;
             flex-direction: row;
@@ -83,8 +82,16 @@ header {
             padding: 12px 20px;
         }
 
-        a.active, a:hover {
+        .item.active, .item:hover {
             background: #F3F6FA;
+        }
+
+        .amount-goods {
+            width: 24px;
+            border-radius: 50%;
+            color: white;
+            text-align: center;
+            background: #FF60C3;
         }
     }
 }
@@ -190,6 +197,64 @@ footer {
     }
 }
 
+/* Шаблон чек бокса */
+.check-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 24px;
+    border-radius: 8px;
+    transition: 0.1s background, 0.1s padding;
+    cursor: pointer;
+    padding: 2px 0;
+
+    &:hover {
+        padding: 2px 2px 2px 4px;
+        background: #F3F6FA;
+    }
+
+    &:focus-visible {
+        padding-left: 4px;
+        background: #F3F6FA;
+    }
+
+    p {
+        margin: 0;
+    }
+
+    input {
+        display: none;
+    }
+
+    .checkmark {
+        width: 20px;
+        height: 20px;
+        border: none;
+        border-radius: 4px;
+        background: #E4E7EB;
+        position: relative;
+        transition: 0.1s;
+    }
+    
+    input:checked + .checkmark {
+        background: #115EFB;
+    }
+
+    input:checked + .checkmark::after {
+        content: '';
+        position: absolute;
+        left: 7px;
+        top: 4px;
+
+        width: 4px;
+        height: 8px;
+        
+        border: solid white;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+    }
+}
+
 // Шаблон кнопки
 button {
     display: flex;
@@ -209,6 +274,29 @@ button {
     img {
         width: 16px;
         height: 16px;
+    }
+}
+
+.add-more {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 27px;
+    max-height: 49px;
+    
+    > div {
+        display: flex;
+        flex-direction: row;
+        gap: 15px;
+        align-items: center;
+
+        .plus-minus {
+            display: flex;
+            align-items: center;
+            padding: 0;
+            width: 32px;
+            height: 32px;
+        }
     }
 }
 
