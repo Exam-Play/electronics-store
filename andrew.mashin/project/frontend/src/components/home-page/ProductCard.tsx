@@ -2,14 +2,7 @@ import { useState } from 'react';
 
 import ratingIcon from '../../assets/images/icons/rating.svg'
 
-interface Product {
-    id: number;
-    name: string;
-    price: number;
-    rating: number;
-    isBestseller: boolean;
-    isNovelty: boolean;
-}
+import { Product } from '../Structures';
 
 function ProductCard({
     type,

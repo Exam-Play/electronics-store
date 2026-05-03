@@ -6,39 +6,12 @@ import Pagination from "../components/catalog-page/Pagination";
 import Filter from "../components/catalog-page/Filter";
 import ProductCard from "../components/catalog-page/ProductCard";
 import ProductModalWindow from "../components/catalog-page/ProductModalWindow";
-import { Product } from "../App";
 
-export interface FilterState {
-    priceMin: number,
-    priceMax: number,
-    categories: Set<string>,
-    colors: Set<string>
-}
-
-const categoryKeywords: Record<string, string[]> = {
-    "Смартфоны": ["смартфон"],
-    "Фитнес браслеты": ["фитнес", "браслет"],
-    "Портативная акустика": ["акустика", "колонка"],
-    "Очки виртуальной реальности": ["очки", "шлем", "vr"],
-    "Электротранспорт": ["чемодан-скутер", "скутер"],
-    "Умные часы": ["часы"]
-};
-
-const colorKeywords: Record<string, string[]> = {
-    "Красный": ["красн"],
-    "Оранжевый": ["оранж"],
-    "Желтый": ["желт"],
-    "Зеленый": ["зелен"],
-    "Голубой": ["голуб"],
-    "Синий": ["син"],
-    "Фиолетовый": ["фиолет"],
-    "Белый": ["бел"],
-    "Черный": ["черн"],
-    "Серый": ["сер"],
-    "Серебристый": ["серебр"],
-    "Бежевый": ["беж"]
-};
-
+import { Product } from '../components/Structures';
+import { ProductCart } from "../components/Structures";
+import { FilterState } from "../components/Structures";
+import { categoryKeywords } from "../components/Structures";
+import { colorKeywords } from "../components/Structures";
 
 function getPages(current: number, total: number): (number | '...')[] {
     if (total <= 5) {
@@ -111,7 +84,7 @@ function CatalogPage({
     removeFromCart
 }:{
     cards: Product[],
-    cartItems: Product[],
+    cartItems: ProductCart[],
     setCards: React.Dispatch<React.SetStateAction<Product[]>>,
     isLoading: boolean,
     addToCart: (item: Product) => void,
@@ -131,7 +104,7 @@ function CatalogPage({
         if (cards.length > 0 && originalCards.length === 0) {
             setOriginalCards([...cards]);
         }
-    }, [cards]);
+    }, [cards, originalCards]);
 
     const [activeSort, setActiveSort] = useState("");
     const [activeProduct, setActiveProduct] = useState<Product | null>(null);

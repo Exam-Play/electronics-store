@@ -4,39 +4,28 @@ import closeCross from '../../assets/images/icons/cross_pink.svg'
 
 import PlusMinus from "../catalog-page/PlusMinus";
 import DeleteProductModalWindow from "../../components/cart-page/DeleteProductModalWindow";
-
-
-interface Product {
-    id: number;
-    name: string;
-    price: number;
-    rating: number;
-    isBestseller: boolean;
-    isNovelty: boolean;
-    description: string;
-    characteristics: {
-        label: string;
-        value: string
-    }[];
-}
+import { Product } from '../../components/Structures';
+import { ProductCart } from "../../components/Structures";
 
 function CartItem({
     item,
+    card,
     cartItems,
     addToCart,
     removeFromCart,
     selected,
     onSelect
 }:{
-    item: Product,
-    cartItems: Product[],
+    item: ProductCart,
+    card: Product,
+    cartItems: ProductCart[],
     addToCart: (item: Product) => void,
     removeFromCart: (id: number) => void,
     selected: boolean,
     onSelect: () => void
 }) {
     const [showConfirm, setShowConfirm] = useState(false);
-    const productQuantity = cartItems.filter(cartItem => cartItem.id === item.id).length;
+    const productQuantity = cartItems.find(cartItem => cartItem.id === item.id)?.quantity ?? 0;
 
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
@@ -69,14 +58,14 @@ function CartItem({
 
         <div className='add-more'>
             <PlusMinus
-                item={item}
+                item={card}
                 addToCart={addToCart}
                 removeFromCart={removeFromCart}
                 productQuantity={productQuantity}
             />
         </div>
 
-        <h2>{item.price * productQuantity} ₽</h2>
+        <h2>{card.price * productQuantity} ₽</h2>
 
         <button
             className="delete-button"
@@ -90,10 +79,7 @@ function CartItem({
             <DeleteProductModalWindow
                 item={item}
                 onConfirm={() => {
-                    const count = cartItems.filter(i => i.id === item.id).length;
-                    for (let i = 0; i < count; i++) {
-                        removeFromCart(item.id);
-                    }
+                    removeFromCart(item.id);
                     if (selected) onSelect();
                     setShowConfirm(false);
                 }}

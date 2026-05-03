@@ -74,6 +74,10 @@ header {
         display: flex;
         flex-direction: row;
         
+        a {
+            border-radius: 8px;
+        }
+
         .item {
             border-radius: 8px;
             display: flex;
@@ -82,7 +86,7 @@ header {
             padding: 12px 20px;
         }
 
-        .item.active, .item:hover {
+        a.active, .item:hover {
             background: #F3F6FA;
         }
 

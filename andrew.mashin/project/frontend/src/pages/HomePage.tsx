@@ -13,15 +13,7 @@ import locationIcon from '../assets/images/home-page/location.svg'
 import Slider from '../components/home-page/Slider'
 
 import '../styles/homeStyle.scss'
-
-interface Product {
-    id: number;
-    name: string;
-    price: number;
-    rating: number;
-    isBestseller: boolean;
-    isNovelty: boolean;
-}
+import { Product } from '../components/Structures';
 
 function HomePage({
     data,

@@ -5,15 +5,11 @@ import 'nouislider/dist/nouislider.css';
 function RangePrice({
     MIN,
     MAX,
-    min,
-    max,
     onUpdate,
     sliderInstance
 }:{
     MIN: number,
     MAX: number,
-    min: number,
-    max: number,
     onUpdate: (min: number, max: number) => void,
     sliderInstance: any
 }){
@@ -33,6 +29,7 @@ function RangePrice({
         });
 
         return () => sliderInstance.current?.destroy();
+// eslint-disable-next-line
     }, [MIN, MAX]);
 
     return <div ref={sliderRef}/>;

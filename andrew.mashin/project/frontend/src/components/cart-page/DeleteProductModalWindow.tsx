@@ -1,25 +1,13 @@
 import closeCross from '../../assets/images/icons/cross.svg'
 
-interface Product {
-    id: number;
-    name: string;
-    price: number;
-    rating: number;
-    isBestseller: boolean;
-    isNovelty: boolean;
-    description: string;
-    characteristics: {
-        label: string;
-        value: string
-    }[];
-}
+import { ProductCart } from '../../components/Structures';
 
 function DeleteProductModalWindow({
     item,
     onConfirm,
     onCancel
 }:{
-    item: Product,
+    item: ProductCart,
     onConfirm: () => void,
     onCancel: () => void
 }) {

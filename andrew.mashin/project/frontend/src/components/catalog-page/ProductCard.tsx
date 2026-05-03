@@ -1,23 +1,10 @@
 import { useState } from "react";
 
 import ratingIcon from '../../assets/images/icons/rating.svg'
+
 import ButtonCard from "./ButtonCard";
-
-
-interface Product {
-    id: number;
-    name: string;
-    price: number;
-    rating: number;
-    isBestseller: boolean;
-    isNovelty: boolean;
-    description: string;
-    characteristics: {
-        label: string;
-        value: string
-    }[];
-}
-
+import { Product } from '../../components/Structures';
+import { ProductCart } from "../../components/Structures";
 
 function ProductCard({
     item,
@@ -27,7 +14,7 @@ function ProductCard({
     removeFromCart
 }:{
     item: Product,
-    cartItems: Product[],
+    cartItems: ProductCart[],
     setActiveProduct: (product: Product | null) => void,
     addToCart: (item: Product) => void,
     removeFromCart: (id: number) => void

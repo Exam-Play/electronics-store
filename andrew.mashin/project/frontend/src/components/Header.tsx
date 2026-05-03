@@ -68,7 +68,10 @@ function Header({
                 <Link
                     to={isLoggedIn ? "/" : "/profile"}
                     className={activeItem === 'profile' ? 'active' : ''}
-                    onClick={() => (isLoggedIn) ? clickLogout() : null}
+                    onClick={() => {
+                        if (isLoggedIn) clickLogout();
+                        setActiveItem('profile');
+                    }}
                 >
                     <div className='item'>
                         <img src={profileLogo} alt='profile-logo'/>

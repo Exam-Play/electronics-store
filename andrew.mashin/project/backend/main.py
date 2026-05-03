@@ -111,7 +111,7 @@ async def post_orders(request: Request):
         "delivery": body.get("delivery"),
         "payment": body.get("payment"),
         "packaging": body.get("packaging"),
-        "total": sum(item["price"] for item in cart)
+        "total": sum((item["price"] * item["quantity"]) for item in cart)
     }
 
     with open("database/users.json", "r", encoding="utf-8") as file:

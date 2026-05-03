@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 
 import CheckBox from "./CheckBox";
 import RangePrice from "./RangePrice";
-import { FilterState } from "../../pages/CatalogPage";
+import { FilterState } from "../Structures";
 
 function Filter({
     MIN,
@@ -122,8 +122,6 @@ function Filter({
             <RangePrice
                 MIN={MIN}
                 MAX={MAX}
-                min={priceMin}
-                max={priceMax}
                 onUpdate={(min, max) => {
                     setPriceMin(min);
                     setPriceMax(max);

@@ -10,19 +10,8 @@ import CartPage from './pages/CartPage'
 import NotFoundPage from './pages/NotFoundPage'
 import ProfilePage from './pages/ProfilePage';
 
-export interface Product {
-    id: number;
-    name: string;
-    price: number;
-    rating: number;
-    isBestseller: boolean;
-    isNovelty: boolean;
-    description: string;
-    characteristics: {
-        label: string;
-        value: string
-    }[];
-}
+import { Product } from './components/Structures';
+import { ProductCart } from './components/Structures';
 
 function App() {
     const location = useLocation();
@@ -38,7 +27,7 @@ function App() {
         localStorage.getItem('isLoggedIn') === 'true'
     );
 
-    const [cartItems, setCartItems] = useState<Product[]>(() => {
+    const [cartItems, setCartItems] = useState<ProductCart[]>(() => {
         const user = localStorage.getItem('username');
         if (!user) return [];
         const saved = localStorage.getItem(`cart_${user}`);
@@ -98,14 +87,30 @@ function App() {
     };
 
     const addToCart = (item: Product) => {
-        setCartItems(prev => [...prev, item].sort((a, b) => a.id - b.id));
+        setCartItems(prev => {
+            const existing = prev.find(i => i.id === item.id);
+            if (existing) {
+                return prev.map(i => i.id === item.id
+                    ? { ...i, quantity: i.quantity + 1 }
+                    : i
+                );
+            }
+            return [...prev, { id: item.id, name: item.name, quantity: 1 }]
+                .sort((a, b) => a.id - b.id);
+        });
     };
 
     const removeFromCart = (id: number) => {
         setCartItems(prev => {
-            const index = prev.findIndex(item => item.id === id);
-            if (index === -1) return prev;
-            return [...prev.slice(0, index), ...prev.slice(index + 1)];
+            const existing = prev.find(i => i.id === id);
+            if (!existing) return prev;
+            if (existing.quantity === 1) {
+                return prev.filter(i => i.id !== id);
+            }
+            return prev.map(i => i.id === id
+                ? { ...i, quantity: i.quantity - 1 }
+                : i
+            );
         });
     };
 
@@ -120,7 +125,7 @@ function App() {
                 onLogout={handleLogout}
                 activeItem={activeItem}
                 setActiveItem={setActiveItem}
-                cartCount={cartItems.length}
+                cartCount={cartItems.reduce((a, b) => a + b.quantity, 0)}
             />
 
             <main>
@@ -147,6 +152,7 @@ function App() {
                         path="/cart"
                         element={<CartPage
                             username={username}
+                            cards={cards}
                             cartItems={cartItems}
                             setCartItems={setCartItems}
                             addToCart={addToCart}

@@ -1,28 +1,19 @@
 import { useState } from "react";
+
 import CheckBox from "../catalog-page/CheckBox";
 import SelectItem from "./SelectItem";
-
-interface Product {
-    id: number;
-    name: string;
-    price: number;
-    rating: number;
-    isBestseller: boolean;
-    isNovelty: boolean;
-    description: string;
-    characteristics: {
-        label: string;
-        value: string
-    }[];
-}
+import { ProductCart } from "../../components/Structures";
+import { Product } from "../../components/Structures";
 
 function CartForm({
+    cards,
     setThanks,
     cartItems,
     username
 }:{
+    cards: Product[],
     setThanks: (v:string) => void,
-    cartItems: Product[],
+    cartItems: ProductCart[],
     username: string
 }) {
     const [delivery, setDelivery] = useState("pickup");
@@ -65,7 +56,12 @@ function CartForm({
                 tel,
                 email,
                 address: delivery === 'delivery' ? address : null,
-                cart: cartItems,
+                cart: cartItems.map(i => ({
+                    id: i.id,
+                    name: i.name,
+                    quantity: i.quantity,
+                    price: cards.find(c => c.id === i.id)?.price ?? 0
+                })),
                 delivery,
                 payment,
                 packaging

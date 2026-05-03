@@ -3,19 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import CartIcon from '../../assets/images/icons/cart_white.svg'
 import PlusMinus from './PlusMinus';
 
-interface Product {
-    id: number;
-    name: string;
-    price: number;
-    rating: number;
-    isBestseller: boolean;
-    isNovelty: boolean;
-    description: string;
-    characteristics: {
-        label: string;
-        value: string
-    }[];
-}
+import { Product } from '../../components/Structures';
+import { ProductCart } from "../../components/Structures";
 
 function ButtonCard({
     item,
@@ -24,12 +13,12 @@ function ButtonCard({
     removeFromCart
 }:{
     item: Product,
-    cartItems: Product[],
+    cartItems: ProductCart[],
     addToCart: (item: Product) => void,
     removeFromCart: (id: number) => void
 }){
     const navigate = useNavigate();
-    const productQuantity = cartItems.filter(cartItem => cartItem.id === item.id).length;
+    const productQuantity = cartItems.find(cartItem => cartItem.id === item.id)?.quantity ?? 0;
 
     let buttonCard = (
         <button

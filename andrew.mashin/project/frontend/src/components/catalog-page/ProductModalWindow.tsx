@@ -3,20 +3,8 @@ import { useState, useEffect } from 'react';
 import closeCross from '../../assets/images/icons/cross.svg'
 import ratingIcon from '../../assets/images/icons/rating.svg'
 import ButtonCard from './ButtonCard';
-
-interface Product {
-    id: number;
-    name: string;
-    price: number;
-    rating: number;
-    isBestseller: boolean;
-    isNovelty: boolean;
-    description: string;
-    characteristics: {
-        label: string;
-        value: string
-    }[];
-}
+import { Product } from '../../components/Structures';
+import { ProductCart } from "../../components/Structures";
 
 function ProductModalWindow({
     cartItems,
@@ -25,7 +13,7 @@ function ProductModalWindow({
     addToCart,
     removeFromCart
 }:{
-    cartItems: Product[],
+    cartItems: ProductCart[],
     activeProduct: Product,
     setActiveProduct: (product: Product | null) => void,
     addToCart: (item: Product) => void,

@@ -1,30 +1,19 @@
 import { useState, useEffect, useCallback } from "react";
 
 import closeCross from '../assets/images/icons/cross_pink.svg'
-
 import "../styles/cartStyle.scss";
+
 import EmptyCart from "../components/cart-page/EmptyCart";
 import CheckBox from "../components/catalog-page/CheckBox";
 import CartItem from "../components/cart-page/CartItem";
 import CartForm from "../components/cart-page/CartForm";
 import Gratitude from "../components/cart-page/Gratitude";
-
-interface Product {
-    id: number;
-    name: string;
-    price: number;
-    rating: number;
-    isBestseller: boolean;
-    isNovelty: boolean;
-    description: string;
-    characteristics: {
-        label: string;
-        value: string
-    }[];
-}
+import { ProductCart } from "../components/Structures";
+import { Product } from "../components/Structures";
 
 function CartPage({
     username,
+    cards,
     cartItems,
     setCartItems,
     addToCart,
@@ -32,8 +21,9 @@ function CartPage({
     onOrderComplete
 }:{
     username: string
-    cartItems: Product[],
-    setCartItems: React.Dispatch<React.SetStateAction<Product[]>>,
+    cards: Product[],
+    cartItems: ProductCart[],
+    setCartItems: React.Dispatch<React.SetStateAction<ProductCart[]>>,
     addToCart: (item: Product) => void,
     removeFromCart: (id: number) => void,
     onOrderComplete: () => void
@@ -69,7 +59,10 @@ function CartPage({
     const [selectedIds, setSelectedIds] = useState<Set<number>>(new Set());
 
     const selectedItems = cartItems.filter(i => selectedIds.has(i.id));
-    const finalPrice = selectedItems.reduce((sum, i) => sum + i.price, 0);
+    const finalPrice = selectedItems.reduce((sum, i) => {
+        const product = cards.find(c => c.id === i.id);
+        return sum + (product?.price ?? 0) * i.quantity;
+    }, 0);
     const countGoods = selectedItems.length;
 
     const itemText = (count: number) => (count === 1) ? "товар" : (count >= 2 && count <= 4) ? "товара" : "товаров";
@@ -117,10 +110,7 @@ function CartPage({
                         <button
                             className="delete-button"
                             onClick={() => selectedIds.forEach((item) => {
-                                const count = cartItems.filter(i => i.id === item).length;
-                                for (let i = 0; i < count; i++) {
-                                    removeFromCart(item);
-                                }
+                                removeFromCart(item);
                                 toggleSelect(item);
                             })}
                         >
@@ -130,9 +120,14 @@ function CartPage({
                     }
                 </div>
 
-                {uniqueItems.map((item) => (
-                    <CartItem
+                {uniqueItems.map((item) => {
+                    const card = cards.find(p => p.id === item.id);
+
+                    if (!card) return null;
+
+                    return <CartItem
                         key={item.id}
+                        card={card}
                         item={item}
                         cartItems={cartItems}
                         addToCart={addToCart}
@@ -140,7 +135,7 @@ function CartPage({
                         selected={selectedIds.has(item.id)}
                         onSelect={() => toggleSelect(item.id)}
                     />
-                ))}
+                })}
 
                 <h2>{countGoods} {itemText(countGoods)} на {finalPrice} ₽</h2>
             </div>
@@ -149,6 +144,7 @@ function CartPage({
 
             <div className="cart-content">
                 <CartForm
+                    cards={cards}
                     setThanks={setThanks}
                     cartItems={selectedItems}
                     username={username}
