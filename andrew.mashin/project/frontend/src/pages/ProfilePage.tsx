@@ -3,20 +3,6 @@ import { useNavigate } from 'react-router-dom';
 
 import '../styles/profileStyle.scss';
 
-interface Product {
-    id: number;
-    name: string;
-    price: number;
-    rating: number;
-    isBestseller: boolean;
-    isNovelty: boolean;
-    description: string;
-    characteristics: {
-        label: string;
-        value: string;
-    }[];
-}
-
 function ProfilePage({
     onLogin,
     setActiveItem

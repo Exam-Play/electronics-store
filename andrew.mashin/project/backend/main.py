@@ -1,10 +1,12 @@
+from datetime import datetime
+
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 import json
 
 
 DB_USERS = "database/users.json"
-
+DB_GOODS = "database/goods.json"
 
 app = FastAPI()
 
@@ -15,7 +17,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
 
 @app.post("/login")
 async def post_login(request: Request):
@@ -61,7 +62,7 @@ async def save_cart(request: Request):
 
 @app.get("/cart/{username}")
 async def get_cart(username: str):
-    with open("database/users.json", "r", encoding="utf-8") as file:
+    with open(DB_USERS, "r", encoding="utf-8") as file:
         users = json.load(file)
 
     for user in users:
@@ -73,17 +74,58 @@ async def get_cart(username: str):
 
 @app.get("/goods")
 def get_goods():
-    with open("database/goods.json", "r", encoding="utf-8") as file:
+    with open(DB_GOODS, "r", encoding="utf-8") as file:
         database_data = json.load(file)
 
     return database_data
 
 
-@app.get("/orders")
-def get_orders():
-    return {"message": "Hello FastAPI"}
+@app.get("/orders/{username}")
+async def get_orders(username: str):
+    with open("database/users.json", "r", encoding="utf-8") as file:
+        users = json.load(file)
+
+    for user in users:
+        if user["username"] == username:
+            return { "orders": user.get("orders", []) }
+
+    raise HTTPException(status_code=404, detail="Пользователь не найден")
 
 
 @app.post("/orders")
-def post_orders():
-    return {"message": "Hello FastAPI"}
+async def post_orders(request: Request):
+    body = await request.json()
+    username = body.get("username")
+    cart = body.get("cart", [])
+    order_id = body.get("order_id")
+
+    order = {
+        "id": order_id,
+        "date": datetime.now().strftime("%d.%m.%Y %H:%M"),
+        "contacts": {
+            "tel": body.get("tel"),
+            "email": body.get("email"),
+            "address": body.get("address"),
+        },
+        "items": cart,
+        "delivery": body.get("delivery"),
+        "payment": body.get("payment"),
+        "packaging": body.get("packaging"),
+        "total": sum(item["price"] for item in cart)
+    }
+
+    with open("database/users.json", "r", encoding="utf-8") as file:
+        users = json.load(file)
+
+    for user in users:
+        if user["username"] == username:
+            if "orders" not in user:
+                user["orders"] = []
+            user["orders"].append(order)
+            user["cart"] = []
+            break
+
+    with open("database/users.json", "w", encoding="utf-8") as file:
+        json.dump(users, file, ensure_ascii=False, indent=4)
+
+    return { "success": True, "order_id": order_id }

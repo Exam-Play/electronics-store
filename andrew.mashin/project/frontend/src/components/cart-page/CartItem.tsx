@@ -1,5 +1,10 @@
-import PlusMinus from "../catalog-page/PlusMinus";
+import { useState, useEffect } from "react";
+
 import closeCross from '../../assets/images/icons/cross_pink.svg'
+
+import PlusMinus from "../catalog-page/PlusMinus";
+import DeleteProductModalWindow from "../../components/cart-page/DeleteProductModalWindow";
+
 
 interface Product {
     id: number;
@@ -30,7 +35,16 @@ function CartItem({
     selected: boolean,
     onSelect: () => void
 }) {
+    const [showConfirm, setShowConfirm] = useState(false);
     const productQuantity = cartItems.filter(cartItem => cartItem.id === item.id).length;
+
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') setShowConfirm(false);
+        };
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, []);
 
     return <div className="cart-item">
         <div className="check-with-img">
@@ -66,16 +80,26 @@ function CartItem({
 
         <button
             className="delete-button"
-            onClick={() => {
-                const count = cartItems.filter(i => i.id === item.id).length;
-                for (let i = 0; i < count; i++) {
-                    removeFromCart(item.id);
-                }
-            }}
+            onClick={() => setShowConfirm(true)}
         >
             <img src={closeCross} alt="close cross"/>
             <p>Удалить</p>
         </button>
+
+        {showConfirm && (
+            <DeleteProductModalWindow
+                item={item}
+                onConfirm={() => {
+                    const count = cartItems.filter(i => i.id === item.id).length;
+                    for (let i = 0; i < count; i++) {
+                        removeFromCart(item.id);
+                    }
+                    if (selected) onSelect();
+                    setShowConfirm(false);
+                }}
+                onCancel={() => setShowConfirm(false)}
+            />
+        )}
     </div>
 }
 

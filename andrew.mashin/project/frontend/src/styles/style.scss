@@ -207,6 +207,7 @@ footer {
     transition: 0.1s background, 0.1s padding;
     cursor: pointer;
     padding: 2px 0;
+    user-select: none;
 
     &:hover {
         padding: 2px 2px 2px 4px;
@@ -296,6 +297,14 @@ button {
             padding: 0;
             width: 32px;
             height: 32px;
+        }
+
+        .plus-minus:hover {
+            background: #115EFB;
+
+            img {
+                filter: brightness(0) invert(1);
+            }
         }
     }
 }

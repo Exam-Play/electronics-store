@@ -3,20 +3,6 @@ import { useEffect, useRef, useState } from "react";
 import CheckBox from "./CheckBox";
 import RangePrice from "./RangePrice";
 
-interface Product {
-    id: number;
-    name: string;
-    price: number;
-    rating: number;
-    isBestseller: boolean;
-    isNovelty: boolean;
-    description: string;
-    characteristics: {
-        label: string;
-        value: string;
-    }[];
-}
-
 function Filter({
     MIN,
     MAX

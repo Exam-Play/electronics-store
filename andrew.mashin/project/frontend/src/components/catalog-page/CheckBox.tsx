@@ -1,15 +1,18 @@
 function CheckBox({
     title,
+    name,
     checked,
     onChange
 }:{
     title: string,
-    checked: boolean,
-    onChange: () => void
+    name?: string,
+    checked?: boolean,
+    onChange?: () => void
 }) {
     return <label className="check-item" tabIndex={0}>
         <input
             type="checkbox"
+            name={name}
             checked={checked}
             onChange={onChange}
         />

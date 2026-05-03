@@ -146,7 +146,9 @@ function App() {
                     <Route
                         path="/cart"
                         element={<CartPage
+                            username={username}
                             cartItems={cartItems}
+                            setCartItems={setCartItems}
                             addToCart={addToCart}
                             removeFromCart={removeFromCart}
                             onOrderComplete={() => setCartItems([])}
