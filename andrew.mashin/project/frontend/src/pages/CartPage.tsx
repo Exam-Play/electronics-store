@@ -63,7 +63,7 @@ function CartPage({
         const product = cards.find(c => c.id === i.id);
         return sum + (product?.price ?? 0) * i.quantity;
     }, 0);
-    const countGoods = selectedItems.length;
+    const countGoods = selectedItems.reduce((sum, item) => sum + item.quantity, 0);
 
     const itemText = (count: number) => (count === 1) ? "товар" : (count >= 2 && count <= 4) ? "товара" : "товаров";
     const uniqueItems = cartItems.filter(
@@ -160,13 +160,17 @@ function CartPage({
         </div>
         :
         <div className="history-cart-content">
-            {orders.map(order => (
-                <div key={order.id} className="order-item">
+            {orders.map(order => {
+                const totalCount = (order.items as any[]).reduce(
+                    (sum, item: any) => sum + item.quantity, 0
+                );
+
+                return <div key={order.id} className="order-item">
                     <p>№{order.id} от {order.date}</p>
-                    <p>{order.items.length} {itemText(order.items.length)}</p>
+                    <p>{totalCount} {itemText(totalCount)}</p>
                     <p>{order.total} ₽</p>
                 </div>
-            ))}
+            })}
         </div>
     );
 

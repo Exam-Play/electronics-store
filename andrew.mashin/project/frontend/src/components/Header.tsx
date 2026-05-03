@@ -29,11 +29,16 @@ function Header({
         }).catch(error => console.error('Ошибка:', error));
     }
 
+    const homeLink = (activeItem !== "" ?
+        <Link to="/" onClick={() => setActiveItem('')}>
+            <Title />
+        </Link>
+        : <Title />
+    )
+
     return <header>
         <div className='wrapper'>
-            <Link to="/" onClick={() => setActiveItem('home')}>
-                <Title />
-            </Link>
+            {homeLink}
 
             <div className='items'>
                 <Link

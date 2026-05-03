@@ -145,6 +145,9 @@ function CatalogPage({
 
         <div className="wrapper">
             <div className="catalog-goods">
+                {currentCards.length === 0 ?
+                    <h1 style={{position: "absolute", left: "33%", top: "33%"}}>Товары не найдены</h1>
+                : null}
                 {isLoading
                     ? Array.from({ length: 9 }).map((_, i) => (
                         <div key={i} className="product-card"></div>

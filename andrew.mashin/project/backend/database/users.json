@@ -2,23 +2,7 @@
     {
         "username": "ExamPlay",
         "password": "123456",
-        "cart": [
-            {
-                "id": 2,
-                "name": "Внешний аккумулятор 10000mAh, черный",
-                "quantity": 20
-            },
-            {
-                "id": 3,
-                "name": "Bluetooth гарнитура, черный",
-                "quantity": 3
-            },
-            {
-                "id": 5,
-                "name": "Беспроводная акустика",
-                "quantity": 1
-            }
-        ],
+        "cart": [],
         "orders": [
             {
                 "id": "032158",
@@ -46,6 +30,87 @@
                 "payment": "cash",
                 "packaging": true,
                 "total": 8196
+            },
+            {
+                "id": "032250",
+                "date": "04.05.2026 01:50",
+                "contacts": {
+                    "tel": "123",
+                    "email": "andrew.mashin06@gmail.com",
+                    "address": null
+                },
+                "items": [
+                    {
+                        "id": 2,
+                        "name": "Внешний аккумулятор 10000mAh, черный",
+                        "quantity": 6,
+                        "price": 2399
+                    },
+                    {
+                        "id": 3,
+                        "name": "Bluetooth гарнитура, черный",
+                        "quantity": 3,
+                        "price": 1899
+                    },
+                    {
+                        "id": 5,
+                        "name": "Беспроводная акустика",
+                        "quantity": 1,
+                        "price": 3499
+                    }
+                ],
+                "delivery": "pickup",
+                "payment": "card",
+                "packaging": true,
+                "total": 23590
+            },
+            {
+                "id": "032257",
+                "date": "04.05.2026 01:57",
+                "contacts": {
+                    "tel": "123",
+                    "email": "andrew.mashin06@gmail.com",
+                    "address": null
+                },
+                "items": [
+                    {
+                        "id": 37,
+                        "name": "Видеокарта GeForce RTX 5060 8GB",
+                        "quantity": 6,
+                        "price": 33240
+                    }
+                ],
+                "delivery": "pickup",
+                "payment": "cash",
+                "packaging": true,
+                "total": 199440
+            },
+            {
+                "id": "032301",
+                "date": "04.05.2026 02:01",
+                "contacts": {
+                    "tel": "123",
+                    "email": "andrew.mashin06@gmail.com",
+                    "address": null
+                },
+                "items": [
+                    {
+                        "id": 7,
+                        "name": "Смартфон 256 ГБ черный",
+                        "quantity": 1,
+                        "price": 34990
+                    },
+                    {
+                        "id": 8,
+                        "name": "Смартфон 256 ГБ белый",
+                        "quantity": 4,
+                        "price": 34990
+                    }
+                ],
+                "delivery": "pickup",
+                "payment": "cash",
+                "packaging": true,
+                "total": 174950
             }
         ]
     },
