@@ -2,13 +2,16 @@ import { useEffect, useRef, useState } from "react";
 
 import CheckBox from "./CheckBox";
 import RangePrice from "./RangePrice";
+import { FilterState } from "../../pages/CatalogPage";
 
 function Filter({
     MIN,
-    MAX
+    MAX,
+    onFilter
 }:{
     MIN: number,
-    MAX: number
+    MAX: number,
+    onFilter: (filters: FilterState) => void
 }){
     useEffect(() => {
         if (MIN === 0 && MAX === 0) return;
@@ -20,6 +23,46 @@ function Filter({
     const [priceMax, setPriceMax] = useState(MAX);
     const sliderInstance = useRef<any>(null);
     const [styleFont, setStyleFont] = useState('#B9B9B9');
+
+    const [selectedCategories, setSelectedCategories] = useState<Set<string>>(new Set());
+    const [selectedColors, setSelectedColors] = useState<Set<string>>(new Set());
+
+    const categories = ["Смартфоны", "Фитнес браслеты", "Портативная акустика", "Очки виртуальной реальности", "Электротранспорт", "Умные часы"];
+    const colors = ["Красный", "Оранжевый", "Желтый", "Зеленый", "Голубой", "Синий", "Фиолетовый", "Белый", "Черный", "Серый", "Серебристый", "Бежевый"];
+
+    const toggleCategory = (title: string) => {
+        setSelectedCategories(prev => {
+            const next = new Set(prev);
+            next.has(title) ? next.delete(title) : next.add(title);
+            return next;
+        });
+    };
+
+    const toggleColor = (title: string) => {
+        setSelectedColors(prev => {
+            const next = new Set(prev);
+            next.has(title) ? next.delete(title) : next.add(title);
+            return next;
+        });
+    };
+
+    const handleApply = () => {
+        onFilter({
+            priceMin,
+            priceMax,
+            categories: selectedCategories,
+            colors: selectedColors
+        });
+    };
+
+    const handleReset = () => {
+        setSelectedCategories(new Set());
+        setSelectedColors(new Set());
+        setPriceMin(MIN);
+        setPriceMax(MAX);
+        sliderInstance.current?.set([MIN, MAX]);
+        onFilter({ priceMin: MIN, priceMax: MAX, categories: new Set(), colors: new Set() });
+    };
 
     const handleMinChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         let val = Number(e.target.value);
@@ -92,33 +135,36 @@ function Filter({
         <div className="section">
             <h2>Тип товара</h2>
             <div className="check-list">
-                <CheckBox title="Смартфоны"/>
-                <CheckBox title="Фитнес браслеты"/>
-                <CheckBox title="Портативная акустика"/>
-                <CheckBox title="Очки виртуальной реальности"/>
-                <CheckBox title="Электротранспорт"/>
-                <CheckBox title="Умные часы"/>
+                {categories.map(cat => (
+                    <CheckBox
+                        key={cat}
+                        title={cat}
+                        checked={selectedCategories.has(cat)}
+                        onChange={() => toggleCategory(cat)}
+                    />
+                ))}
             </div>
         </div>
 
         <div className="section">
             <h2>Цвет</h2>
             <div className="check-list">
-                <CheckBox title="Красный"/>
-                <CheckBox title="Оранжевый"/>
-                <CheckBox title="Желтый"/>
-                <CheckBox title="Зеленый"/>
-                <CheckBox title="Голубой"/>
-                <CheckBox title="Синий"/>
-                <CheckBox title="Фиолетовый"/>
+                {colors.map(color => (
+                    <CheckBox
+                        key={color}
+                        title={color}
+                        checked={selectedColors.has(color)}
+                        onChange={() => toggleColor(color)}
+                    />
+                ))}
             </div>
         </div>
 
         <div className="buttons">
-            <button className="button-blue-template">
+            <button className="button-blue-template" onClick={handleApply}>
                 <span>Показать</span>
             </button>
-            <button className="button-pink-template">
+            <button className="button-pink-template" onClick={handleReset}>
                 <span>Сбросить</span>
             </button>
         </div>

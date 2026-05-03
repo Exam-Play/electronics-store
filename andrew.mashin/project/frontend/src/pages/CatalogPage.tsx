@@ -6,20 +6,39 @@ import Pagination from "../components/catalog-page/Pagination";
 import Filter from "../components/catalog-page/Filter";
 import ProductCard from "../components/catalog-page/ProductCard";
 import ProductModalWindow from "../components/catalog-page/ProductModalWindow";
+import { Product } from "../App";
 
-interface Product {
-    id: number;
-    name: string;
-    price: number;
-    rating: number;
-    isBestseller: boolean;
-    isNovelty: boolean;
-    description: string;
-    characteristics: {
-        label: string;
-        value: string;
-    }[];
+export interface FilterState {
+    priceMin: number,
+    priceMax: number,
+    categories: Set<string>,
+    colors: Set<string>
 }
+
+const categoryKeywords: Record<string, string[]> = {
+    "Смартфоны": ["смартфон"],
+    "Фитнес браслеты": ["фитнес", "браслет"],
+    "Портативная акустика": ["акустика", "колонка"],
+    "Очки виртуальной реальности": ["очки", "шлем", "vr"],
+    "Электротранспорт": ["чемодан-скутер", "скутер"],
+    "Умные часы": ["часы"]
+};
+
+const colorKeywords: Record<string, string[]> = {
+    "Красный": ["красн"],
+    "Оранжевый": ["оранж"],
+    "Желтый": ["желт"],
+    "Зеленый": ["зелен"],
+    "Голубой": ["голуб"],
+    "Синий": ["син"],
+    "Фиолетовый": ["фиолет"],
+    "Белый": ["бел"],
+    "Черный": ["черн"],
+    "Серый": ["сер"],
+    "Серебристый": ["серебр"],
+    "Бежевый": ["беж"]
+};
+
 
 function getPages(current: number, total: number): (number | '...')[] {
     if (total <= 5) {
@@ -44,19 +63,43 @@ function getMaxPrice(products: Product[]): number {
     return products.reduce((max, p) => p.price > max ? p.price : max, products[0].price);
 }
 
-function sortProducts(products: Product[], sortType: string): Product[] {
+function sortProducts(sortType: string, defaultProducts: Product[]): Product[] {
     switch (sortType) {
         case "Новые":
-            return [...products].sort((a, b) => b.isNovelty === a.isNovelty ? 0 : b.isNovelty ? 1 : -1);
+            return [...defaultProducts].sort((a, b) => b.isNovelty === a.isNovelty ? 0 : b.isNovelty ? 1 : -1);
         case "Популярные":
-            return [...products].sort((a, b) => b.isBestseller === a.isBestseller ? 0 : b.isBestseller ? 1 : -1);
+            return [...defaultProducts].sort((a, b) => b.isBestseller === a.isBestseller ? 0 : b.isBestseller ? 1 : -1);
         case "Подешевле":
-            return [...products].sort((a, b) => a.price - b.price);
+            return [...defaultProducts].sort((a, b) => a.price - b.price);
         case "Подороже":
-            return [...products].sort((a, b) => b.price - a.price);
+            return [...defaultProducts].sort((a, b) => b.price - a.price);
         default:
-            return products;
+            return [...defaultProducts];
     }
+}
+
+function filterProducts(products: Product[], filters: FilterState): Product[] {
+    return products.filter(p => {
+        const nameLower = p.name.toLowerCase();
+
+        if (p.price < filters.priceMin || p.price > filters.priceMax) return false;
+
+        if (filters.categories.size > 0) {
+            const match = [...filters.categories].some(cat =>
+                categoryKeywords[cat]?.some(kw => nameLower.includes(kw))
+            );
+            if (!match) return false;
+        }
+
+        if (filters.colors.size > 0) {
+            const match = [...filters.colors].some(color =>
+                colorKeywords[color]?.some(kw => nameLower.includes(kw))
+            );
+            if (!match) return false;
+        }
+
+        return true;
+    });
 }
 
 function CatalogPage({
@@ -74,16 +117,32 @@ function CatalogPage({
     addToCart: (item: Product) => void,
     removeFromCart: (id: number) => void
 }){
+    const [filters, setFilters] = useState<FilterState>({
+        priceMin: 0,
+        priceMax: 999999,
+        categories: new Set(),
+        colors: new Set()
+    });
+
+    const filteredCards = filterProducts(cards, filters);
+
+    const [originalCards, setOriginalCards] = useState<Product[]>([]);
+    useEffect(() => {
+        if (cards.length > 0 && originalCards.length === 0) {
+            setOriginalCards([...cards]);
+        }
+    }, [cards]);
+
     const [activeSort, setActiveSort] = useState("");
     const [activeProduct, setActiveProduct] = useState<Product | null>(null);
 
-    const countOfPages = Math.ceil(cards.length / 9);
+    const countOfPages = Math.ceil(filteredCards.length / 9);
     const [currentPage, setCurrentPage] = useState(1);
     const pages = getPages(currentPage, countOfPages);
 
     const startIndex = (currentPage - 1) * 9;
     const endIndex = startIndex + 9;
-    const currentCards = cards.slice(startIndex, endIndex);
+    const currentCards = filteredCards.slice(startIndex, endIndex);
 
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
@@ -102,7 +161,7 @@ function CatalogPage({
                     key={item}
                     className={activeSort === item ? "active" : ""}
                     onClick={() => {
-                        setCards(prevCards => sortProducts(prevCards, activeSort === item ? "" : item));
+                        setCards(() => sortProducts(activeSort === item ? "" : item, originalCards));
                         setActiveSort(prev => prev === item ? "" : item);
                     }}
                 >
@@ -133,6 +192,7 @@ function CatalogPage({
             <Filter
                 MIN={getMinPrice(cards)}
                 MAX={getMaxPrice(cards)}
+                onFilter={setFilters}
             />
         </div>
 

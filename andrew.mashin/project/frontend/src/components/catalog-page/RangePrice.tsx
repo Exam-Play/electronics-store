@@ -23,7 +23,7 @@ function RangePrice({
         if (!sliderRef.current) return;
 
         sliderInstance.current = noUiSlider.create(sliderRef.current, {
-            start: [min, max],
+            start: [MIN, MAX],
             connect: true,
             range: { min: MIN, max: MAX },
         });
@@ -33,7 +33,7 @@ function RangePrice({
         });
 
         return () => sliderInstance.current?.destroy();
-    }, []);
+    }, [MIN, MAX]);
 
     return <div ref={sliderRef}/>;
 };

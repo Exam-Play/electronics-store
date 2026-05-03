@@ -10,9 +10,9 @@ import phoneIcon from '../assets/images/home-page/phone.svg'
 import emailIcon from '../assets/images/home-page/email.svg'
 import locationIcon from '../assets/images/home-page/location.svg'
 
-import Slider from '../components/home-page/Slider';
+import Slider from '../components/home-page/Slider'
 
-import '../styles/homeStyle.scss';
+import '../styles/homeStyle.scss'
 
 interface Product {
     id: number;

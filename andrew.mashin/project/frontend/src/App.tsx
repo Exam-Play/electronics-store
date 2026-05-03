@@ -10,7 +10,7 @@ import CartPage from './pages/CartPage'
 import NotFoundPage from './pages/NotFoundPage'
 import ProfilePage from './pages/ProfilePage';
 
-interface Product {
+export interface Product {
     id: number;
     name: string;
     price: number;
