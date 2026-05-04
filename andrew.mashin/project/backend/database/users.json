@@ -111,6 +111,39 @@
                 "payment": "cash",
                 "packaging": true,
                 "total": 174950
+            },
+            {
+                "id": "041457",
+                "date": "04.05.2026 17:57",
+                "contacts": {
+                    "tel": "123",
+                    "email": "andrew.mashin06@gmail.com",
+                    "address": null
+                },
+                "items": [
+                    {
+                        "id": 1,
+                        "name": "Внешний аккумулятор 10000mAh, белый",
+                        "quantity": 1,
+                        "price": 2499
+                    },
+                    {
+                        "id": 2,
+                        "name": "Внешний аккумулятор 10000mAh, черный",
+                        "quantity": 1,
+                        "price": 2399
+                    },
+                    {
+                        "id": 37,
+                        "name": "Видеокарта GeForce RTX 5060 8GB",
+                        "quantity": 6,
+                        "price": 33240
+                    }
+                ],
+                "delivery": "pickup",
+                "payment": "cash",
+                "packaging": true,
+                "total": 204338
             }
         ]
     },

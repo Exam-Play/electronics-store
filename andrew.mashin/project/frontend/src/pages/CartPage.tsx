@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import { useNavigate } from 'react-router-dom';
 
 import closeCross from '../assets/images/icons/cross_pink.svg'
 import "../styles/cartStyle.scss";
@@ -28,6 +29,14 @@ function CartPage({
     removeFromCart: (id: number) => void,
     onOrderComplete: () => void
 }) {
+    const navigate = useNavigate();
+    
+    useEffect(() => {
+        if (username === "") {
+            navigate("/");
+        }
+    }, [username, navigate]);
+
     const [orders, setOrders] = useState<any[]>([]);
 
     const loadOrders = useCallback(() => {
