@@ -1,7 +1,7 @@
 import Plus from '../../assets/images/icons/plus.svg'
 import Minus from '../../assets/images/icons/minus.svg'
 
-import { Product } from '../../components/Structures';
+import { Product } from '../Structures';
 
 function PlusMinus({
     item,

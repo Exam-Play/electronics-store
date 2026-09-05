@@ -3,9 +3,9 @@ import { useState, useEffect } from "react";
 import closeCross from '../../assets/images/icons/cross_pink.svg'
 
 import PlusMinus from "../catalog-page/PlusMinus";
-import DeleteProductModalWindow from "../../components/cart-page/DeleteProductModalWindow";
-import { Product } from '../../components/Structures';
-import { ProductCart } from "../../components/Structures";
+import DeleteProductModalWindow from "./DeleteProductModalWindow";
+import { Product } from '../Structures';
+import { ProductCart } from "../Structures";
 
 function CartItem({
     item,

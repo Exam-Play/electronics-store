@@ -267,5 +267,5 @@ fabric.properties
 
 # venv and pycache
 
-andrew.mashin/project/backend/venv/
-andrew.mashin/project/backend/__pycache__
+backend/venv/
+backend/__pycache__

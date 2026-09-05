@@ -2,8 +2,8 @@ import { useState } from "react";
 
 import CheckBox from "../catalog-page/CheckBox";
 import SelectItem from "./SelectItem";
-import { ProductCart } from "../../components/Structures";
-import { Product } from "../../components/Structures";
+import { ProductCart } from "../Structures";
+import { Product } from "../Structures";
 
 function CartForm({
     cards,
