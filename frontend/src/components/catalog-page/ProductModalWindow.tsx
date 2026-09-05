@@ -3,8 +3,8 @@ import { useState, useEffect } from 'react';
 import closeCross from '../../assets/images/icons/cross.svg'
 import ratingIcon from '../../assets/images/icons/rating.svg'
 import ButtonCard from './ButtonCard';
-import { Product } from '../Structures';
-import { ProductCart } from "../Structures";
+import type { Product } from '../Structures';
+import type { ProductCart } from "../Structures";
 
 function ProductModalWindow({
     cartItems,
@@ -32,6 +32,10 @@ function ProductModalWindow({
         </div>
     : null;
 
+    const getImageUrl = (id: number) => {
+        return new URL(`../../assets/images/goods_increased/image_${id}.png`, import.meta.url).href;
+    };
+    
     return <div className="product-window">
         <div className="wrapper">
             <button className="close-button" onClick={() => setActiveProduct(null)}>
@@ -56,8 +60,8 @@ function ProductModalWindow({
                         </div>
                         <img
                             src={activeProduct?.id
-                                ? require(`../../assets/images/goods_increased/image_${activeProduct.id}.png`)
-                                : null}
+                                ? getImageUrl(activeProduct.id)
+                                : undefined}
                             style={{ opacity: loaded ? 1 : 0, transition: 'opacity 0.3s ease-in-out' }}
                             alt='product img'
                             onLoad={() => setLoaded(true)}

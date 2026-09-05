@@ -10,8 +10,8 @@ import CartPage from './pages/CartPage'
 import NotFoundPage from './pages/NotFoundPage'
 import ProfilePage from './pages/ProfilePage';
 
-import { Product } from './components/Structures';
-import { ProductCart } from './components/Structures';
+import type { Product } from './components/Structures';
+import type { ProductCart } from './components/Structures';
 
 function App() {
     const location = useLocation();

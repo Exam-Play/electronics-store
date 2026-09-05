@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import ratingIcon from '../../assets/images/icons/rating.svg'
 
-import { Product } from '../Structures';
+import type { Product } from '../Structures';
 
 function ProductCard({
     type,
@@ -27,13 +27,17 @@ function ProductCard({
         background: `${isBestsellers ? '#FF60C3' : (isNovelty) ? '#00E398' : 'white'}`
     };
 
+    const getImageUrl = (id: number) => {
+        return new URL(`../../assets/images/goods/image_${id}.png`, import.meta.url).href;
+    };
+
     return <div className="product-card">
         <div className="img-wrapper">
             <div className="text-wrapper" style={backgroundStyle}>
                 <p>{isBestsellers ? 'Хит' : isNovelty ? 'Новинка' : ''}</p>
             </div>
             <img
-                src={require(`../../assets/images/goods/image_${dataImage.id}.png`)}
+                src={getImageUrl(dataImage.id)}
                 alt='product img'
                 style={{ opacity: loaded ? 1 : 0, transition: 'opacity 0.3s ease-in-out' }}
                 onLoad={() => setLoaded(true)}

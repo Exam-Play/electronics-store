@@ -4,8 +4,8 @@ import closeCross from '../../assets/images/icons/cross_pink.svg'
 
 import PlusMinus from "../catalog-page/PlusMinus";
 import DeleteProductModalWindow from "./DeleteProductModalWindow";
-import { Product } from '../Structures';
-import { ProductCart } from "../Structures";
+import type { Product } from '../Structures';
+import type { ProductCart } from "../Structures";
 
 function CartItem({
     item,
@@ -35,6 +35,10 @@ function CartItem({
         return () => window.removeEventListener('keydown', handleKeyDown);
     }, []);
 
+    const getImageUrl = (id: number) => {
+        return new URL(`../../assets/images/goods/image_${id}.png`, import.meta.url).href;
+    };
+
     return <div className="cart-item">
         <div className="check-with-img">
             <label className="check-item" tabIndex={0}>
@@ -48,7 +52,7 @@ function CartItem({
             
             <div className="img-wrapper">
                 <img
-                    src={require(`../../assets/images/goods/image_${item.id}.png`)}
+                    src={getImageUrl(item.id)}
                     alt='product img'
                 />
             </div>

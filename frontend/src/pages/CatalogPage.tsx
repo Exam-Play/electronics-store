@@ -7,9 +7,9 @@ import Filter from "../components/catalog-page/Filter";
 import ProductCard from "../components/catalog-page/ProductCard";
 import ProductModalWindow from "../components/catalog-page/ProductModalWindow";
 
-import { Product } from '../components/Structures';
-import { ProductCart } from "../components/Structures";
-import { FilterState } from "../components/Structures";
+import type { Product } from '../components/Structures';
+import type { ProductCart } from "../components/Structures";
+import type { FilterState } from "../components/Structures";
 import { categoryKeywords } from "../components/Structures";
 import { colorKeywords } from "../components/Structures";
 

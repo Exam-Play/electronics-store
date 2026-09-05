@@ -3,8 +3,8 @@ import { useState } from "react";
 import ratingIcon from '../../assets/images/icons/rating.svg'
 
 import ButtonCard from "./ButtonCard";
-import { Product } from '../Structures';
-import { ProductCart } from "../Structures";
+import type { Product } from '../Structures';
+import type { ProductCart } from "../Structures";
 
 function ProductCard({
     item,
@@ -28,6 +28,10 @@ function ProductCard({
         </div>
     : null;
 
+    const getImageUrl = (id: number) => {
+        return new URL(`../../assets/images/goods/image_${id}.png`, import.meta.url).href;
+    };
+
     return <div className="product-card">
         <div onClick={() => setActiveProduct(item)} style={{cursor: 'pointer'}}>
             <div className="img-wrapper">
@@ -45,7 +49,7 @@ function ProductCard({
                     : null}
                 </div>
                 <img
-                    src={require(`../../assets/images/goods/image_${item.id}.png`)}
+                    src={getImageUrl(item.id)}
                     alt='product img'
                     style={{ opacity: loaded ? 1 : 0, transition: 'opacity 0.3s ease-in-out' }}
                     onLoad={() => setLoaded(true)}

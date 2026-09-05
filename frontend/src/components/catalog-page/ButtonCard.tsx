@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import CartIcon from '../../assets/images/icons/cart_white.svg'
 import PlusMinus from './PlusMinus';
 
-import { Product } from '../Structures';
-import { ProductCart } from "../Structures";
+import type { Product } from '../Structures';
+import type { ProductCart } from "../Structures";
 
 function ButtonCard({
     item,

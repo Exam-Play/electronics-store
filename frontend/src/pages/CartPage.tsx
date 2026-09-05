@@ -9,8 +9,8 @@ import CheckBox from "../components/catalog-page/CheckBox";
 import CartItem from "../components/cart-page/CartItem";
 import CartForm from "../components/cart-page/CartForm";
 import Gratitude from "../components/cart-page/Gratitude";
-import { ProductCart } from "../components/Structures";
-import { Product } from "../components/Structures";
+import type { ProductCart } from "../components/Structures";
+import type { Product } from "../components/Structures";
 
 function CartPage({
     username,

@@ -13,7 +13,7 @@ import locationIcon from '../assets/images/home-page/location.svg'
 import Slider from '../components/home-page/Slider'
 
 import '../styles/homeStyle.scss'
-import { Product } from '../components/Structures';
+import type { Product } from '../components/Structures';
 
 function HomePage({
     data,
