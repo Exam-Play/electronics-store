@@ -9,22 +9,19 @@ import { CartPage } from './pages/CartPage'
 import NotFoundPage from './pages/NotFoundPage'
 import { ProfilePage } from './pages/ProfilePage';
 
-import type { Product } from './components/Structures';
+import type { Product } from './utils/structures';
 import { authStore } from './stores/AuthStore';
 import { observer } from 'mobx-react-lite';
 import { Header } from './components/Header';
-import { cartStore } from './stores/CartStore';
+
+import './stores/RootStore';
 
 function AppComponent() {
     const location = useLocation();
+
     const [activeItem, setActiveItem] = useState(location.pathname.slice(1));
     const [isLoading, setIsLoading] = useState(true);
     const [cards, setCards] = useState<Product[]>([]);
-
-    useEffect(() => {
-        if (!authStore.username) return;
-        localStorage.setItem(`cart_${authStore.username}`, JSON.stringify(cartStore.cartItems));
-    }, [cartStore.cartItems, authStore.username]);
 
     useEffect(() => {
         fetch("http://127.0.0.1:8080/goods", {
@@ -46,7 +43,6 @@ function AppComponent() {
             <Header
                 activeItem={activeItem}
                 setActiveItem={setActiveItem}
-                cartCount={cartStore.cartItems.reduce((a, b) => a + b.quantity, 0)}
             />
 
             <main>
@@ -58,6 +54,7 @@ function AppComponent() {
                             isLoading={isLoading}
                         />}
                     />
+
                     <Route
                         path="/catalog"
                         element={authStore.isLoggedIn ?
@@ -68,13 +65,14 @@ function AppComponent() {
                             /> : <Navigate to="/profile" />
                         }
                     />
+
                     <Route
                         path="/cart"
                         element={<CartPage
                             cards={cards}
-                            onOrderComplete={() => cartStore.clearCart()}
                         />}
                     />
+
                     <Route
                         path="/profile"
                         element={<ProfilePage

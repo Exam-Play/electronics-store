@@ -2,8 +2,8 @@ import { useState } from "react";
 
 import CheckBox from "../catalog-page/CheckBox";
 import SelectItem from "./SelectItem";
-import type { ProductCart } from "../Structures";
-import type { Product } from "../Structures";
+import type { ProductCart } from "../../utils/structures";
+import type { Product } from "../../utils/structures";
 import { authStore } from "../../stores/AuthStore";
 import { observer } from "mobx-react-lite";
 

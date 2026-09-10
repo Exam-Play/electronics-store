@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 
 import CheckBox from "./CheckBox";
 import RangePrice from "./RangePrice";
-import type { FilterState } from "../Structures";
+import type { FilterState } from "../../utils/structures";
 
 function Filter({
     MIN,

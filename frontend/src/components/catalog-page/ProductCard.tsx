@@ -3,7 +3,7 @@ import { useState } from "react";
 import ratingIcon from '../../assets/images/icons/rating.svg'
 
 import { ButtonCard } from "./ButtonCard";
-import type { Product } from '../Structures';
+import type { Product } from '../../utils/structures';
 
 function ProductCard({
     item,

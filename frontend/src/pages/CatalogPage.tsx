@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 
 import '../styles/catalogStyle.scss';
 
@@ -7,73 +7,10 @@ import Filter from "../components/catalog-page/Filter";
 import ProductCard from "../components/catalog-page/ProductCard";
 import ProductModalWindow from "../components/catalog-page/ProductModalWindow";
 
-import type { Product } from '../components/Structures';
-import type { ProductCart } from "../components/Structures";
-import type { FilterState } from "../components/Structures";
-import { categoryKeywords } from "../components/Structures";
-import { colorKeywords } from "../components/Structures";
+import type { Product } from '../utils/structures';
+import type { FilterState } from "../utils/structures";
 
-function getPages(current: number, total: number): (number | '...')[] {
-    if (total <= 5) {
-        return Array.from({ length: total }, (_, i) => i + 1);
-    }
-    if (current <= 3) {
-        return [1, 2, 3, '...', total];
-    }
-    if (current >= total - 2) {
-        return [1, '...', total - 2, total - 1, total];
-    }
-    return [1, '...', current - 1, current, current + 1, '...', total];
-}
-
-function getMinPrice(products: Product[]): number {
-    if (products.length === 0) return 0;
-    return products.reduce((min, p) => p.price < min ? p.price : min, products[0].price);
-}
-
-function getMaxPrice(products: Product[]): number {
-    if (products.length === 0) return 0;
-    return products.reduce((max, p) => p.price > max ? p.price : max, products[0].price);
-}
-
-function sortProducts(sortType: string, defaultProducts: Product[]): Product[] {
-    switch (sortType) {
-        case "Новые":
-            return [...defaultProducts].sort((a, b) => b.isNovelty === a.isNovelty ? 0 : b.isNovelty ? 1 : -1);
-        case "Популярные":
-            return [...defaultProducts].sort((a, b) => b.isBestseller === a.isBestseller ? 0 : b.isBestseller ? 1 : -1);
-        case "Подешевле":
-            return [...defaultProducts].sort((a, b) => a.price - b.price);
-        case "Подороже":
-            return [...defaultProducts].sort((a, b) => b.price - a.price);
-        default:
-            return [...defaultProducts];
-    }
-}
-
-function filterProducts(products: Product[], filters: FilterState): Product[] {
-    return products.filter(p => {
-        const nameLower = p.name.toLowerCase();
-
-        if (p.price < filters.priceMin || p.price > filters.priceMax) return false;
-
-        if (filters.categories.size > 0) {
-            const match = [...filters.categories].some(cat =>
-                categoryKeywords[cat]?.some(kw => nameLower.includes(kw))
-            );
-            if (!match) return false;
-        }
-
-        if (filters.colors.size > 0) {
-            const match = [...filters.colors].some(color =>
-                colorKeywords[color]?.some(kw => nameLower.includes(kw))
-            );
-            if (!match) return false;
-        }
-
-        return true;
-    });
-}
+import { filterProducts, getMaxPrice, getMinPrice, getPages, sortProducts } from "../utils/functions";
 
 function CatalogPage({
     cards,
@@ -91,7 +28,10 @@ function CatalogPage({
         colors: new Set()
     });
 
-    const filteredCards = filterProducts(cards, filters);
+    const filteredCards = useMemo(
+        () => filterProducts(cards, filters),
+        [cards, filters]
+    );
 
     const [originalCards, setOriginalCards] = useState<Product[]>([]);
     useEffect(() => {
@@ -103,9 +43,12 @@ function CatalogPage({
     const [activeSort, setActiveSort] = useState("");
     const [activeProduct, setActiveProduct] = useState<Product | null>(null);
 
-    const countOfPages = Math.ceil(filteredCards.length / 9);
     const [currentPage, setCurrentPage] = useState(1);
+    const countOfPages = Math.ceil(filteredCards.length / 9);
     const pages = getPages(currentPage, countOfPages);
+
+    const minPrice = useMemo(() => getMinPrice(cards), [cards]);
+    const maxPrice = useMemo(() => getMaxPrice(cards), [cards]);
 
     const startIndex = (currentPage - 1) * 9;
     const endIndex = startIndex + 9;
@@ -128,7 +71,7 @@ function CatalogPage({
                     key={item}
                     className={activeSort === item ? "active" : ""}
                     onClick={() => {
-                        setCards(() => sortProducts(activeSort === item ? "" : item, originalCards));
+                        setCards(sortProducts(activeSort === item ? "" : item, originalCards));
                         setActiveSort(prev => prev === item ? "" : item);
                     }}
                 >
@@ -157,8 +100,8 @@ function CatalogPage({
             </div>
 
             <Filter
-                MIN={getMinPrice(cards)}
-                MAX={getMaxPrice(cards)}
+                MIN={minPrice}
+                MAX={maxPrice}
                 onFilter={setFilters}
             />
         </div>

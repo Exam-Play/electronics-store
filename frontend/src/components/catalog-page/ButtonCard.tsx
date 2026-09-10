@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import CartIcon from '../../assets/images/icons/cart_white.svg'
 import { PlusMinus } from './PlusMinus';
 
-import type { Product } from '../Structures';
+import type { Product } from '../../utils/structures';
 import { cartStore } from '../../stores/CartStore';
 import { observer } from 'mobx-react-lite';
 

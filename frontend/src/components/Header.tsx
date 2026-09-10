@@ -11,12 +11,10 @@ import { cartStore } from '../stores/CartStore';
 
 function HeaderComponent({
     activeItem,
-    setActiveItem,
-    cartCount
+    setActiveItem
 }:{
     activeItem: string,
-    setActiveItem: (v:string)=>void,
-    cartCount: number
+    setActiveItem: (v:string)=>void
 }){
     function clickLogout() {
         cartStore.saveCart(authStore.username).finally(() => {
@@ -58,9 +56,9 @@ function HeaderComponent({
                     <div className='item'>
                         <img src={cartLogo} alt='cart-logo'/>
                         <p>Корзина</p>
-                        {authStore.isLoggedIn && cartCount !== 0 &&
+                        {authStore.isLoggedIn && cartStore.cartCount !== 0 &&
                             <div className='amount-goods'>
-                                {cartCount}
+                                {cartStore.cartCount}
                             </div>
                         }
                     </div>    

@@ -7,7 +7,7 @@ import leftArrowIcon from '../../assets/images/home-page/left-arrow.svg'
 import rightArrowIcon from '../../assets/images/home-page/right-arrow.svg'
 
 import ProductCard from './ProductCard';
-import type { Product } from '../Structures';
+import type { Product } from '../../utils/structures';
 
 function ProductSection({
     nameClass,

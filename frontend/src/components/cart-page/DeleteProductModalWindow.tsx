@@ -1,6 +1,6 @@
 import closeCross from '../../assets/images/icons/cross.svg'
 
-import type { ProductCart } from '../Structures';
+import type { ProductCart } from '../../utils/structures';
 
 function DeleteProductModalWindow({
     item,

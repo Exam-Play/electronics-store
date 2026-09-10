@@ -4,8 +4,8 @@ import closeCross from '../../assets/images/icons/cross_pink.svg'
 
 import { PlusMinus } from "../catalog-page/PlusMinus";
 import DeleteProductModalWindow from "./DeleteProductModalWindow";
-import type { Product } from '../Structures';
-import type { ProductCart } from "../Structures";
+import type { Product } from '../../utils/structures';
+import type { ProductCart } from "../../utils/structures";
 import { cartStore } from "../../stores/CartStore";
 
 function CartItem({

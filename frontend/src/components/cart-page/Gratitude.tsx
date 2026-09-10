@@ -1,15 +1,15 @@
 import closeCross from '../../assets/images/icons/cross.svg'
 import ThanksImage from '../../assets/images/backgrounds/thanks_image.svg'
+import { cartStore } from '../../stores/CartStore';
+import { observer } from 'mobx-react-lite';
 
-function Gratitude({
+function GratitudeComponent({
     thanks,
     setThanks,
-    onOrderComplete,
     loadOrders
 }:{
     thanks: string,
     setThanks: (v:string) => void,
-    onOrderComplete: () => void,
     loadOrders: () => void
 }) {
     return <div className="delete-product-window">
@@ -17,7 +17,7 @@ function Gratitude({
             <button className="close-button"
                 onClick={() => {
                     setThanks("");
-                    onOrderComplete();
+                    cartStore.clearCart();
                     loadOrders();
                 }}
             >
@@ -34,7 +34,7 @@ function Gratitude({
                     <button className="button-blue-template"
                         onClick={() => {
                             setThanks("");
-                            onOrderComplete();
+                            cartStore.clearCart();
                             loadOrders();
                         }
                     }>
@@ -46,4 +46,4 @@ function Gratitude({
     </div>
 }
 
-export default Gratitude;
+export const Gratitude = observer(GratitudeComponent);

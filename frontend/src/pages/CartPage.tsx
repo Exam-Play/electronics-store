@@ -8,18 +8,16 @@ import EmptyCart from "../components/cart-page/EmptyCart";
 import CheckBox from "../components/catalog-page/CheckBox";
 import CartItem from "../components/cart-page/CartItem";
 import { CartForm } from "../components/cart-page/CartForm";
-import Gratitude from "../components/cart-page/Gratitude";
-import type { Product } from "../components/Structures";
+import { Gratitude } from "../components/cart-page/Gratitude";
+import type { Product } from "../utils/structures";
 import { authStore } from "../stores/AuthStore";
 import { observer } from 'mobx-react-lite';
 import { cartStore } from "../stores/CartStore";
 
 function CartPageComponent({
-    cards,
-    onOrderComplete
+    cards
 }:{
-    cards: Product[],
-    onOrderComplete: () => void
+    cards: Product[]
 }) {
     const navigate = useNavigate();
     
@@ -48,13 +46,13 @@ function CartPageComponent({
         const handleKeyDown = (e: KeyboardEvent) => {
             if (e.key === 'Escape') {
                 setThanks("");
-                onOrderComplete();
+                cartStore.clearCart();
                 loadOrders();
             }
         };
         window.addEventListener('keydown', handleKeyDown);
         return () => window.removeEventListener('keydown', handleKeyDown);
-    }, [onOrderComplete, loadOrders]);
+    }, [cartStore.clearCart, loadOrders]);
 
     const [activeTab, setActiveTab] = useState<"cart" | "history">("cart");
     const [selectedIds, setSelectedIds] = useState<Set<number>>(new Set());
@@ -176,7 +174,6 @@ function CartPageComponent({
             <Gratitude
                 thanks={thanks}
                 setThanks={setThanks}
-                onOrderComplete={onOrderComplete}
                 loadOrders={loadOrders}
             />
         }

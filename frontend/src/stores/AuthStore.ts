@@ -1,6 +1,6 @@
 import { makeAutoObservable, runInAction } from "mobx"
 
-class Auth {
+class AuthStore {
     username;
     isLoggedIn;
 
@@ -39,4 +39,4 @@ class Auth {
     }
 }
 
-export const authStore = new Auth();
+export const authStore = new AuthStore();

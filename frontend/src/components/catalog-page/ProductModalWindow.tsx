@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import closeCross from '../../assets/images/icons/cross.svg'
 import ratingIcon from '../../assets/images/icons/rating.svg'
 import { ButtonCard } from './ButtonCard';
-import type { Product } from '../Structures';
+import type { Product } from '../../utils/structures';
 
 function ProductModalWindow({
     activeProduct,

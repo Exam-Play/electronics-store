@@ -1,7 +1,7 @@
 import { makeAutoObservable, runInAction } from "mobx"
-import type { Product, ProductCart } from "../components/Structures";
+import type { Product, ProductCart } from "../utils/structures";
 
-class Cart {
+class CartStore {
     cartItems : ProductCart[] = [];
 
     constructor() {
@@ -12,6 +12,10 @@ class Cart {
         }
 
         makeAutoObservable(this);
+    }
+
+    get cartCount() {
+        return this.cartItems.reduce((a, b) => a + b.quantity, 0)
     }
 
     addToCart(item: Product) {
@@ -81,4 +85,4 @@ class Cart {
     }
 }
 
-export const cartStore = new Cart();
+export const cartStore = new CartStore();

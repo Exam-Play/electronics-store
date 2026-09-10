@@ -47,6 +47,7 @@ function ProfilePageComponent({
             if (data === true) {
                 authStore.login(login);
                 cartStore.loadCart(login);
+                
                 navigate('/');
                 setActiveItem('home');
                 setErrorLogin('');
