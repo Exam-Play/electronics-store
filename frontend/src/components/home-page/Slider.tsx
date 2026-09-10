@@ -7,6 +7,8 @@ import leftArrowIcon from '../../assets/images/home-page/left-arrow.svg'
 import rightArrowIcon from '../../assets/images/home-page/right-arrow.svg'
 
 import ProductCard from './ProductCard';
+import ProductModalWindow from '../catalog-page/ProductModalWindow';
+
 import type { Product } from '../../utils/structures';
 
 function ProductSection({
@@ -23,7 +25,9 @@ function ProductSection({
     isLoading: boolean
 }){
     const isBestsellers = (title === 'Хиты продаж');
-    const isNovelty = (title === 'Новинки');
+    const isNoveltys = (title === 'Новинки');
+
+    const [activeProduct, setActiveProduct] = useState<Product | null>(null);
 
     const getCard = (i: number) => data[i % data.length];
 
@@ -39,7 +43,7 @@ function ProductSection({
 
     return <div className={nameClass}>
         <div className='description'>
-            <img src={isBestsellers ? bestsellersIcon : isNovelty ? noveltyIcon : ''} alt='description-icon'/>
+            <img src={isBestsellers ? bestsellersIcon : isNoveltys ? noveltyIcon : ''} alt='description-icon'/>
             <h1>{title}</h1>
             <p>{description}</p>
         </div>
@@ -54,13 +58,25 @@ function ProductSection({
                     [leftIndex, leftIndex + 1, leftIndex + 2].map((i) => {
                         const card = getCard(i);
                         return card ? (
-                            <ProductCard key={card.id} type={title} dataImage={card} />
+                            <ProductCard
+                                key={card.id}
+                                type={title}
+                                dataImage={card}
+                                setActiveProduct={setActiveProduct}
+                            />
                         ) : null;
                     })
                 )}
             </div>
             <img src={rightArrowIcon} className='arrow' onClick={slideRight} alt='arrow right icon'/>
         </div>
+
+        {activeProduct && (
+            <ProductModalWindow
+                activeProduct={activeProduct}
+                setActiveProduct={setActiveProduct}
+            />
+        )}
     </div>
 }
 

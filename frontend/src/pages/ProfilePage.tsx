@@ -6,12 +6,9 @@ import { authStore } from "../stores/AuthStore";
 import { cartStore } from "../stores/CartStore";
 import { observer } from "mobx-react-lite";
 import { API_URL } from "../utils/api";
+import { activePageStore } from "../stores/ActivePageStore";
 
-function ProfilePageComponent({
-    setActiveItem
-}:{
-    setActiveItem: (v: string) => void
-}){
+function ProfilePageComponent(){
     const [isErrorLogin, setErrorLogin] = useState('');
     const navigate = useNavigate();
 
@@ -50,7 +47,7 @@ function ProfilePageComponent({
                 cartStore.loadCart(login);
                 
                 navigate('/');
-                setActiveItem('home');
+                activePageStore.syncWithPath('home');
                 setErrorLogin('');
             }
         })

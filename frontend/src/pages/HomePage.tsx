@@ -13,6 +13,7 @@ import locationIcon from '../assets/images/home-page/location.svg'
 import Slider from '../components/home-page/Slider'
 
 import '../styles/homeStyle.scss'
+import '../styles/modalWindow.scss'
 import type { Product } from '../utils/structures';
 
 function HomePage({
@@ -44,7 +45,7 @@ function HomePage({
         />
 
         <Slider
-            nameClass="novelty"
+            nameClass="novelties"
             title="Новинки"
             description="Их только произвели - они уже у нас! Все самое новое и свежее на рынке электроники."
             data={novelty}

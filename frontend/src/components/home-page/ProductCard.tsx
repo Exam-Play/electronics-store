@@ -6,10 +6,12 @@ import type { Product } from '../../utils/structures';
 
 function ProductCard({
     type,
-    dataImage
+    dataImage,
+    setActiveProduct
 }:{
     type : string,
-    dataImage: Product
+    dataImage: Product,
+    setActiveProduct: (product: Product | null) => void
 }){
     const [loaded, setLoaded] = useState(false);
 
@@ -31,7 +33,7 @@ function ProductCard({
         return new URL(`../../assets/images/goods/image_${id}.png`, import.meta.url).href;
     };
 
-    return <div className="product-card">
+    return <div className="product-card" onClick={() => setActiveProduct(dataImage)}>
         <div className="img-wrapper">
             <div className="text-wrapper" style={backgroundStyle}>
                 <p>{isBestsellers ? 'Хит' : isNovelty ? 'Новинка' : ''}</p>

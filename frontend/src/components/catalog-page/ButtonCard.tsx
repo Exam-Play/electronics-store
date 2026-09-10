@@ -6,6 +6,8 @@ import { PlusMinus } from './PlusMinus';
 import type { Product } from '../../utils/structures';
 import { cartStore } from '../../stores/CartStore';
 import { observer } from 'mobx-react-lite';
+import { authStore } from '../../stores/AuthStore';
+import { activePageStore } from '../../stores/ActivePageStore';
 
 function ButtonCardComponent({
     item,
@@ -18,7 +20,14 @@ function ButtonCardComponent({
     let buttonCard = (
         <button
             className="button-blue-template add-to-cart"
-            onClick={() => cartStore.addToCart(item)}
+            onClick={() => {
+                if (authStore.isLoggedIn) {
+                    cartStore.addToCart(item);
+                } else {
+                    navigate('/profile');
+                    activePageStore.syncWithPath("profile");
+                }
+            }}
         >
             <img src={CartIcon} alt="cart icon"/>
             <span>В корзину</span>
@@ -30,7 +39,10 @@ function ButtonCardComponent({
             <div className='add-more'>
                 <button
                     className="button-pink-template availability"
-                    onClick={() => navigate('/cart')}
+                    onClick={() => {
+                        navigate('/cart');
+                        activePageStore.syncWithPath('cart');
+                    }}
                 >
                     <img src={CartIcon} alt="cart icon"/>
                     <span>{productQuantity} шт.</span>

@@ -8,24 +8,19 @@ import Title from './Title';
 import { authStore } from '../stores/AuthStore';
 import { observer } from 'mobx-react-lite';
 import { cartStore } from '../stores/CartStore';
+import { activePageStore } from '../stores/ActivePageStore';
 
-function HeaderComponent({
-    activeItem,
-    setActiveItem
-}:{
-    activeItem: string,
-    setActiveItem: (v:string)=>void
-}){
+function HeaderComponent(){
     function clickLogout() {
         cartStore.saveCart(authStore.username).finally(() => {
             authStore.logout();
             cartStore.clearCart();
         });
-        setActiveItem('home');
+        activePageStore.syncWithPath('');
     }
 
-    const homeLink = (activeItem !== "" ?
-        <Link to="/" onClick={() => setActiveItem('home')}>
+    const homeLink = (activePageStore.activeItem !== "" ?
+        <Link to="/" onClick={() => activePageStore.syncWithPath('home')}>
             <Title />
         </Link>
         : <Title />
@@ -38,20 +33,20 @@ function HeaderComponent({
             <div className='items'>
                 <Link
                     to="/catalog"
-                    className={(activeItem === 'catalog' && authStore.isLoggedIn) ? 'active' : ''}
-                    onClick={() => authStore.isLoggedIn ? setActiveItem('catalog') : setActiveItem('profile')}
+                    className={activePageStore.activeItem === 'catalog' ? 'active' : ''}
+                    onClick={() => activePageStore.syncWithPath('catalog')}
                 >
                     <div className='item'>
                         <img src={catalogLogo} alt='catalog-logo'/>
                         <p>Каталог</p>
-                    </div>    
+                    </div>
                 </Link>
 
                 {authStore.isLoggedIn &&
                 <Link
                     to="/cart" 
-                    className={activeItem === 'cart' ? 'active' : ''}
-                    onClick={() => setActiveItem('cart')}
+                    className={activePageStore.activeItem === 'cart' ? 'active' : ''}
+                    onClick={() => activePageStore.syncWithPath('cart')}
                 >
                     <div className='item'>
                         <img src={cartLogo} alt='cart-logo'/>
@@ -67,12 +62,12 @@ function HeaderComponent({
 
                 <Link
                     to={authStore.isLoggedIn ? "/" : "/profile"}
-                    className={activeItem === 'profile' ? 'active' : ''}
+                    className={activePageStore.activeItem === 'profile' ? 'active' : ''}
                     onClick={() => {
                         if (authStore.isLoggedIn) {
                             clickLogout();
                         } else {
-                            setActiveItem('profile');
+                            activePageStore.syncWithPath('profile');
                         }
                     }}
                 >

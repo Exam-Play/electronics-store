@@ -1,4 +1,4 @@
-import { Routes, Route, useLocation, Navigate } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import { useState, useEffect } from "react";
 
 import Footer from './components/Footer';
@@ -10,7 +10,6 @@ import NotFoundPage from './pages/NotFoundPage'
 import { ProfilePage } from './pages/ProfilePage';
 
 import type { Product } from './utils/structures';
-import { authStore } from './stores/AuthStore';
 import { observer } from 'mobx-react-lite';
 import { Header } from './components/Header';
 
@@ -20,7 +19,6 @@ import { API_URL } from './utils/api';
 function AppComponent() {
     const location = useLocation();
 
-    const [activeItem, setActiveItem] = useState(location.pathname.slice(1));
     const [isLoading, setIsLoading] = useState(true);
     const [cards, setCards] = useState<Product[]>([]);
 
@@ -41,10 +39,7 @@ function AppComponent() {
 
     return (
         <>
-            <Header
-                activeItem={activeItem}
-                setActiveItem={setActiveItem}
-            />
+            <Header />
 
             <main>
                 <Routes>
@@ -58,12 +53,12 @@ function AppComponent() {
 
                     <Route
                         path="/catalog"
-                        element={authStore.isLoggedIn ?
-                            <CatalogPage
-                                cards={cards}
-                                setCards={setCards}
+                        element={
+                            <CatalogPage 
+                                cards={cards} 
+                                setCards={setCards} 
                                 isLoading={isLoading}
-                            /> : <Navigate to="/profile" />
+                            />
                         }
                     />
 
@@ -76,9 +71,7 @@ function AppComponent() {
 
                     <Route
                         path="/profile"
-                        element={<ProfilePage
-                            setActiveItem={setActiveItem}
-                        />}
+                        element={<ProfilePage />}
                     />
                 </Routes>
             </main>
