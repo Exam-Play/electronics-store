@@ -2,30 +2,25 @@ import { useState, useEffect } from "react";
 
 import closeCross from '../../assets/images/icons/cross_pink.svg'
 
-import PlusMinus from "../catalog-page/PlusMinus";
+import { PlusMinus } from "../catalog-page/PlusMinus";
 import DeleteProductModalWindow from "./DeleteProductModalWindow";
 import type { Product } from '../Structures';
 import type { ProductCart } from "../Structures";
+import { cartStore } from "../../stores/CartStore";
 
 function CartItem({
     item,
     card,
-    cartItems,
-    addToCart,
-    removeFromCart,
     selected,
     onSelect
 }:{
     item: ProductCart,
     card: Product,
-    cartItems: ProductCart[],
-    addToCart: (item: Product) => void,
-    removeFromCart: (id: number) => void,
     selected: boolean,
     onSelect: () => void
 }) {
     const [showConfirm, setShowConfirm] = useState(false);
-    const productQuantity = cartItems.find(cartItem => cartItem.id === item.id)?.quantity ?? 0;
+    const productQuantity = cartStore.cartItems.find(cartItem => cartItem.id === item.id)?.quantity ?? 0;
 
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
@@ -63,8 +58,6 @@ function CartItem({
         <div className='add-more'>
             <PlusMinus
                 item={card}
-                addToCart={addToCart}
-                removeFromCart={removeFromCart}
                 productQuantity={productQuantity}
             />
         </div>
@@ -83,7 +76,7 @@ function CartItem({
             <DeleteProductModalWindow
                 item={item}
                 onConfirm={() => {
-                    removeFromCart(item.id);
+                    cartStore.removeItem(item.id);
                     if (selected) onSelect();
                     setShowConfirm(false);
                 }}

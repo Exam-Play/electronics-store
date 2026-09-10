@@ -1,36 +1,31 @@
 import { useNavigate } from 'react-router-dom';
 
 import CartIcon from '../../assets/images/icons/cart_white.svg'
-import PlusMinus from './PlusMinus';
+import { PlusMinus } from './PlusMinus';
 
 import type { Product } from '../Structures';
-import type { ProductCart } from "../Structures";
+import { cartStore } from '../../stores/CartStore';
+import { observer } from 'mobx-react-lite';
 
-function ButtonCard({
+function ButtonCardComponent({
     item,
-    cartItems,
-    addToCart,
-    removeFromCart
 }:{
     item: Product,
-    cartItems: ProductCart[],
-    addToCart: (item: Product) => void,
-    removeFromCart: (id: number) => void
 }){
     const navigate = useNavigate();
-    const productQuantity = cartItems.find(cartItem => cartItem.id === item.id)?.quantity ?? 0;
+    const productQuantity = cartStore.cartItems.find(cartItem => cartItem.id === item.id)?.quantity ?? 0;
 
     let buttonCard = (
         <button
             className="button-blue-template add-to-cart"
-            onClick={() => addToCart(item)}
+            onClick={() => cartStore.addToCart(item)}
         >
             <img src={CartIcon} alt="cart icon"/>
             <span>В корзину</span>
         </button>
     );
 
-    if (cartItems.some(cartItem => cartItem.id === item.id)) {
+    if (cartStore.cartItems.some(cartItem => cartItem.id === item.id)) {
         buttonCard = (
             <div className='add-more'>
                 <button
@@ -42,15 +37,13 @@ function ButtonCard({
                 </button>
                 <PlusMinus
                     item={item}
-                    addToCart={addToCart}
-                    removeFromCart={removeFromCart}
                     productQuantity={productQuantity}
                 />
             </div>
         );
     }
 
-    return buttonCard
+    return buttonCard;
 }
 
-export default ButtonCard;
+export const ButtonCard = observer(ButtonCardComponent);

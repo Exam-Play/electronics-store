@@ -5,32 +5,29 @@ import profileLogo from '../assets/images/icons/profile.svg'
 import cartLogo from '../assets/images/icons/cart.svg'
 
 import Title from './Title';
+import { authStore } from '../stores/AuthStore';
+import { observer } from 'mobx-react-lite';
+import { cartStore } from '../stores/CartStore';
 
-function Header({
-    isLoggedIn,
-    onLogout,
+function HeaderComponent({
     activeItem,
     setActiveItem,
     cartCount
 }:{
-    isLoggedIn: boolean,
-    onLogout: () => void,
     activeItem: string,
     setActiveItem: (v:string)=>void,
     cartCount: number
 }){
     function clickLogout() {
-        onLogout();
+        cartStore.saveCart(authStore.username).finally(() => {
+            authStore.logout();
+            cartStore.clearCart();
+        });
         setActiveItem('home');
-
-        fetch("http://127.0.0.1:8080/logout", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" }
-        }).catch(error => console.error('Ошибка:', error));
     }
 
     const homeLink = (activeItem !== "" ?
-        <Link to="/" onClick={() => setActiveItem('')}>
+        <Link to="/" onClick={() => setActiveItem('home')}>
             <Title />
         </Link>
         : <Title />
@@ -43,8 +40,8 @@ function Header({
             <div className='items'>
                 <Link
                     to="/catalog"
-                    className={activeItem === 'catalog' ? 'active' : ''}
-                    onClick={() => setActiveItem('catalog')}
+                    className={(activeItem === 'catalog' && authStore.isLoggedIn) ? 'active' : ''}
+                    onClick={() => authStore.isLoggedIn ? setActiveItem('catalog') : setActiveItem('profile')}
                 >
                     <div className='item'>
                         <img src={catalogLogo} alt='catalog-logo'/>
@@ -52,7 +49,7 @@ function Header({
                     </div>    
                 </Link>
 
-                {isLoggedIn &&
+                {authStore.isLoggedIn &&
                 <Link
                     to="/cart" 
                     className={activeItem === 'cart' ? 'active' : ''}
@@ -61,7 +58,7 @@ function Header({
                     <div className='item'>
                         <img src={cartLogo} alt='cart-logo'/>
                         <p>Корзина</p>
-                        {isLoggedIn && cartCount !== 0 &&
+                        {authStore.isLoggedIn && cartCount !== 0 &&
                             <div className='amount-goods'>
                                 {cartCount}
                             </div>
@@ -71,16 +68,19 @@ function Header({
                 }
 
                 <Link
-                    to={isLoggedIn ? "/" : "/profile"}
+                    to={authStore.isLoggedIn ? "/" : "/profile"}
                     className={activeItem === 'profile' ? 'active' : ''}
                     onClick={() => {
-                        if (isLoggedIn) clickLogout();
-                        setActiveItem('profile');
+                        if (authStore.isLoggedIn) {
+                            clickLogout();
+                        } else {
+                            setActiveItem('profile');
+                        }
                     }}
                 >
                     <div className='item'>
                         <img src={profileLogo} alt='profile-logo'/>
-                        <p>{isLoggedIn ? "Выйти" : "Войти"}</p>
+                        <p>{authStore.isLoggedIn ? "Выйти" : "Войти"}</p>
                     </div>
                 </Link>
             </div>
@@ -88,4 +88,4 @@ function Header({
     </header>
 }
 
-export default Header;
+export const Header = observer(HeaderComponent);

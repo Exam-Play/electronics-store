@@ -2,12 +2,13 @@ import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 
 import '../styles/profileStyle.scss';
+import { authStore } from "../stores/AuthStore";
+import { cartStore } from "../stores/CartStore";
+import { observer } from "mobx-react-lite";
 
-function ProfilePage({
-    onLogin,
+function ProfilePageComponent({
     setActiveItem
 }:{
-    onLogin: (login: string) => void,
     setActiveItem: (v: string) => void
 }){
     const [isErrorLogin, setErrorLogin] = useState('');
@@ -44,7 +45,8 @@ function ProfilePage({
         })
         .then((data) => {
             if (data === true) {
-                onLogin(login);
+                authStore.login(login);
+                cartStore.loadCart(login);
                 navigate('/');
                 setActiveItem('home');
                 setErrorLogin('');
@@ -88,4 +90,4 @@ function ProfilePage({
     </div>
 }
 
-export default ProfilePage;
+export const ProfilePage = observer(ProfilePageComponent);

@@ -2,22 +2,15 @@ import { useState } from "react";
 
 import ratingIcon from '../../assets/images/icons/rating.svg'
 
-import ButtonCard from "./ButtonCard";
+import { ButtonCard } from "./ButtonCard";
 import type { Product } from '../Structures';
-import type { ProductCart } from "../Structures";
 
 function ProductCard({
     item,
-    cartItems,
-    setActiveProduct,
-    addToCart,
-    removeFromCart
+    setActiveProduct
 }:{
     item: Product,
-    cartItems: ProductCart[],
-    setActiveProduct: (product: Product | null) => void,
-    addToCart: (item: Product) => void,
-    removeFromCart: (id: number) => void
+    setActiveProduct: (product: Product | null) => void
 }){
     const [loaded, setLoaded] = useState(false);
 
@@ -62,9 +55,6 @@ function ProductCard({
 
         <ButtonCard
             item={item}
-            cartItems={cartItems}
-            addToCart={addToCart}
-            removeFromCart={removeFromCart}
         />
     </div>
 }

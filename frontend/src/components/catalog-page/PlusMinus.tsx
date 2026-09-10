@@ -2,33 +2,31 @@ import Plus from '../../assets/images/icons/plus.svg'
 import Minus from '../../assets/images/icons/minus.svg'
 
 import type { Product } from '../Structures';
+import { cartStore } from '../../stores/CartStore';
+import { observer } from 'mobx-react-lite';
 
-function PlusMinus({
+function PlusMinusComponent({
     item,
-    addToCart,
-    removeFromCart,
     productQuantity
 }:{
     item: Product,
-    addToCart: (item: Product) => void,
-    removeFromCart: (id: number) => void
     productQuantity: number
 }) {
     return <div>
         <button
             className='plus-minus'
-            onClick={() => removeFromCart(item.id)}
+            onClick={() => cartStore.removeFromCart(item.id)}
         >
             <img src={Minus} alt='minus'/>
         </button>
         <p>{productQuantity}</p>
         <button
             className='plus-minus'
-            onClick={() => addToCart(item)}
+            onClick={() => cartStore.addToCart(item)}
         >
             <img src={Plus} alt='plus'/>
         </button>
     </div>
 }
 
-export default PlusMinus;
+export const PlusMinus = observer(PlusMinusComponent);

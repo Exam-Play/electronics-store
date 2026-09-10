@@ -7,44 +7,36 @@ import "../styles/cartStyle.scss";
 import EmptyCart from "../components/cart-page/EmptyCart";
 import CheckBox from "../components/catalog-page/CheckBox";
 import CartItem from "../components/cart-page/CartItem";
-import CartForm from "../components/cart-page/CartForm";
+import { CartForm } from "../components/cart-page/CartForm";
 import Gratitude from "../components/cart-page/Gratitude";
-import type { ProductCart } from "../components/Structures";
 import type { Product } from "../components/Structures";
+import { authStore } from "../stores/AuthStore";
+import { observer } from 'mobx-react-lite';
+import { cartStore } from "../stores/CartStore";
 
-function CartPage({
-    username,
+function CartPageComponent({
     cards,
-    cartItems,
-    setCartItems,
-    addToCart,
-    removeFromCart,
     onOrderComplete
 }:{
-    username: string
     cards: Product[],
-    cartItems: ProductCart[],
-    setCartItems: React.Dispatch<React.SetStateAction<ProductCart[]>>,
-    addToCart: (item: Product) => void,
-    removeFromCart: (id: number) => void,
     onOrderComplete: () => void
 }) {
     const navigate = useNavigate();
     
     useEffect(() => {
-        if (username === "") {
+        if (authStore.username === "") {
             navigate("/");
         }
-    }, [username, navigate]);
+    }, [authStore.username, navigate]);
 
     const [orders, setOrders] = useState<any[]>([]);
 
     const loadOrders = useCallback(() => {
-        if (!username) return;
-        fetch(`http://127.0.0.1:8080/orders/${username}`)
+        if (!authStore.username) return;
+        fetch(`http://127.0.0.1:8080/orders/${authStore.username}`)
             .then(r => r.json())
             .then(data => setOrders(data.orders ?? []));
-    }, [username]);
+    }, [authStore.username]);
 
     useEffect(() => {
         loadOrders();
@@ -67,7 +59,7 @@ function CartPage({
     const [activeTab, setActiveTab] = useState<"cart" | "history">("cart");
     const [selectedIds, setSelectedIds] = useState<Set<number>>(new Set());
 
-    const selectedItems = cartItems.filter(i => selectedIds.has(i.id));
+    const selectedItems = cartStore.cartItems.filter(i => selectedIds.has(i.id));
     const finalPrice = selectedItems.reduce((sum, i) => {
         const product = cards.find(c => c.id === i.id);
         return sum + (product?.price ?? 0) * i.quantity;
@@ -75,7 +67,7 @@ function CartPage({
     const countGoods = selectedItems.reduce((sum, item) => sum + item.quantity, 0);
 
     const itemText = (count: number) => (count === 1) ? "товар" : (count >= 2 && count <= 4) ? "товара" : "товаров";
-    const uniqueItems = cartItems.filter(
+    const uniqueItems = cartStore.cartItems.filter(
         (item, index, self) => self.findIndex(i => i.id === item.id) === index
     );
 
@@ -95,7 +87,7 @@ function CartPage({
         }
     };
 
-    const cart = cartItems.length === 0 ? <EmptyCart/> : (
+    const cart = cartStore.cartItems.length === 0 ? <EmptyCart/> : (
         <div>
             <div className="cart-content">
                 <div className="all-buttons">
@@ -108,7 +100,7 @@ function CartPage({
                     {selectedIds.size === uniqueItems.length &&
                         <button
                             className="delete-button"
-                            onClick={() => setCartItems([])}
+                            onClick={() => cartStore.clearCart()}
                         >
                             <img src={closeCross} alt="close cross"/>
                             <p>Удалить все</p>
@@ -118,9 +110,9 @@ function CartPage({
                     {selectedIds.size > 1 && selectedIds.size < uniqueItems.length &&
                         <button
                             className="delete-button"
-                            onClick={() => selectedIds.forEach((item) => {
-                                removeFromCart(item);
-                                toggleSelect(item);
+                            onClick={() => selectedIds.forEach(() => {
+                                selectedIds.forEach((id) => cartStore.removeItem(id));
+                                setSelectedIds(new Set());
                             })}
                         >
                             <img src={closeCross} alt="close cross"/>
@@ -138,9 +130,6 @@ function CartPage({
                         key={item.id}
                         card={card}
                         item={item}
-                        cartItems={cartItems}
-                        addToCart={addToCart}
-                        removeFromCart={removeFromCart}
                         selected={selectedIds.has(item.id)}
                         onSelect={() => toggleSelect(item.id)}
                     />
@@ -156,7 +145,6 @@ function CartPage({
                     cards={cards}
                     setThanks={setThanks}
                     cartItems={selectedItems}
-                    username={username}
                 />
             </div>
         </div>
@@ -216,4 +204,4 @@ function CartPage({
     </div>
 };
 
-export default CartPage;
+export const CartPage = observer(CartPageComponent);

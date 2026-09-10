@@ -4,17 +4,17 @@ import CheckBox from "../catalog-page/CheckBox";
 import SelectItem from "./SelectItem";
 import type { ProductCart } from "../Structures";
 import type { Product } from "../Structures";
+import { authStore } from "../../stores/AuthStore";
+import { observer } from "mobx-react-lite";
 
-function CartForm({
+function CartFormComponent({
     cards,
     setThanks,
-    cartItems,
-    username
+    cartItems
 }:{
     cards: Product[],
     setThanks: (v:string) => void,
-    cartItems: ProductCart[],
-    username: string
+    cartItems: ProductCart[]
 }) {
     const [delivery, setDelivery] = useState("pickup");
     const [isError, setIsError] = useState('');
@@ -52,7 +52,7 @@ function CartForm({
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 order_id,
-                username,
+                username: authStore.username,
                 tel,
                 email,
                 address: delivery === 'delivery' ? address : null,
@@ -151,4 +151,4 @@ function CartForm({
     </form>
 }
 
-export default CartForm;
+export const CartForm = observer(CartFormComponent);

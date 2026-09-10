@@ -77,18 +77,12 @@ function filterProducts(products: Product[], filters: FilterState): Product[] {
 
 function CatalogPage({
     cards,
-    cartItems,
     setCards,
-    isLoading,
-    addToCart,
-    removeFromCart
+    isLoading
 }:{
     cards: Product[],
-    cartItems: ProductCart[],
     setCards: React.Dispatch<React.SetStateAction<Product[]>>,
-    isLoading: boolean,
-    addToCart: (item: Product) => void,
-    removeFromCart: (id: number) => void
+    isLoading: boolean
 }){
     const [filters, setFilters] = useState<FilterState>({
         priceMin: 0,
@@ -156,10 +150,7 @@ function CatalogPage({
                         <ProductCard
                             key={item.id}
                             item={item}
-                            cartItems={cartItems}
                             setActiveProduct={setActiveProduct}
-                            addToCart={addToCart}
-                            removeFromCart={removeFromCart}
                         />
                     ))
                 }
@@ -181,11 +172,8 @@ function CatalogPage({
 
         {activeProduct && (
             <ProductModalWindow
-                cartItems={cartItems}
                 activeProduct={activeProduct}
                 setActiveProduct={setActiveProduct}
-                addToCart={addToCart}
-                removeFromCart={removeFromCart}
             />
         )}
     </div>
