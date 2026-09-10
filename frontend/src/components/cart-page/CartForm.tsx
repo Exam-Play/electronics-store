@@ -5,6 +5,7 @@ import SelectItem from "./SelectItem";
 import type { ProductCart } from "../../utils/structures";
 import type { Product } from "../../utils/structures";
 import { authStore } from "../../stores/AuthStore";
+import { API_URL } from "../../utils/api";
 import { observer } from "mobx-react-lite";
 
 function CartFormComponent({
@@ -47,7 +48,7 @@ function CartFormComponent({
             setIsError('empty-payment'); return;
         }
         
-        fetch("http://127.0.0.1:8080/orders", {
+        fetch(`${API_URL}/orders`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({

@@ -15,6 +15,7 @@ import { observer } from 'mobx-react-lite';
 import { Header } from './components/Header';
 
 import './stores/RootStore';
+import { API_URL } from './utils/api';
 
 function AppComponent() {
     const location = useLocation();
@@ -24,7 +25,7 @@ function AppComponent() {
     const [cards, setCards] = useState<Product[]>([]);
 
     useEffect(() => {
-        fetch("http://127.0.0.1:8080/goods", {
+        fetch(`${API_URL}/goods`, {
             method: "GET",
             headers: { "Content-Type": "application/json" }
         })

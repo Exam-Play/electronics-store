@@ -3,16 +3,24 @@ from datetime import datetime
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 import json
-
+import os
 
 DB_USERS = "database/users.json"
 DB_GOODS = "database/goods.json"
 
 app = FastAPI()
 
+_frontend_url = os.environ.get("FRONTEND_URL")
+_allowed_origins = [
+    "http://localhost:3000",
+    "https://electronics-store-theta-kohl.vercel.app"
+]
+if _frontend_url:
+    _allowed_origins.append(_frontend_url)
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=_allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

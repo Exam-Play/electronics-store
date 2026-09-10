@@ -5,6 +5,7 @@ import '../styles/profileStyle.scss';
 import { authStore } from "../stores/AuthStore";
 import { cartStore } from "../stores/CartStore";
 import { observer } from "mobx-react-lite";
+import { API_URL } from "../utils/api";
 
 function ProfilePageComponent({
     setActiveItem
@@ -31,7 +32,7 @@ function ProfilePageComponent({
             setErrorLogin('size-password'); return;
         }
 
-        fetch("http://127.0.0.1:8080/login", {
+        fetch(`${API_URL}/login`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ username: login, password })

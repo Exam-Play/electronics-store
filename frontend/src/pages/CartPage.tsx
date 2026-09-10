@@ -8,6 +8,7 @@ import EmptyCart from "../components/cart-page/EmptyCart";
 import CheckBox from "../components/catalog-page/CheckBox";
 import CartItem from "../components/cart-page/CartItem";
 import { CartForm } from "../components/cart-page/CartForm";
+import { API_URL } from "../utils/api";
 import { Gratitude } from "../components/cart-page/Gratitude";
 import type { Product } from "../utils/structures";
 import { authStore } from "../stores/AuthStore";
@@ -31,7 +32,7 @@ function CartPageComponent({
 
     const loadOrders = useCallback(() => {
         if (!authStore.username) return;
-        fetch(`http://127.0.0.1:8080/orders/${authStore.username}`)
+        fetch(`${API_URL}/orders/${authStore.username}`)
             .then(r => r.json())
             .then(data => setOrders(data.orders ?? []));
     }, [authStore.username]);

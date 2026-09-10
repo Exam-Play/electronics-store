@@ -2,7 +2,18 @@
     {
         "username": "ExamPlay",
         "password": "123456",
-        "cart": [],
+        "cart": [
+            {
+                "id": 8,
+                "name": "Смартфон 256 ГБ белый",
+                "quantity": 1
+            },
+            {
+                "id": 11,
+                "name": "Фитнес-браслет ASK-B19 зеленый",
+                "quantity": 3
+            }
+        ],
         "orders": [
             {
                 "id": "032158",
@@ -144,6 +155,87 @@
                 "payment": "cash",
                 "packaging": true,
                 "total": 204338
+            },
+            {
+                "id": "101134",
+                "date": "10.09.2026 14:34",
+                "contacts": {
+                    "tel": "123",
+                    "email": "andrew.mashin06@gmail.com",
+                    "address": null
+                },
+                "items": [
+                    {
+                        "id": 2,
+                        "name": "Внешний аккумулятор 10000mAh, черный",
+                        "quantity": 3,
+                        "price": 2399
+                    },
+                    {
+                        "id": 3,
+                        "name": "Bluetooth гарнитура, черный",
+                        "quantity": 2,
+                        "price": 1899
+                    }
+                ],
+                "delivery": "pickup",
+                "payment": "cash",
+                "packaging": true,
+                "total": 10995
+            },
+            {
+                "id": "101252",
+                "date": "10.09.2026 15:52",
+                "contacts": {
+                    "tel": "123",
+                    "email": "andrew.mashin06@gmail.com",
+                    "address": null
+                },
+                "items": [
+                    {
+                        "id": 2,
+                        "name": "Внешний аккумулятор 10000mAh, черный",
+                        "quantity": 2,
+                        "price": 2399
+                    },
+                    {
+                        "id": 3,
+                        "name": "Bluetooth гарнитура, черный",
+                        "quantity": 3,
+                        "price": 1899
+                    }
+                ],
+                "delivery": "pickup",
+                "payment": "card",
+                "packaging": false,
+                "total": 10495
+            },
+            {
+                "id": "101703",
+                "date": "10.09.2026 20:03",
+                "contacts": {
+                    "tel": "123",
+                    "email": "andrew.mashin06@gmail.com",
+                    "address": null
+                },
+                "items": [
+                    {
+                        "id": 2,
+                        "name": "Внешний аккумулятор 10000mAh, черный",
+                        "quantity": 3,
+                        "price": 2399
+                    },
+                    {
+                        "id": 5,
+                        "name": "Беспроводная акустика",
+                        "quantity": 5,
+                        "price": 3499
+                    }
+                ],
+                "delivery": "pickup",
+                "payment": "cash",
+                "packaging": false,
+                "total": 24692
             }
         ]
     },

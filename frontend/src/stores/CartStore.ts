@@ -1,5 +1,6 @@
 import { makeAutoObservable, runInAction } from "mobx"
 import type { Product, ProductCart } from "../utils/structures";
+import { API_URL } from "../utils/api";
 
 class CartStore {
     cartItems : ProductCart[] = [];
@@ -52,7 +53,7 @@ class CartStore {
 
     async loadCart(login: string) {
         try {
-            const r = await fetch(`http://127.0.0.1:8080/cart/${login}`, {
+            const r = await fetch(`${API_URL}/cart/${login}`, {
                 method: "GET",
                 headers: { "Content-Type": "application/json" }
             });
@@ -66,7 +67,7 @@ class CartStore {
 
     async saveCart(username: string) {
         try {
-            await fetch('http://127.0.0.1:8080/cart/save', {
+            await fetch(`${API_URL}/cart/save`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username, cart: this.cartItems })

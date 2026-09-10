@@ -1,4 +1,5 @@
 import { makeAutoObservable, runInAction } from "mobx"
+import { API_URL } from "../utils/api";
 
 class AuthStore {
     username;
@@ -21,7 +22,7 @@ class AuthStore {
 
     async logout() {
         try {
-            await fetch("http://127.0.0.1:8080/logout", {
+            await fetch(`${API_URL}/logout`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" }
             });
