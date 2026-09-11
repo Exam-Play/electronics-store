@@ -14,12 +14,13 @@ from database.models import User, Order, OrderItem
 
 app = FastAPI()
 
-_frontend_url = os.environ.get("FRONTEND_URL")
+_frontend_urls_raw = os.environ.get("FRONTEND_URLS", "")
 _allowed_origins = [
     "http://localhost:3000"
 ]
-if _frontend_url:
-    _allowed_origins.append(_frontend_url)
+_allowed_origins.extend(
+    url.strip() for url in _frontend_urls_raw.split(",") if url.strip()
+)
 
 app.add_middleware(
     CORSMiddleware,
