@@ -80,7 +80,7 @@ async def save_cart(request: Request, db: Session = Depends(get_db)):
         "success": True
     }
 
-@app.get("/cart/{username}")
+@app.get("/users/{username}/cart")
 async def get_cart(username: str, db: Session = Depends(get_db)):
     user = db.query(User).filter_by(username=username).first()
     if user is None:
@@ -117,7 +117,7 @@ def get_goods(db: Session = Depends(get_db)):
         for g in goods
     ]
 
-@app.get("/orders/{username}")
+@app.get("/users/{username}/orders")
 async def get_orders(username: str, db: Session = Depends(get_db)):
     user = db.query(User).filter_by(username=username).first()
     if user is None:

@@ -1,18 +1,33 @@
-import { makeAutoObservable, runInAction } from "mobx"
+import { makeAutoObservable, reaction, runInAction } from "mobx"
 import type { Product, ProductCart } from "../utils/structures";
 import { API_URL } from "../utils/api";
 
 class CartStore {
-    cartItems : ProductCart[] = [];
+    cartItems: ProductCart[] = [];
+    username: string = "";
 
     constructor() {
-        const user = localStorage.getItem('username');
-        if (user) {
-            const saved = localStorage.getItem(`cart_${user}`);
-            this.cartItems = saved ? JSON.parse(saved) : [];
+        this.username = localStorage.getItem('username') ?? "";
+
+        if (this.username) {
+            const saved = localStorage.getItem(`cart_${this.username}`);
+            try {
+                this.cartItems = saved ? JSON.parse(saved) : [];
+            } catch {
+                this.cartItems = [];
+            }
         }
 
         makeAutoObservable(this);
+
+        reaction(
+            () => this.cartItems,
+            (items) => {
+                if (this.username) {
+                    localStorage.setItem(`cart_${this.username}`, JSON.stringify(items));
+                }
+            }
+        );
     }
 
     get cartCount() {
@@ -37,7 +52,9 @@ class CartStore {
 
         if (!existing) return;
         if (existing.quantity === 1) {
-            this.cartItems = this.cartItems.filter(i => i.id !== id);
+            const resultCart = this.cartItems.filter(i => i.id !== id);
+
+            this.cartItems = resultCart;
             return;
         }
 
@@ -51,15 +68,20 @@ class CartStore {
         this.cartItems = this.cartItems.filter(i => i.id !== id);
     }
 
-    async loadCart(login: string) {
+    async loadCart(username: string) {
+        this.username = username;
+        localStorage.setItem('username', username);
+        
         try {
-            const r = await fetch(`${API_URL}/cart/${login}`, {
+            const r = await fetch(`${API_URL}/users/${username}/cart`, {
                 method: "GET",
                 headers: { "Content-Type": "application/json" }
             });
             const data = await r.json();
 
-            runInAction(() => this.cartItems = data.cart ?? []);
+            runInAction(() => {
+                this.cartItems = data.cart ?? [];
+            });
         } catch {
             runInAction(() => this.cartItems = []);
         }
@@ -72,9 +94,9 @@ class CartStore {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username, cart: this.cartItems })
             });
-
+            
             runInAction(() => {
-                localStorage.removeItem(`cart_${username}`)
+                localStorage.removeItem(`cart_${username}`);
             });
         } catch (error) {
             console.error('Ошибка:', error);
@@ -82,7 +104,12 @@ class CartStore {
     }
 
     clearCart() {
+        if (this.username) {
+            localStorage.removeItem(`cart_${this.username}`);
+        }
+
         this.cartItems = [];
+        this.username = "";
     }
 }
 

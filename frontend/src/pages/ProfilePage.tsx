@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 
 import '../styles/profileStyle.scss';
 import { authStore } from "../stores/AuthStore";
-import { cartStore } from "../stores/CartStore";
 import { observer } from "mobx-react-lite";
 import { API_URL } from "../utils/api";
 import { activePageStore } from "../stores/ActivePageStore";
@@ -44,7 +43,6 @@ function ProfilePageComponent(){
         .then((data) => {
             if (data === true) {
                 authStore.login(login);
-                cartStore.loadCart(login);
                 
                 navigate('/');
                 activePageStore.syncWithPath('home');

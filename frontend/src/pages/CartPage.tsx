@@ -32,7 +32,7 @@ function CartPageComponent({
 
     const loadOrders = useCallback(() => {
         if (!authStore.username) return;
-        fetch(`${API_URL}/orders/${authStore.username}`)
+        fetch(`${API_URL}/users/${authStore.username}/orders`)
             .then(r => r.json())
             .then(data => setOrders(data.orders ?? []));
     }, [authStore.username]);

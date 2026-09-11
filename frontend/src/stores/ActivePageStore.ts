@@ -4,11 +4,18 @@ class ActivePageStore {
     activeItem = "home";
 
     constructor() {
+        const activeItem = localStorage.getItem('activeItem');
+
+        if (activeItem) this.activeItem = activeItem;
+
         makeAutoObservable(this);
     }
 
     syncWithPath(pathname: string) {
-        this.activeItem = pathname === "" ? "home" : pathname;
+        const activeItem = pathname === "" ? "home" : pathname;
+
+        localStorage.setItem('activeItem', activeItem);
+        this.activeItem = activeItem;
     }
 }
 
