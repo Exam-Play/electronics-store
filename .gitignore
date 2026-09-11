@@ -269,3 +269,4 @@ fabric.properties
 
 backend/.venv/
 backend/__pycache__
+backend/database/__pycache__

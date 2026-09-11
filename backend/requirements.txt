@@ -1,2 +1,6 @@
-fastapi==0.115.0
-uvicorn[standard]==0.32.0
+fastapi==0.141.1
+uvicorn[standard]==0.52.4
+
+python-dotenv~=1.2.3
+SQLAlchemy~=2.1.0rc2
+bcrypt~=5.0.0
