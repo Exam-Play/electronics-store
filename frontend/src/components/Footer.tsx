@@ -20,7 +20,7 @@ function Footer() {
             <div className="phone">
                 <a href="tel:+79218469996" rel='noreferrer' target='_blank'>
                     <img src={mobileLogo} alt="mobile-logo"/>
-                    <h2>8 (921) 846-99-96</h2>
+                    <h2>+7 (921) 861-98-44</h2>
                 </a>
             </div>
 

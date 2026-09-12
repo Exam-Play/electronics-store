@@ -30,6 +30,21 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.post("/register")
+async def post_register(request: Request, db: Session = Depends(get_db)):
+    body = await request.json()
+    username = body.get("username")
+    password = body.get("password")
+
+    existing = db.query(User).filter_by(username=username).first()
+    if existing:
+        raise HTTPException(status_code=409, detail="Логин уже занят")
+
+    password_hash = bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt()).decode("utf-8")
+    db.add(User(username=username, password_hash=password_hash))
+    db.commit()
+    return True
+
 @app.post("/login")
 async def post_login(request: Request):
     body = await request.json()

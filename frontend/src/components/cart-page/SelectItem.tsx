@@ -30,8 +30,8 @@ function SelectItem({
     }, []);
 
     return (
-        <div className="select-group">
-            <label htmlFor={`select-${name}`}>{label}</label>
+        <div className="input-template select-group">
+            <label htmlFor={`select-${name}`} className="star">{label}</label>
             <div className={`select-wrapper ${isOpen ? "active" : ""}`} ref={ref}>
                 <div className="select-trigger"
                     onClick={() => setIsOpen(prev => !prev)}

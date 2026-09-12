@@ -290,7 +290,7 @@
                     width: 193px;
                 }
 
-                input[type="text"] {
+                input[type="email"], input[type="tel"]{
                     width: 286px;
                 }
 
@@ -324,14 +324,11 @@
                     }
                 }
 
-                .select-group > label {
-                    font-size: 14px;
-                }
-
                 .select-group {
+                    width: 286px;
+                    
                     .select-wrapper {
                         position: relative;
-                        width: 286px;
 
                         &.active .select-trigger {
                             border-color: #84ADFF;

@@ -24,8 +24,8 @@ function ButtonCardComponent({
                 if (authStore.isLoggedIn) {
                     cartStore.addToCart(item);
                 } else {
-                    navigate('/profile');
-                    activePageStore.syncWithPath("profile");
+                    navigate('/login');
+                    activePageStore.syncWithPath("login");
                 }
             }}
         >

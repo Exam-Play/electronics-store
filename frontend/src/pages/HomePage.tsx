@@ -75,7 +75,7 @@ function HomePage({
             <div className='items'>
                 <div className='item'>
                     <img src={phoneIcon} alt='phone-icon'/>
-                    <h2>8 (921) 846-99-96</h2>
+                    <h2>+7 (921) 861-98-44</h2>
                 </div>
                 <div className='item'>
                     <img src={emailIcon} alt='email-icon'/>

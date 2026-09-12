@@ -5,17 +5,25 @@ import profileLogo from '../assets/images/icons/profile.svg'
 import cartLogo from '../assets/images/icons/cart.svg'
 
 import Title from './Title';
+import { ProfileDropdown } from './ProfileDropdown';
+
 import { authStore } from '../stores/AuthStore';
 import { observer } from 'mobx-react-lite';
 import { cartStore } from '../stores/CartStore';
 import { activePageStore } from '../stores/ActivePageStore';
+import { ChevronDown } from 'lucide-react';
+import { useRef, useState } from 'react';
 
 function HeaderComponent(){
+    const [isDropdownOpen, setDropdownOpen] = useState(false);
+    const triggerRef = useRef<HTMLAnchorElement>(null);
+
     function clickLogout() {
         cartStore.saveCart(authStore.username).finally(() => {
             authStore.logout();
             cartStore.clearCart();
         });
+        setDropdownOpen(false);
         activePageStore.syncWithPath('');
     }
 
@@ -60,22 +68,38 @@ function HeaderComponent(){
                 </Link>
                 }
 
-                <Link
-                    to={authStore.isLoggedIn ? "/" : "/profile"}
-                    className={activePageStore.activeItem === 'profile' ? 'active' : ''}
-                    onClick={() => {
-                        if (authStore.isLoggedIn) {
-                            clickLogout();
-                        } else {
-                            activePageStore.syncWithPath('profile');
-                        }
-                    }}
+                <div style={{ position: 'relative', borderRadius: '8px' }}
+                    className={(activePageStore.activeItem === 'login' || isDropdownOpen) ? 'active' : ''}
                 >
-                    <div className='item'>
-                        <img src={profileLogo} alt='profile-logo'/>
-                        <p>{authStore.isLoggedIn ? "Выйти" : "Войти"}</p>
-                    </div>
-                </Link>
+                    <Link
+                        ref={triggerRef}
+                        to={authStore.isLoggedIn ? "#" : "/login"}
+                        onClick={(e) => {
+                            if (authStore.isLoggedIn) {
+                                e.preventDefault();
+                                setDropdownOpen(prev => !prev);
+                            } else {
+                                activePageStore.syncWithPath('login');
+                            }
+                        }}
+                    >
+                        <div className='item'>
+                            <img src={profileLogo} alt='profile-logo'/>
+                            <p>
+                                {authStore.isLoggedIn ? authStore.username : "Войти"}
+                                {authStore.isLoggedIn && <ChevronDown size={19} />}
+                            </p>
+                        </div>
+                    </Link>
+
+                    {isDropdownOpen && (
+                        <ProfileDropdown
+                            onClose={() => setDropdownOpen(false)}
+                            onLogout={clickLogout}
+                            excludeRef={triggerRef}
+                        />
+                    )}
+                </div>
             </div>
         </div>
     </header>

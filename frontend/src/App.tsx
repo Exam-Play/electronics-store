@@ -7,7 +7,7 @@ import HomePage from './pages/HomePage'
 import CatalogPage from './pages/CatalogPage'
 import { CartPage } from './pages/CartPage'
 import NotFoundPage from './pages/NotFoundPage'
-import { ProfilePage } from './pages/ProfilePage';
+import { LoginPage } from './pages/LoginPage';
 
 import type { Product } from './utils/structures';
 import { observer } from 'mobx-react-lite';
@@ -15,6 +15,7 @@ import { Header } from './components/Header';
 
 import './stores/RootStore';
 import { API_URL } from './utils/api';
+import { RegisterPage } from './pages/RegisterPage';
 
 function AppComponent() {
     const location = useLocation();
@@ -33,7 +34,7 @@ function AppComponent() {
         .finally(() => setIsLoading(false));
     }, []);
 
-    if (!["/", "/catalog", "/cart", "/profile"].includes(location.pathname)) {
+    if (!["/", "/catalog", "/cart", "/login", "/register"].includes(location.pathname)) {
         return <NotFoundPage />;
     }
 
@@ -70,8 +71,13 @@ function AppComponent() {
                     />
 
                     <Route
-                        path="/profile"
-                        element={<ProfilePage />}
+                        path="/login"
+                        element={<LoginPage />}
+                    />
+
+                    <Route
+                        path="/register"
+                        element={<RegisterPage />}
                     />
                 </Routes>
             </main>

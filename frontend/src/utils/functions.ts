@@ -61,3 +61,5 @@ export function filterProducts(products: Product[], filters: FilterState): Produ
         return true;
     });
 }
+
+export const itemText = (count: number) => (count === 1) ? "товар" : (count >= 2 && count <= 4) ? "товара" : "товаров";

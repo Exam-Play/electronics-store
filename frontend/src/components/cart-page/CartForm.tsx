@@ -8,6 +8,8 @@ import { authStore } from "../../stores/AuthStore";
 import { API_URL } from "../../utils/api";
 import { observer } from "mobx-react-lite";
 
+import { InputMask } from "@react-input/mask";
+
 function CartFormComponent({
     cards,
     setThanks,
@@ -36,16 +38,24 @@ function CartFormComponent({
             window.scrollTo({ top: 0, behavior: 'smooth' }); return;
         }
         if (!tel) {
-            setIsError('empty-tel'); return;
+            setIsError('empty-tel');
+            return;
+        }
+        if (tel.replace(/\D/g, '').length !== 11) {
+            setIsError('invalid-tel');
+            return;
         }
         if (!email) {
-            setIsError('empty-email'); return;
+            setIsError('empty-email');
+            return;
         }
         if (delivery === 'delivery' && !address) {
-            setIsError('empty-address'); return;
+            setIsError('empty-address');
+            return;
         }
         if (!payment) {
-            setIsError('empty-payment'); return;
+            setIsError('empty-payment');
+            return;
         }
         
         fetch(`${API_URL}/orders`, {
@@ -84,23 +94,28 @@ function CartFormComponent({
     return <form className="order-form" onSubmit={handleSubmit}>
         <div className="form-row">
             <div className="input-template">
-                <label htmlFor='tel'>Телефон</label>
-                <input
+                <label htmlFor='tel' className="star">Телефон</label>
+                <InputMask
                     id='tel'
                     name='tel'
-                    type='text'
                     autoComplete="tel"
-                    style={isError === 'empty-tel' ? { outline: '1px #FF60C3 solid' } : {}}
+                    type="tel"
+                    mask="+_ (___) ___-__-__"
+                    replacement={{ _: /\d/ }}
+                    placeholder="+7 (XXX) XXX-XX-XX"
+                    style={isError === 'empty-tel' || isError === 'invalid-tel'
+                         ? { outline: '1px #FF60C3 solid' } : {}}
                 />
             </div>
-    
+
             <div className="input-template">
                 <label htmlFor='email' className="star">E-mail</label>
                 <input
                     id='email'
                     name='email'
-                    type='text'
+                    type='email'
                     autoComplete="email"
+                    placeholder="example@mail.com"
                     style={isError === 'empty-email' ? { outline: '1px #FF60C3 solid' } : {}}
                 />
             </div>
