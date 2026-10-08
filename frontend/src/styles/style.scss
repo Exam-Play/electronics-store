@@ -27,7 +27,7 @@
 }
 
 body {
-    font-family: 'Rubik';
+    font-family: 'Rubik', serif;
     background-color: #FFFFFF;
     margin: 0;
     line-height: 150%;
@@ -58,7 +58,7 @@ a {
 }
 
 span {
-    font-family: 'Rubik';
+    font-family: 'Rubik', serif;
     color: #115EFB;
 }
 
@@ -85,7 +85,7 @@ header {
         display: flex;
         flex-direction: row;
         gap: 5px;
-        
+
         a {
             border-radius: 8px;
         }
@@ -130,7 +130,7 @@ header {
         z-index: 100;
         animation: dropdown-appear 0.18s ease-out;
         transform-origin: top right;
-        
+
         span {
             color: black;
         }
@@ -224,7 +224,7 @@ footer {
 
     .wrapper {
         @include wrapper;
-        
+
         align-items: normal !important;
         padding: 42px 0;
     }
@@ -349,7 +349,7 @@ footer {
         position: relative;
         transition: 0.1s;
     }
-    
+
     input:checked + .checkmark {
         background: #115EFB;
     }
@@ -362,7 +362,7 @@ footer {
 
         width: 4px;
         height: 8px;
-        
+
         border: solid white;
         border-width: 0 2px 2px 0;
         transform: rotate(45deg);
@@ -397,7 +397,7 @@ button {
     align-items: center;
     gap: 27px;
     max-height: 49px;
-    
+
     > div {
         display: flex;
         flex-direction: row;

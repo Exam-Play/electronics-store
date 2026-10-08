@@ -9,11 +9,7 @@ import { observer } from 'mobx-react-lite';
 import { authStore } from '../../stores/AuthStore';
 import { activePageStore } from '../../stores/ActivePageStore';
 
-function ButtonCardComponent({
-    item,
-}:{
-    item: Product,
-}){
+function ButtonCardComponent({ item }:{ item: Product }){
     const navigate = useNavigate();
     const productQuantity = cartStore.cartItems.find(cartItem => cartItem.id === item.id)?.quantity ?? 0;
 

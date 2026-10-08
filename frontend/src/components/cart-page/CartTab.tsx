@@ -1,3 +1,5 @@
+import React from "react";
+
 import closeCross from '../../assets/images/icons/cross_pink.svg';
 import EmptyCart from './EmptyCart';
 import CheckBox from '../catalog-page/CheckBox';
@@ -7,7 +9,7 @@ import { cartStore } from '../../stores/CartStore';
 import { itemText } from '../../utils/functions';
 import type { Product } from '../../utils/structures';
 
-type CartTabProps = {
+interface CartTabProps {
     cards: Product[];
     uniqueItems: { id: number; name: string; quantity: number }[];
     selectedIds: Set<number>;
@@ -15,7 +17,7 @@ type CartTabProps = {
     toggleSelect: (id: number) => void;
     toggleSelectAll: () => void;
     setThanks: (value: string) => void;
-};
+}
 
 export function CartTab({
     cards,

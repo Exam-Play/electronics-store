@@ -1,12 +1,12 @@
-import { useEffect, useRef } from 'react';
+import {type RefObject, useEffect, useRef} from 'react';
 import { Link } from 'react-router-dom';
-import { ClipboardList, User, LogOut } from 'lucide-react';
+import { ClipboardList, User, LogOut } from "lucide-react";
 import { authStore } from '../stores/AuthStore';
 
-type ProfileDropdownProps = {
+interface ProfileDropdownProps {
     onClose: () => void;
     onLogout: () => void;
-    excludeRef: React.RefObject<HTMLElement | null>;
+    excludeRef: RefObject<HTMLElement | null>;
 };
 
 export function ProfileDropdown({ onClose, onLogout, excludeRef }: ProfileDropdownProps) {

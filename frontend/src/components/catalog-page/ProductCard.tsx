@@ -5,13 +5,12 @@ import ratingIcon from '../../assets/images/icons/rating.svg'
 import { ButtonCard } from "./ButtonCard";
 import type { Product } from '../../utils/structures';
 
-function ProductCard({
-    item,
-    setActiveProduct
-}:{
+interface ProductCardProps {
     item: Product,
     setActiveProduct: (product: Product | null) => void
-}){
+}
+
+function ProductCard({ item, setActiveProduct }: ProductCardProps){
     const [loaded, setLoaded] = useState(false);
 
     const ratingBlock = (item.rating !== 0.0) ? 
@@ -53,9 +52,7 @@ function ProductCard({
             {ratingBlock}
         </div>
 
-        <ButtonCard
-            item={item}
-        />
+        <ButtonCard item={item} />
     </div>
 }
 

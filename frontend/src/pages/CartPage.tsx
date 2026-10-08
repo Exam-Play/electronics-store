@@ -18,14 +18,15 @@ import { useOrderHistory } from "../hooks/useOrderHistory";
 import { useCartSelection } from "../hooks/useCartSelection";
 
 function CartPageComponent({ cards }: { cards: Product[] }) {
+    const username = authStore.username;
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (authStore.username === "") navigate("/");
-    }, [authStore.username, navigate]);
+        if (username === "") navigate("/");
+    }, [username, navigate]);
 
     const [activeTab, setActiveTab] = useTabFromQuery<"cart" | "history">("cart", "history");
-    const { orders, loadOrders } = useOrderHistory();
+    const { orders, loadOrders } = useOrderHistory(username);
     const [thanks, setThanks] = useState("");
 
     useEffect(() => {
@@ -81,6 +82,6 @@ function CartPageComponent({ cards }: { cards: Product[] }) {
             {activeTab === "history" && <HistoryTab orders={orders} />}
         </div>
     </div>
-};
+}
 
 export const CartPage = observer(CartPageComponent);

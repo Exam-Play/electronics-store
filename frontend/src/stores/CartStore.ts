@@ -1,6 +1,6 @@
-import { makeAutoObservable, reaction, runInAction } from "mobx"
-import type { Product, ProductCart } from "../utils/structures";
-import { API_URL } from "../utils/api";
+import {makeAutoObservable, reaction, runInAction} from "mobx"
+import type {Product, ProductCart} from "../utils/structures";
+import {API_URL} from "../utils/api";
 
 class CartStore {
     cartItems: ProductCart[] = [];
@@ -52,9 +52,7 @@ class CartStore {
 
         if (!existing) return;
         if (existing.quantity === 1) {
-            const resultCart = this.cartItems.filter(i => i.id !== id);
-
-            this.cartItems = resultCart;
+            this.cartItems = this.cartItems.filter(i => i.id !== id);
             return;
         }
 

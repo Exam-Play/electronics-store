@@ -1,27 +1,32 @@
-import { useEffect, useRef, useState } from "react";
+import {useCallback, useEffect, useRef, useState} from "react";
+import type React from "react";
+import type { API } from 'nouislider';
 
 import CheckBox from "./CheckBox";
 import RangePrice from "./RangePrice";
 import type { FilterState } from "../../utils/structures";
 
-function Filter({
-    MIN,
-    MAX,
-    onFilter
-}:{
+interface FilterProps {
     MIN: number,
     MAX: number,
     onFilter: (filters: FilterState) => void
-}){
+}
+
+function Filter({ MIN, MAX, onFilter }: FilterProps) {
+    const [priceMin, setPriceMin] = useState(MIN);
+    const [priceMax, setPriceMax] = useState(MAX);
+    const initialized = useRef(false);
+
     useEffect(() => {
         if (MIN === 0 && MAX === 0) return;
+        if (initialized.current) return;
+        initialized.current = true;
+        
         setPriceMin(MIN);
         setPriceMax(MAX);
     }, [MIN, MAX]);
 
-    const [priceMin, setPriceMin] = useState(MIN);
-    const [priceMax, setPriceMax] = useState(MAX);
-    const sliderInstance = useRef<any>(null);
+    const sliderInstance = useRef<API>(null);
     const [styleFont, setStyleFont] = useState('#B9B9B9');
 
     const [selectedCategories, setSelectedCategories] = useState<Set<string>>(new Set());
@@ -33,7 +38,13 @@ function Filter({
     const toggleCategory = (title: string) => {
         setSelectedCategories(prev => {
             const next = new Set(prev);
-            next.has(title) ? next.delete(title) : next.add(title);
+
+            if (next.has(title)) {
+                next.delete(title);
+            } else {
+                next.add(title);
+            }
+
             return next;
         });
     };
@@ -41,7 +52,13 @@ function Filter({
     const toggleColor = (title: string) => {
         setSelectedColors(prev => {
             const next = new Set(prev);
-            next.has(title) ? next.delete(title) : next.add(title);
+
+            if (next.has(title)) {
+                next.delete(title);
+            } else {
+                next.add(title);
+            }
+
             return next;
         });
     };
@@ -79,6 +96,15 @@ function Filter({
         setPriceMax(val);
         sliderInstance.current?.set([null, val]);
     };
+
+    const handleSliderReady = useCallback((api: API) => {
+        sliderInstance.current = api;
+    }, []);
+
+    const handleUpdate = useCallback((min: number, max: number) => {
+        setPriceMin(min);
+        setPriceMax(max);
+    }, []);
 
     return <div className="filter">
         <div className="section">
@@ -122,11 +148,8 @@ function Filter({
             <RangePrice
                 MIN={MIN}
                 MAX={MAX}
-                onUpdate={(min, max) => {
-                    setPriceMin(min);
-                    setPriceMax(max);
-                }}
-                sliderInstance={sliderInstance}
+                onUpdate={handleUpdate}
+                onSliderReady={handleSliderReady}
             />
         </div>
 

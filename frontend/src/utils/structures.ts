@@ -25,6 +25,31 @@ export interface FilterState {
     colors: Set<string>
 }
 
+export interface OrderItem {
+    id: number;
+    name: string;
+    quantity: number;
+    price: number;
+}
+
+export interface OrderContacts {
+    tel: string;
+    email: string;
+    address: string | null;
+}
+
+export interface Order {
+    id: string;
+    date: string;
+    contacts: OrderContacts;
+    items: OrderItem[];
+    delivery: string;
+    payment: string;
+    packaging: boolean;
+    total: number;
+}
+
+
 export const categoryKeywords: Record<string, string[]> = {
     "Смартфоны": ["смартфон"],
     "Фитнес браслеты": ["фитнес", "браслет"],

@@ -1,16 +1,17 @@
 import { useState, useEffect, useCallback } from 'react';
-import { authStore } from '../stores/AuthStore';
 import { API_URL } from '../utils/api';
 
-export function useOrderHistory() {
-    const [orders, setOrders] = useState<any[]>([]);
+import type { Order } from "../utils/structures.ts";
+
+export function useOrderHistory(username: string) {
+    const [orders, setOrders] = useState<Order[]>([]);
 
     const loadOrders = useCallback(() => {
-        if (!authStore.username) return;
-        fetch(`${API_URL}/users/${authStore.username}/orders`)
+        if (!username) return;
+        fetch(`${API_URL}/users/${username}/orders`)
             .then(r => r.json())
             .then(data => setOrders(data.orders ?? []));
-    }, [authStore.username]);
+    }, [username]);
 
     useEffect(() => {
         loadOrders();

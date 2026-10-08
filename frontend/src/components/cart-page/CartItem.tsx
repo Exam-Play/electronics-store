@@ -8,17 +8,14 @@ import type { Product } from '../../utils/structures';
 import type { ProductCart } from "../../utils/structures";
 import { cartStore } from "../../stores/CartStore";
 
-function CartItem({
-    item,
-    card,
-    selected,
-    onSelect
-}:{
+interface CartItemProps {
     item: ProductCart,
     card: Product,
     selected: boolean,
     onSelect: () => void
-}) {
+}
+
+function CartItem({ item, card, selected, onSelect }: CartItemProps) {
     const [showConfirm, setShowConfirm] = useState(false);
     const productQuantity = cartStore.cartItems.find(cartItem => cartItem.id === item.id)?.quantity ?? 0;
 

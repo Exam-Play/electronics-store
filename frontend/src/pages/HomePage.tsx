@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useMemo } from 'react';
 
 import HomeBanner from '../assets/images/backgrounds/banner.svg'
 
@@ -23,13 +23,14 @@ function HomePage({
     data: Product[],
     isLoading: boolean
 }){
-    const [bestsellers, setBestsellers] = useState<Product[]>([]);
-    const [novelty, setNovelty] = useState<Product[]>([]);
-
-    useEffect(() => {
-        setBestsellers(data.filter((item) => item.isBestseller));
-        setNovelty(data.filter((item) => item.isNovelty));
-    }, [data]);
+    const bestsellers = useMemo(
+        () => data.filter((item) => item.isBestseller),
+        [data]
+    );
+    const novelty = useMemo(
+        () => data.filter((item) => item.isNovelty),
+        [data]
+    );
 
     return <div className='home'>
         <div className='banner'>

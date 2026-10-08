@@ -1,22 +1,18 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import closeCross from '../../assets/images/icons/cross.svg'
 import ratingIcon from '../../assets/images/icons/rating.svg'
 import { ButtonCard } from './ButtonCard';
 import type { Product } from '../../utils/structures';
 
-function ProductModalWindow({
-    activeProduct,
-    setActiveProduct
-}:{
+interface ProductModalWindowProps {
     activeProduct: Product,
     setActiveProduct: (product: Product | null) => void
-}){
-    const [loaded, setLoaded] = useState(false);
+}
 
-    useEffect(() => {
-        setLoaded(false);
-    }, [activeProduct]);
+function ProductModalWindow({ activeProduct, setActiveProduct }: ProductModalWindowProps){
+    const [loadedId, setLoadedId] = useState<number | null>(null);
+    const loaded = loadedId === activeProduct?.id;
 
     const ratingBlock = (activeProduct?.rating !== 0.0) ? 
         <div className="rating-wrapper">
@@ -57,7 +53,7 @@ function ProductModalWindow({
                                 : undefined}
                             style={{ opacity: loaded ? 1 : 0, transition: 'opacity 0.3s ease-in-out' }}
                             alt='product img'
-                            onLoad={() => setLoaded(true)}
+                            onLoad={() => setLoadedId(activeProduct?.id ?? null)}
                         />
                     </div>
                     <div className="info">

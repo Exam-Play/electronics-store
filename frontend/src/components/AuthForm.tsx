@@ -1,4 +1,5 @@
 import { useState } from "react";
+import type React from "react";
 import type { ReactNode } from "react";
 
 export type AuthField = {
@@ -12,19 +13,19 @@ type ServerErrorType = 'incorrect-data' | 'conflict';
 type ClientErrorType = 'empty-data' | 'size' | 'mismatch';
 type AuthErrorType = ClientErrorType | ServerErrorType;
 
-type AuthFormProps = {
-    fields: AuthField[];
-    submitLabel: string;
-    onSubmit: (values: Record<string, string>) => Promise<ServerErrorType | null>;
-    footer?: ReactNode;
-};
-
 const STATIC_MESSAGES: Record<Exclude<AuthErrorType, 'size'>, string> = {
     'empty-data': 'Нельзя вводить пустые поля',
     'mismatch': 'Пароли не совпадают',
     'incorrect-data': 'Неправильный логин или пароль',
     'conflict': 'Такой логин уже занят',
 };
+
+interface AuthFormProps {
+    fields: AuthField[];
+    submitLabel: string;
+    onSubmit: (values: Record<string, string>) => Promise<ServerErrorType | null>;
+    footer?: ReactNode;
+}
 
 export function AuthForm({ fields, submitLabel, onSubmit, footer }: AuthFormProps) {
     const [errorMessage, setErrorMessage] = useState('');

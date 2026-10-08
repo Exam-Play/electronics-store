@@ -4,15 +4,13 @@ import ratingIcon from '../../assets/images/icons/rating.svg'
 
 import type { Product } from '../../utils/structures';
 
-function ProductCard({
-    type,
-    dataImage,
-    setActiveProduct
-}:{
+interface ProductCardProps {
     type : string,
     dataImage: Product,
     setActiveProduct: (product: Product | null) => void
-}){
+}
+
+function ProductCard({ type, dataImage, setActiveProduct }: ProductCardProps){
     const [loaded, setLoaded] = useState(false);
 
     const isBestsellers = (type === 'Хиты продаж');

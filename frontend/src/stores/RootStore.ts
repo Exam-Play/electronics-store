@@ -11,7 +11,7 @@ class RootStore {
         reaction(
             () => this.authStore.username,
             (username) => {
-                if (username) this.cartStore.loadCart(username);
+                if (username) void this.cartStore.loadCart(username);
                 else this.cartStore.clearCart();
             },
             { name: "SyncCartWithAuth" }

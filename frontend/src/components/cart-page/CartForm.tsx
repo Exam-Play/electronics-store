@@ -1,4 +1,5 @@
 import { useState } from "react";
+import type React from "react";
 
 import CheckBox from "../catalog-page/CheckBox";
 import SelectItem from "./SelectItem";
@@ -10,15 +11,13 @@ import { observer } from "mobx-react-lite";
 
 import { InputMask } from "@react-input/mask";
 
-function CartFormComponent({
-    cards,
-    setThanks,
-    cartItems
-}:{
+interface CartFormProps {
     cards: Product[],
     setThanks: (v:string) => void,
     cartItems: ProductCart[]
-}) {
+}
+
+function CartFormComponent({ cards, setThanks, cartItems }: CartFormProps) {
     const [delivery, setDelivery] = useState("pickup");
     const [isError, setIsError] = useState('');
 

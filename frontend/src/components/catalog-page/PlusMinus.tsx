@@ -5,13 +5,12 @@ import type { Product } from '../../utils/structures';
 import { cartStore } from '../../stores/CartStore';
 import { observer } from 'mobx-react-lite';
 
-function PlusMinusComponent({
-    item,
-    productQuantity
-}:{
+interface PlusMinusComponentProps {
     item: Product,
     productQuantity: number
-}) {
+}
+
+function PlusMinusComponent({ item, productQuantity }: PlusMinusComponentProps) {
     return <div>
         <button
             className='plus-minus'

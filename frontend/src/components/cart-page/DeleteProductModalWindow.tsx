@@ -2,15 +2,13 @@ import closeCross from '../../assets/images/icons/cross.svg'
 
 import type { ProductCart } from '../../utils/structures';
 
-function DeleteProductModalWindow({
-    item,
-    onConfirm,
-    onCancel
-}:{
+interface DeleteProductModalWindowProps {
     item: ProductCart,
     onConfirm: () => void,
     onCancel: () => void
-}) {
+}
+
+function DeleteProductModalWindow({ item, onConfirm, onCancel }: DeleteProductModalWindowProps) {
     return <div className="delete-product-window">
         <div className="delete-wrapper">
             <button className="close-button" onClick={onCancel}>

@@ -1,14 +1,11 @@
-function CheckBox({
-    title,
-    name,
-    checked,
-    onChange
-}:{
+interface CheckBoxProps {
     title: string,
     name?: string,
     checked?: boolean,
     onChange?: () => void
-}) {
+}
+
+function CheckBox({ title, name, checked, onChange }: CheckBoxProps) {
     return <label className="check-item" tabIndex={0}>
         <input
             type="checkbox"

@@ -11,21 +11,23 @@ import ProductModalWindow from '../catalog-page/ProductModalWindow';
 
 import type { Product } from '../../utils/structures';
 
-function ProductSection({
-    nameClass,
-    title,
-    description,
-    data,
-    isLoading
-}:{
+interface SliderProps {
     nameClass: string,
     title: string,
     description: string,
     data: Product[],
     isLoading: boolean
-}){
+}
+
+function Slider({
+    nameClass,
+    title,
+    description,
+    data,
+    isLoading
+}: SliderProps) {
     const isBestsellers = (title === 'Хиты продаж');
-    const isNoveltys = (title === 'Новинки');
+    const isNovelties = (title === 'Новинки');
 
     const [activeProduct, setActiveProduct] = useState<Product | null>(null);
 
@@ -43,7 +45,7 @@ function ProductSection({
 
     return <div className={nameClass}>
         <div className='description'>
-            <img src={isBestsellers ? bestsellersIcon : isNoveltys ? noveltyIcon : ''} alt='description-icon'/>
+            <img src={isBestsellers ? bestsellersIcon : isNovelties ? noveltyIcon : ''} alt='description-icon'/>
             <h1>{title}</h1>
             <p>{description}</p>
         </div>
@@ -80,4 +82,4 @@ function ProductSection({
     </div>
 }
 
-export default ProductSection;
+export default Slider;

@@ -6,15 +6,13 @@ const options = [
     { value: "card", label: "Банковская карта" },
 ];
 
-function SelectItem({
-    label,
-    name,
-    isError
-}:{
+interface SelectItemProps {
     label: string,
     name: string,
     isError: string
-}){
+}
+
+function SelectItem({ label, name, isError }: SelectItemProps) {
     const [isOpen, setIsOpen] = useState(false);
     const [selected, setSelected] = useState(options[0]);
     const ref = useRef<HTMLDivElement>(null);

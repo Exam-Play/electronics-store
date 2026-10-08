@@ -3,15 +3,13 @@ import ThanksImage from '../../assets/images/backgrounds/thanks_image.svg'
 import { cartStore } from '../../stores/CartStore';
 import { observer } from 'mobx-react-lite';
 
-function GratitudeComponent({
-    thanks,
-    setThanks,
-    loadOrders
-}:{
+interface GratitudeComponentProps {
     thanks: string,
     setThanks: (v:string) => void,
     loadOrders: () => void
-}) {
+}
+
+function GratitudeComponent({ thanks, setThanks, loadOrders }: GratitudeComponentProps) {
     return <div className="delete-product-window">
         <div className="delete-wrapper thanks-wrapper">
             <button className="close-button"

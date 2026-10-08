@@ -1,11 +1,11 @@
 import { itemText } from '../../utils/functions';
 
-type Order = {
+interface Order {
     id: string | number;
     date: string;
     total: number;
     items: { quantity: number }[];
-};
+}
 
 export function HistoryTab({ orders }: { orders: Order[] }) {
     if (orders.length === 0) {

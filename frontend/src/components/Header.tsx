@@ -20,7 +20,7 @@ function HeaderComponent(){
 
     function clickLogout() {
         cartStore.saveCart(authStore.username).finally(() => {
-            authStore.logout();
+            void authStore.logout();
             cartStore.clearCart();
         });
         setDropdownOpen(false);

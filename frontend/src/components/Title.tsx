@@ -1,7 +1,7 @@
 function Title() {
     return <div className='title'>
         <h2>
-            <span>Gudget</span> Hub
+            <span>Gadget</span> Hub
         </h2>
     </div>
 }

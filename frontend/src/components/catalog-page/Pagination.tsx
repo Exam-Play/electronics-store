@@ -1,17 +1,19 @@
 import leftArrowIcon from '../../assets/images/home-page/left-arrow.svg'
 import rightArrowIcon from '../../assets/images/home-page/right-arrow.svg'
 
+interface PaginationProps {
+    currentPage: number;
+    setCurrentPage: (page: number) => void;
+    countOfPages: number;
+    pages: (number | '...')[];
+}
+
 function Pagination({
     currentPage,
     setCurrentPage,
     countOfPages,
     pages
-}:{
-    currentPage: number;
-    setCurrentPage: (page: number) => void;
-    countOfPages: number;
-    pages: (number | '...')[];
-}) {
+}: PaginationProps) {
     return <div className="pagination">
         {currentPage > 1 && (
             <img

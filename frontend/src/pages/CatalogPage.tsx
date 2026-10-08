@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import {useState, useEffect, useMemo, type Dispatch, type SetStateAction} from "react";
 
 import '../styles/catalogStyle.scss';
 
@@ -18,7 +18,7 @@ function CatalogPage({
     isLoading
 }:{
     cards: Product[],
-    setCards: React.Dispatch<React.SetStateAction<Product[]>>,
+    setCards: Dispatch<SetStateAction<Product[]>>,
     isLoading: boolean
 }){
     const [filters, setFilters] = useState<FilterState>({
