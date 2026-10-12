@@ -1,0 +1,58 @@
+@use '../../../styles/_variables' as *;
+
+.filter {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 290px;
+
+    .section {
+        display: flex;
+        flex-direction: column;
+
+        h2 {
+            font-size: 20px;
+            padding: 20px 0;
+        }
+
+        .priceInputs {
+            display: flex;
+            flex-direction: row;
+            gap: 30px;
+        }
+
+        .checkList {
+            user-select: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+    }
+
+    .buttons {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-top: 20px;
+
+        button {
+            width: 139px;
+        }
+
+        button:nth-child(2) {
+            background: white;
+
+            span {
+                color: $pink;
+            }
+
+            &:hover {
+                background: $pink-dark;
+
+                span {
+                    color: white;
+                }
+            }
+        }
+    }
+}

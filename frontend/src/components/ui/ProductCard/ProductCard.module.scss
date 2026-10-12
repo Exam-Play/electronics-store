@@ -1,0 +1,81 @@
+@use '../../../styles/_variables' as *;
+
+.productCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 480px;
+
+    width: 286px;
+    padding: 16px;
+    border-radius: 28px;
+    transition: 0.3s box-shadow;
+
+    p {
+        color: $text;
+        margin: 10px 0;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    h2 {
+        padding: 0;
+        margin-top: 15px;
+    }
+}
+
+.productCard:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+
+    > p {
+        color: $blue;
+    }
+}
+
+.ratingWrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+
+    span {
+        color: $text;
+        line-height: 125%;
+    }
+}
+
+.textWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+
+    position: absolute;
+    z-index: 3;
+    top: 4%;
+    right: 4%;
+
+    .label {
+        padding: 4px 8px;
+        border-radius: 20px;
+    }
+
+    .novelty {
+        background: $green;
+    }
+
+    .bestseller {
+        width: 25px;
+        background: $pink;
+    }
+
+    p {
+        text-align: center;
+        font-weight: 500;
+        font-size: 12px;
+        color: $white;
+        line-height: 150%;
+        margin: 0;
+    }
+}

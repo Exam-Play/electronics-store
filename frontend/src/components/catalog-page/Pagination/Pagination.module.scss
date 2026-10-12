@@ -1,0 +1,47 @@
+@use '../../../styles/_variables' as *;
+
+.pagination {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 922px;
+    margin-bottom: 50px;
+
+    .paginationItem {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+
+        &:hover {
+            background: $blue-light;
+
+            span {
+                color: white;
+            }
+        }
+
+        &.active {
+            background: $blue;
+            span {
+                color: white;
+            }
+        }
+    }
+
+    .arrow {
+        padding: 8px;
+        border-radius: 50%;
+        width: 16px;
+        height: 16px;
+    }
+
+    .arrow:hover {
+        background: $gray-bg;
+    }
+}

@@ -1,0 +1,197 @@
+import {useCallback, useEffect, useRef, useState} from "react";
+import type React from "react";
+import type { API } from 'nouislider';
+
+import styles from './Filter.module.scss'
+
+import { CheckBox } from "../../ui/CheckBox";
+import RangePrice from "../RangePrice.tsx";
+import type { FilterState } from "../../../utils/structures.ts";
+
+interface FilterProps {
+    MIN: number,
+    MAX: number,
+    onFilter: (filters: FilterState) => void
+}
+
+export function Filter({ MIN, MAX, onFilter }: FilterProps) {
+    const [priceMin, setPriceMin] = useState(MIN);
+    const [priceMax, setPriceMax] = useState(MAX);
+    const initialized = useRef(false);
+
+    useEffect(() => {
+        if (MIN === 0 && MAX === 0) return;
+        if (initialized.current) return;
+        initialized.current = true;
+        
+        setPriceMin(MIN);
+        setPriceMax(MAX);
+    }, [MIN, MAX]);
+
+    const sliderInstance = useRef<API>(null);
+    const [styleFont, setStyleFont] = useState('#B9B9B9');
+
+    const [selectedCategories, setSelectedCategories] = useState<Set<string>>(new Set());
+    const [selectedColors, setSelectedColors] = useState<Set<string>>(new Set());
+
+    const categories = ["Смартфоны", "Фитнес браслеты", "Портативная акустика", "Очки виртуальной реальности", "Электротранспорт", "Умные часы"];
+    const colors = ["Красный", "Оранжевый", "Желтый", "Зеленый", "Голубой", "Синий", "Фиолетовый", "Белый", "Черный", "Серый", "Серебристый", "Бежевый"];
+
+    const toggleCategory = (title: string) => {
+        setSelectedCategories(prev => {
+            const next = new Set(prev);
+
+            if (next.has(title)) {
+                next.delete(title);
+            } else {
+                next.add(title);
+            }
+
+            return next;
+        });
+    };
+
+    const toggleColor = (title: string) => {
+        setSelectedColors(prev => {
+            const next = new Set(prev);
+
+            if (next.has(title)) {
+                next.delete(title);
+            } else {
+                next.add(title);
+            }
+
+            return next;
+        });
+    };
+
+    const handleApply = () => {
+        onFilter({
+            priceMin,
+            priceMax,
+            categories: selectedCategories,
+            colors: selectedColors
+        });
+    };
+
+    const handleReset = () => {
+        setSelectedCategories(new Set());
+        setSelectedColors(new Set());
+        setPriceMin(MIN);
+        setPriceMax(MAX);
+        sliderInstance.current?.set([MIN, MAX]);
+        onFilter({ priceMin: MIN, priceMax: MAX, categories: new Set(), colors: new Set() });
+    };
+
+    const handleMinChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        let val = Number(e.target.value);
+        if (val < MIN) val = MIN;
+        if (val >= priceMax) val = priceMax - 1;
+        setPriceMin(val);
+        sliderInstance.current?.set([val, null]);
+    };
+
+    const handleMaxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        let val = Number(e.target.value);
+        if (val > MAX) val = MAX;
+        if (val <= priceMin) val = priceMin + 1;
+        setPriceMax(val);
+        sliderInstance.current?.set([null, val]);
+    };
+
+    const handleSliderReady = useCallback((api: API) => {
+        sliderInstance.current = api;
+    }, []);
+
+    const handleUpdate = useCallback((min: number, max: number) => {
+        setPriceMin(min);
+        setPriceMax(max);
+    }, []);
+
+    return <div className={styles.filter}>
+        <div className={styles.section}>
+            <h2>Цена, ₽</h2>
+            <div className={styles.priceInputs}>
+                <div className="input-template">
+                    <label htmlFor="priceMin">От</label>
+                    <input
+                        style={{ color: styleFont }}
+                        id="priceMin"
+                        type="number"
+                        value={priceMin}
+                        onChange={(e) => setPriceMin(Number(e.target.value))}
+                        onFocus={() => setStyleFont('#000')}
+                        onBlur={(e) => {
+                            setStyleFont('#B9B9B9');
+                            handleMinChange(e);
+                        }}
+                        min="0"
+                        max={MAX}
+                    />
+                </div>
+                <div className="input-template">
+                    <label htmlFor="priceMax">До</label>
+                    <input
+                        style={{ color: styleFont }}
+                        id="priceMax"
+                        type="number"
+                        value={priceMax}
+                        onChange={(e) => setPriceMax(Number(e.target.value))}
+                        onFocus={() => setStyleFont('#000')}
+                        onBlur={(e) => {
+                            setStyleFont('#B9B9B9')
+                            handleMaxChange(e);
+                        }}
+                        min="0"
+                        max={MAX}
+                    />
+                </div>
+            </div>
+            <RangePrice
+                MIN={MIN}
+                MAX={MAX}
+                onUpdate={handleUpdate}
+                onSliderReady={handleSliderReady}
+            />
+        </div>
+
+        <div className={styles.section}>
+            <h2>Тип товара</h2>
+            <div className={styles.checkList}>
+                {categories.map(cat => (
+                    <CheckBox
+                        key={cat}
+                        title={cat}
+                        checked={selectedCategories.has(cat)}
+                        onChange={() => toggleCategory(cat)}
+                        transition={true}
+                    />
+                ))}
+            </div>
+        </div>
+
+        <div className={styles.section}>
+            <h2>Цвет</h2>
+            <div className={styles.checkList}>
+                {colors.map(color => (
+                    <CheckBox
+                        key={color}
+                        title={color}
+                        checked={selectedColors.has(color)}
+                        onChange={() => toggleColor(color)}
+                        transition={true}
+                    />
+                ))}
+            </div>
+        </div>
+
+        <div className={styles.buttons}>
+            <button className="button-blue-template" onClick={handleApply}>
+                <span>Показать</span>
+            </button>
+            <button className="button-pink-template" onClick={handleReset}>
+                <span>Сбросить</span>
+            </button>
+        </div>
+    </div>
+}

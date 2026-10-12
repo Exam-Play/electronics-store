@@ -1,0 +1,28 @@
+@use '../../../styles/_variables' as *;
+
+.cartContent {
+    background: $white;
+    width: 1240px;
+    border-radius: 8px;
+    padding: 40px;
+    margin-left: -40px;
+    margin-bottom: 80px;
+
+    .allButtons {
+        display: flex;
+        gap: 20px;
+    }
+
+    .checkItem {
+        &:hover {
+            padding: 2px 0 2px 0;
+            background: none;
+        }
+    }
+
+    > h2 {
+        text-align: right;
+        margin: 30px 160px 20px 0;
+        padding: 0;
+    }
+}

@@ -1,25 +1,32 @@
-import { Routes, Route, useLocation } from 'react-router-dom'
+import { Routes, Route, Outlet } from 'react-router-dom'
 import { useState, useEffect } from "react";
-
-import Footer from './components/Footer';
-
-import HomePage from './pages/HomePage'
-import CatalogPage from './pages/CatalogPage'
-import { CartPage } from './pages/CartPage'
-import NotFoundPage from './pages/NotFoundPage'
-import { LoginPage } from './pages/LoginPage';
-
-import type { Product } from './utils/structures';
 import { observer } from 'mobx-react-lite';
-import { Header } from './components/Header';
+
+import { HomePage } from './pages/HomePage'
+import { CatalogPage } from './pages/CatalogPage'
+import { CartPage } from './pages/CartPage'
+import { NotFoundPage } from './pages/NotFoundPage'
+import { RegisterPage, LoginPage } from './pages/AuthPages';
+
+import { Header } from './components/layout/Header';
+import { Footer } from './components/layout/Footer';
 
 import './stores/RootStore';
+
 import { API_URL } from './utils/api';
-import { RegisterPage } from './pages/RegisterPage';
+import type { Product } from './utils/structures';
+
+function MainLayout() {
+    return (
+        <>
+            <Header />
+            <main><Outlet /></main>
+            <Footer />
+        </>
+    );
+}
 
 function AppComponent() {
-    const location = useLocation();
-
     const [isLoading, setIsLoading] = useState(true);
     const [cards, setCards] = useState<Product[]>([]);
 
@@ -34,56 +41,41 @@ function AppComponent() {
         .finally(() => setIsLoading(false));
     }, []);
 
-    if (!["/", "/catalog", "/cart", "/login", "/register"].includes(location.pathname)) {
-        return <NotFoundPage />;
-    }
-
     return (
-        <>
-            <Header />
+        <Routes>
+            <Route element={<MainLayout />}>
+                <Route
+                    path="/"
+                    element={<HomePage
+                        data={cards}
+                        isLoading={isLoading}
+                    />}
+                />
 
-            <main>
-                <Routes>
-                    <Route
-                        path="/"
-                        element={<HomePage
-                            data={cards}
-                            isLoading={isLoading}
-                        />}
-                    />
-
-                    <Route
-                        path="/catalog"
-                        element={
-                            <CatalogPage 
-                                cards={cards} 
-                                setCards={setCards} 
-                                isLoading={isLoading}
-                            />
-                        }
-                    />
-
-                    <Route
-                        path="/cart"
-                        element={<CartPage
+                <Route
+                    path="/catalog"
+                    element={
+                        <CatalogPage
                             cards={cards}
-                        />}
-                    />
+                            isLoading={isLoading}
+                        />
+                    }
+                />
 
-                    <Route
-                        path="/login"
-                        element={<LoginPage />}
-                    />
+                <Route
+                    path="/cart"
+                    element={<CartPage
+                        cards={cards}
+                    />}
+                />
 
-                    <Route
-                        path="/register"
-                        element={<RegisterPage />}
-                    />
-                </Routes>
-            </main>
-            
-            <Footer />
-        </>
+                <Route path="/login" element={<LoginPage />} />
+
+                <Route path="/register" element={<RegisterPage />} />
+            </Route>
+
+            <Route path="*" element={<NotFoundPage />} />
+        </Routes>
     );
 }
 

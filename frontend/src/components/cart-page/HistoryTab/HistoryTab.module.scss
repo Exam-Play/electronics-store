@@ -1,0 +1,26 @@
+@use '../../../styles/_variables' as *;
+
+.historyCartContent {
+    background: $white;
+    width: 1240px;
+    border-radius: 8px;
+    padding: 10px 40px;
+    margin-left: -40px;
+
+    .orderItem {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 3px 0;
+        border-bottom: 2px solid $gray-border;
+
+        p {
+            flex: 1;
+        }
+    }
+
+    .orderItem:last-child {
+        border-bottom: none;
+    }
+}

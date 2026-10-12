@@ -1,0 +1,13 @@
+.home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .banner {
+        width: 1240px;
+        height: 560px;
+        user-select: none;
+        margin-bottom: 80px;
+    }
+}

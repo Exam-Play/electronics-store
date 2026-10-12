@@ -1,0 +1,35 @@
+@use '../../../styles/_variables' as *;
+
+.cartItem {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 40px 105px 40px 0;
+    border-bottom: 2px solid $gray-border;
+
+    p {
+        margin: 0;
+    }
+
+    .name {
+        width: 392px;
+        align-self: normal;
+        margin-top: 5px;
+        margin-left: 5px;
+    }
+
+    .checkWithImg {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+
+        .imgWrapper {
+            width: 148px;
+            height: 148px;
+
+            img {
+                height: 118px;
+            }
+        }
+    }
+}

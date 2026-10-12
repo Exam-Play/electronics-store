@@ -1,0 +1,16 @@
+.addToCart {
+    width: 173px;
+}
+
+.addMore {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 27px;
+    max-height: 49px;
+    margin-top: auto;
+
+    .availability {
+        width: 129px;
+    }
+}

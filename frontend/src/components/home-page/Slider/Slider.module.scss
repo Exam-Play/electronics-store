@@ -1,0 +1,62 @@
+@use '../../../styles/_variables' as *;
+
+.bestsellers, .novelties {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 1240px;
+    min-height: 455px;
+    margin-bottom: 80px;
+
+    .description {
+        min-width: 255px;
+
+        img {
+            width: 35px;
+        }
+
+        p {
+            color: #7B7B7B;
+            margin: 0;
+        }
+    }
+
+    .cardsWrapper {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 5px;
+
+        .arrow {
+            user-select: none;
+            height: 24px;
+            cursor: pointer;
+            width: 24px;
+            padding: 10px;
+            border-radius: 50%;
+            transition: 0.2s background;
+        }
+
+        .arrow:hover {
+            background: $gray-bg;
+        }
+
+        .cards {
+            display: flex;
+            flex-direction: row;
+            min-height: 455px;
+
+            .productCard {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                height: 100%;
+
+                width: 286px;
+                padding: 16px;
+                border-radius: 28px;
+                transition: 0.3s box-shadow;
+            }
+        }
+    }
+}

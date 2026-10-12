@@ -1,0 +1,102 @@
+@use '../../../styles/_variables' as *;
+
+@keyframes dropdown-appear {
+    from {
+        opacity: 0;
+        transform: translateY(-8px) scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.profileDropdown {
+    position: absolute;
+    top: calc(100% + 12px);
+    right: 0;
+    width: 260px;
+    background: $white;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    padding: 16px;
+    z-index: 100;
+    animation: dropdown-appear 0.18s ease-out;
+    transform-origin: top right;
+
+    span {
+        color: black;
+    }
+
+    &__header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding-bottom: 14px;
+        margin-bottom: 8px;
+    }
+
+    &__avatar {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: $gray-light;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: $text;
+    }
+
+    &__name {
+        font-weight: 600;
+        margin: 0;
+    }
+
+    &__menu {
+        display: flex;
+        flex-direction: column;
+
+        a {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 10px 8px;
+            border-radius: 8px;
+            color: $text;
+            font-weight: 400;
+            text-decoration: none;
+
+            &:hover {
+                span {
+                    color: $blue;
+                }
+
+                background: $gray-bg;
+                color: $blue;
+            }
+        }
+    }
+
+    &__logout {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        width: 100%;
+        justify-content: flex-start;
+        margin-top: 8px;
+        padding: 10px 8px;
+        background: none;
+        color: $text;
+        cursor: pointer;
+        border-radius: 8px;
+
+        &:hover {
+            span {
+                color: $blue;
+            }
+
+            background: $gray-bg;
+            color: $blue;
+        }
+    }
+}

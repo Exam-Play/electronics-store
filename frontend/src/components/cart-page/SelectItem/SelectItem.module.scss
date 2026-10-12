@@ -1,0 +1,68 @@
+@use '../../../styles/_variables' as *;
+
+.selectGroup {
+    width: 286px;
+
+    .selectWrapper {
+        position: relative;
+
+        &.active .selectTrigger {
+            border-color: $blue-light;
+        }
+    }
+
+    .selectTrigger {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 48px;
+        padding: 0 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        background: $gray-border;
+
+        &:hover {
+            outline: 1px solid $blue-light;
+            background: $gray-bg;
+        }
+
+        .placeholder {
+            color: $gray-text;
+        }
+
+        .arrow {
+            color: $blue;
+        }
+
+        span {
+            color: black;
+        }
+    }
+
+    .selectDropdown {
+        user-select: none;
+        position: absolute;
+        top: calc(100% + 1px);
+        left: 0;
+        right: 0;
+        background: $gray-bg;
+        outline: 1px solid $blue-light;
+        border-radius: 8px;
+        overflow: hidden;
+        z-index: 10;
+    }
+
+    .selectOption {
+        padding: 10px 16px;
+        cursor: pointer;
+        font-size: 16px;
+
+        &:hover {
+            background: $blue-gray;
+        }
+
+        &.selected {
+            background: $blue-gray;
+        }
+    }
+}

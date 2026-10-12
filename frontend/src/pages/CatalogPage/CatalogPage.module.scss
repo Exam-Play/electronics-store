@@ -1,0 +1,70 @@
+@use '../../styles/_variables' as *;
+
+.catalog {
+    display: flex;
+    flex-direction: column;
+
+    h1 {
+        margin: 60px 0 45px 0;
+    }
+
+    .sorting {
+        width: 1240px;
+        display: flex;
+        user-select: none;
+        margin-bottom: 5px;
+
+        div {
+            padding: 4px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+
+            span {
+                color: $blue;
+                border-bottom: 2px dashed $blue;
+            }
+
+            &:hover {
+                background: $gray-bg;
+            }
+
+            &.active {
+                background: $blue-light;
+
+                span {
+                    color: white;
+                    border: none;
+                }
+            }
+        }
+    }
+
+    .wrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-bottom: 50px;
+
+        .catalogGoods {
+            position: relative;
+            width: 938px;
+            display: grid;
+            row-gap: 50px;
+            box-sizing: border-box;
+            grid-template-columns: repeat(3, 1fr);
+            margin-left: -16px;
+
+            .productCard {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                height: 100%;
+
+                width: 286px;
+                padding: 16px;
+                border-radius: 28px;
+                transition: 0.3s box-shadow;
+            }
+        }
+    }
+}

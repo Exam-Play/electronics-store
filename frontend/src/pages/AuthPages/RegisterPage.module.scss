@@ -1,0 +1,38 @@
+@use '../../styles/_variables' as *;
+
+.profile {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+
+    height: 960px;
+    width: 100%;
+    background-color: #E5EEFF;
+    background-image: url(../../assets/images/backgrounds/background-login.svg);
+    background-position: 0 35px;
+    background-position-x: center;
+    background-repeat: no-repeat;
+
+    .loginBlock {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        background: $white;
+        border-radius: 8px;
+        padding: 48px 48px;
+    }
+
+    .registration {
+        cursor: pointer;
+        font-size: 14px;
+        color: $text;
+        transition: .3s ease;
+
+        &:hover {
+            color: #7B7B7B;
+        }
+    }
+}

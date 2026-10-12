@@ -1,0 +1,24 @@
+@use '../../../styles/variables' as *;
+
+.plusMinusWrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    align-items: center;
+
+    .plusMinus {
+        display: flex;
+        align-items: center;
+        padding: 0;
+        width: 32px;
+        height: 32px;
+    }
+
+    .plusMinus:hover {
+        background: $blue;
+
+        img {
+            filter: brightness(0) invert(1);
+        }
+    }
+}

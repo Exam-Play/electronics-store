@@ -1,0 +1,41 @@
+@use '../../../styles/_variables' as *;
+
+.emptyCart {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    p {
+        color: $text;
+        margin: 0;
+    }
+
+    .illustration {
+        width: 147px;
+        height: 134px;
+
+        img {
+            width: 100%;
+        }
+    }
+
+    .buttons {
+        display: flex;
+        align-items: center;
+        margin-top: 16px;
+
+        .buttonBlueTemplate {
+            width: 212px;
+            font-weight: 500;
+        }
+
+        .btnLink {
+            background: none;
+
+            span {
+                font-weight: 500;
+                color: $blue;
+            }
+        }
+    }
+}

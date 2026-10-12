@@ -1,0 +1,98 @@
+@use '../../../styles/_variables' as *;
+
+.deleteProductWindow {
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .thanksWrapper {
+        height: 378px !important;
+        padding: 45px 0 !important;
+
+        .content {
+            gap: 0 !important;
+        }
+    }
+
+    .deleteWrapper {
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+        position: relative;
+        background: white;
+        border-radius: 40px;
+        padding: 65px 0;
+        width: 556px;
+        height: 300px;
+
+        .closeButton {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            width: 20px;
+            height: 20px;
+            padding: 0;
+            background: none;
+            cursor: pointer;
+
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 24px;
+            height: 100%;
+            width: 444px;
+
+            img {
+                width: 75px;
+                height: 51px;
+                margin-top: 20px;
+            }
+
+            h3 {
+                font-weight: 500;
+                font-size: 20px;
+            }
+
+            p {
+                margin: 5px 0;
+            }
+
+            .buttons {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                justify-content: flex-end;
+
+                .buttonBlueTemplate {
+                    width: 158px;
+                }
+
+                .deleteButton {
+                    color: $pink;
+                    background: 0 0;
+                    margin: 0;
+                    padding: 10px;
+
+                    p {
+                        font-family: "Rubik", sans-serif;
+                        font-size: 16px;
+                    }
+                }
+            }
+        }
+    }
+}

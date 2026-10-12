@@ -1,5 +1,10 @@
 import { categoryKeywords, colorKeywords, type FilterState, type Product } from "./structures";
 
+export const getImageUrl = (id: number, size: 'small' | 'large' = 'small') => {
+    const folder = size === 'large' ? 'goods_increased' : 'goods';
+    return new URL(`../assets/images/${folder}/image_${id}.png`, import.meta.url).href;
+};
+
 export function getPages(current: number, total: number): (number | '...')[] {
     if (total <= 5) {
         return Array.from({ length: total }, (_, i) => i + 1);

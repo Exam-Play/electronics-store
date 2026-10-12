@@ -1,0 +1,58 @@
+@use '../../../styles/_variables' as *;
+
+.orderForm {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+
+    .buttonBlueTemplate {
+        width: 193px;
+    }
+
+    input[type="email"], input[type="tel"]{
+        width: 286px;
+    }
+
+    .formRow {
+        display: flex;
+        flex-direction: row;
+        gap: 25px;
+    }
+
+    .delivery {
+        width: 286px * 2 + 25px;
+
+        input {
+            width: 100%;
+        }
+    }
+
+    .deliveryGroup {
+        display: flex;
+        flex-direction: row;
+        gap: 40px;
+
+        .radioItem {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+
+            input[type="radio"] {
+                cursor: pointer;
+                appearance: none;
+                width: 20px;
+                height: 20px;
+                background:$gray-border;
+                border-radius: 50%;
+                transition: all 0.1s;
+                margin: 0;
+
+                &:checked {
+                    background:white;
+                    border: 6px solid $blue;
+                }
+            }
+        }
+    }
+}

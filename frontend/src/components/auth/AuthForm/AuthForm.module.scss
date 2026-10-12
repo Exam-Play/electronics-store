@@ -1,0 +1,58 @@
+@use '../../../styles/_variables' as *;
+
+.form {
+    p {
+        max-width: 286px;
+        word-spacing: wrap;
+        margin: -25px 0 15px 0;
+        font-size: 14px;
+        color: $pink;
+    }
+
+    label {
+        font-size: 14px;
+        position: relative;
+
+        &::after {
+            content: '*';
+            color: $pink;
+
+            position: absolute;
+            right: -9px;
+            top: 12px;
+
+            font-size: 20px;
+        }
+    }
+
+    input {
+        min-width: 286px;
+        margin-bottom: 25px;
+
+        &:-webkit-autofill {
+            -webkit-box-shadow: 0 0 0 1000px $gray-border inset;
+        }
+    }
+
+    .authButtons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+
+        button {
+            width: 100%;
+            box-sizing: border-box;
+            cursor: pointer;
+            height: 48px;
+            line-height: 150%;
+            padding: 12px 32px;
+            background: $blue;
+            border: none;
+            border-radius: 8px;
+
+            font-size: 16px;
+            color: $white;
+        }
+    }
+}

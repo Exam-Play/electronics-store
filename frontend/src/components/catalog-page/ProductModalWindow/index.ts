@@ -1,0 +1,1 @@
+export { ProductModalWindow } from './ProductModalWindow'
