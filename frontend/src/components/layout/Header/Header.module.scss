@@ -1,7 +1,9 @@
 @use '../../../styles/_variables' as *;
 
 header {
+    box-sizing: border-box;
     height: 80px;
+    padding: 0 30px;
 
     .profileWrapper {
         position: relative;
@@ -27,6 +29,13 @@ header {
         margin: 0;
     }
 
+    .label {
+        max-width: 120px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
     .items {
         display: flex;
         flex-direction: row;
@@ -37,6 +46,7 @@ header {
         }
 
         .item {
+            position: relative;
             border-radius: 8px;
             display: flex;
             flex-direction: row;
@@ -45,7 +55,6 @@ header {
 
             p {
                 display: flex;
-                justify-content: center;
                 align-items: center;
                 gap: 4px;
             }
@@ -61,6 +70,42 @@ header {
             color: white;
             text-align: center;
             background: $pink;
+        }
+    }
+
+    @include tablet {
+        .items .item {
+            gap: 8px;
+            padding: 12px;
+        }
+    }
+
+    @include mobile {
+        padding: 0 15px;
+
+        img, p {
+            max-height: 16px;
+        }
+
+        .items {
+            gap: 4px;
+
+            .item {
+                gap: 0;
+            }
+
+            .label {
+                display: none !important;
+            }
+
+            .amountGoods {
+                position: absolute;
+                top: 2px;
+                right: 0;
+                width: 18px;
+                font-size: 11px;
+                line-height: 18px;
+            }
         }
     }
 }

@@ -12,11 +12,8 @@ export function Footer() {
     return <footer>
         <div className={styles.wrapper}>
             <div className={styles.aboutCompany}>
-                <div>
-                    <h2>Gadget Hub</h2>
-                    <p>Магазин надежных товаров</p>
-                </div>
-                <div>&copy; {year} ООО "Гаджет Хаб". Все права защищены</div>
+                <h2>Gadget Hub</h2>
+                <p>Магазин надежных товаров</p>
             </div>
             
             <div className={styles.phone}>
@@ -37,6 +34,7 @@ export function Footer() {
                     <img src={whatsappLogo} alt='whatsapp'/>
                 </a>
             </div>
-        </div>    
+        </div>
+        <div className={styles.roots}>&copy; {year} ООО "Гаджет Хаб". Все права защищены</div>
     </footer>
 }

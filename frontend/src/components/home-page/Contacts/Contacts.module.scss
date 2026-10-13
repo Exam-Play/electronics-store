@@ -1,14 +1,33 @@
+@use '../../../styles/_variables' as *;
+
 .section {
     display: flex;
     flex-direction: column;
     gap: 24px;
-    width: 1240px;
+    width: 100%;
+    max-width: 1240px;
     margin-bottom: 80px;
 
     .items {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+    }
+
+    @include tablet {
+        margin-bottom: 40px;
+
+        .items {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @include mobile {
+        margin-bottom: 20px;
+
+        h1 {
+            margin: 0;
+        }
     }
 }
 
@@ -17,11 +36,24 @@
     flex-direction: row;
     align-items: center;
     gap: 10px;
-    width: 392px;
     margin: 20px 0 40px 0;
 
     img {
-        width: 40px;
-        height: 40px;
+        width: clamp(28px, 5vw, 40px);
+        height: clamp(28px, 5vw, 40px);
+    }
+
+    h2 {
+        margin: 0;
+    }
+
+    @include mobile {
+        flex-direction: row;
+        align-items: center;
+        margin: 0 !important;
+
+        img {
+            flex-shrink: 0;
+        }
     }
 }

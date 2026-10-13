@@ -12,6 +12,7 @@ import { ProductCard } from '../../ui/ProductCard';
 import { ProductModalWindow } from '../../catalog-page/ProductModalWindow';
 
 import type { Product } from '../../../utils/structures.ts';
+import {useSwipe} from "../../../hooks/useSwipe.ts";
 
 interface SliderProps {
     nameClass: string,
@@ -45,6 +46,8 @@ export function Slider({
         setLeftIndex((leftIndex + 1) % data.length);
     };
 
+    const swipe = useSwipe(slideRight, slideLeft)
+
     return <div className={nameClass === 'bestsellers'
         ? styles.bestsellers
         : styles.novelties
@@ -56,7 +59,7 @@ export function Slider({
         </div>
         <div className={styles.cardsWrapper}>
             <img src={leftArrowIcon} className={styles.arrow} onClick={slideLeft} alt='arrow left icon'/>
-            <div className={styles.cards}>
+            <div className={styles.cards} {...swipe}>
                 {isLoading ? (
                     Array.from({ length: 3 }).map((_, i) => (
                         <div key={i} className={styles.productCard}></div>

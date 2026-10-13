@@ -1,29 +1,62 @@
+@use '../../../styles/_variables' as *;
+
 .section {
     display: flex;
     flex-direction: column;
     gap: 24px;
-    width: 1240px;
+    width: 100%;
+    max-width: 1240px;
     margin-bottom: 80px;
 
     .items {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+    }
+
+    @include tablet {
+        margin-bottom: 60px;
+
+        .items {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @include mobile {
+        margin-bottom: 40px;
+
+        h1 {
+            font-size: clamp(20px, 5.5vw, 32px);
+            margin: 0;
+        }
     }
 }
 
 .advantages .item {
     display: flex;
     flex-direction: column;
-    gap: 21px;
+    gap: clamp(10px, 2vw, 21px);
     box-sizing: border-box;
-    width: 392px;
-    padding: 32px;
+    padding: clamp(14px, 3vw, 32px);
     background: #F5F5F5;
-    border-radius: 32px;
+    border-radius: clamp(20px, 3vw, 32px);
 
     img {
-        width: 72px;
-        height: 72px;
+        width: clamp(40px, 7vw, 72px);
+        height: clamp(40px, 7vw, 72px);
+    }
+
+    h2 {
+        margin: 0;
+        font-size: clamp(15px, 2.4vw, 24px);
+    }
+
+    @include mobile {
+        flex-direction: row;
+        align-items: center;
+
+        img {
+            flex-shrink: 0;
+        }
     }
 }

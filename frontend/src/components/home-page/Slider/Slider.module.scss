@@ -4,12 +4,13 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    width: 1240px;
+    width: 100%;
+    max-width: 1240px;
     min-height: 455px;
     margin-bottom: 80px;
 
     .description {
-        min-width: 255px;
+        max-width: 255px;
 
         img {
             width: 35px;
@@ -22,12 +23,16 @@
     }
 
     .cardsWrapper {
+        position: relative;
         display: flex;
         flex-direction: row;
         align-items: center;
-        gap: 5px;
+        gap: 10px;
+        flex: 1 1 0;
+        min-width: 0;
 
         .arrow {
+            flex: none;
             user-select: none;
             height: 24px;
             cursor: pointer;
@@ -35,6 +40,11 @@
             padding: 10px;
             border-radius: 50%;
             transition: 0.2s background;
+
+            &:last-child {
+                position: absolute;
+                right: -55px;
+            }
         }
 
         .arrow:hover {
@@ -42,20 +52,139 @@
         }
 
         .cards {
-            display: flex;
-            flex-direction: row;
+            touch-action: pan-y;
+
+            display: grid;
+            justify-items: center;
+            grid-template-columns: repeat(3, minmax(0, 318px));
+            flex: 1 1 0;
+            min-width: 0;
             min-height: 455px;
+            column-gap: 22px;
+
+            @include mobile {
+                grid-template-columns: repeat(2, minmax(0, 318px));
+
+                > :nth-child(3) {
+                    display: none;
+                }
+            }
+
+            @include mini-mobile {
+                grid-template-columns: repeat(1, minmax(0, 318px));
+
+                > :nth-child(2), > :nth-child(3) {
+                    display: none;
+                }
+            }
 
             .productCard {
                 display: flex;
                 flex-direction: column;
-                justify-content: space-between;
-                height: 100%;
-
-                width: 286px;
+                aspect-ratio: 286 / 480;
                 padding: 16px;
                 border-radius: 28px;
-                transition: 0.3s box-shadow;
+            }
+        }
+    }
+
+    @include laptop {
+        margin-bottom: 70px;
+
+        .cardsWrapper {
+            gap: 0;
+
+            .cards {
+                column-gap: 0;
+            }
+
+            .arrow:last-child {
+                position: relative;
+                right: 0;
+            }
+        }
+
+        .description {
+            min-width: 205px;
+        }
+
+        h1 {
+            font-size: clamp(24px, 2.3vw, 32px);
+        }
+
+        p {
+            font-size: 15px;
+        }
+    }
+
+    @include tablet {
+        margin-bottom: 55px;
+        flex-direction: column;
+        align-items: stretch;
+        width: fit-content;
+        max-width: 100%;
+        min-height: 0;
+
+        .description {
+            box-sizing: border-box;
+            flex: none;
+            width: 0;
+            min-width: 100%;
+            max-width: none;
+            margin: 0;
+            padding-left: 60px;
+
+            display: grid;
+            grid-template-columns: auto 1fr;
+            column-gap: 10px;
+
+            p {
+                grid-column: span 2;
+            }
+
+            img {
+                align-self: center;
+            }
+        }
+
+        .cardsWrapper {
+            flex: none;
+
+            .arrow {
+                margin-bottom: 85px;
+            }
+
+            .cards {
+                flex: 0 1 auto;
+                min-height: 0;
+            }
+        }
+    }
+
+    @include mini-tablet {
+        margin-bottom: 40px;
+
+        .description {
+            padding-left: 40px;
+        }
+
+        .cardsWrapper {
+            gap: 5px;
+
+            .cards {
+                column-gap: 20px;
+            }
+        }
+    }
+
+    @include mobile {
+        .description {
+            padding-left: 16px;
+        }
+
+        .cardsWrapper {
+            .cards {
+                column-gap: 10px;
             }
         }
     }

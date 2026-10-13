@@ -50,7 +50,7 @@ function HeaderComponent(){
                 >
                     <div className={styles.item}>
                         <img src={catalogLogo} alt='catalog-logo'/>
-                        <p>Каталог</p>
+                        <p><span className={styles.label}>Каталог</span></p>
                     </div>
                 </Link>
 
@@ -62,7 +62,7 @@ function HeaderComponent(){
                 >
                     <div className={styles.item}>
                         <img src={cartLogo} alt='cart-logo'/>
-                        <p>Корзина</p>
+                        <p><span className={styles.label}>Корзина</span></p>
                         {authStore.isLoggedIn && cartStore.cartCount !== 0 &&
                             <div className={styles.amountGoods}>
                                 {cartStore.cartCount}
@@ -90,7 +90,9 @@ function HeaderComponent(){
                         <div className={styles.item}>
                             <img src={profileLogo} alt='profile-logo'/>
                             <p>
-                                {authStore.isLoggedIn ? authStore.username : "Войти"}
+                                <span className={styles.label}>
+                                    {authStore.isLoggedIn ? authStore.username : "Войти"}
+                                </span>
                                 {authStore.isLoggedIn && <ChevronDown size={19} />}
                             </p>
                         </div>

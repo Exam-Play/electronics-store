@@ -1,8 +1,10 @@
 @use '../../../styles/_variables' as *;
 
 .historyCartContent {
+    box-sizing: border-box;
     background: $white;
-    width: 1240px;
+    width: 100%;
+    max-width: 1240px;
     border-radius: 8px;
     padding: 10px 40px;
     margin-left: -40px;

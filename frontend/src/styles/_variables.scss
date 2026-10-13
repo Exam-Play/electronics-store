@@ -14,3 +14,15 @@ $gray-light: #ECEFF3;
 $text: #484848;
 $white: #FFFFFF;
 $green: #00E398;
+
+$bp-laptop: 1400px;
+$bp-tablet: 1280px;
+$bp-mini-tablet: 1040px;
+$bp-mobile: 768px;
+$bp-mini-mobile: 480px;
+
+@mixin laptop { @media (max-width: $bp-laptop) { @content; } }
+@mixin tablet { @media (max-width: $bp-tablet) { @content; } }
+@mixin mini-tablet { @media (max-width: $bp-mini-tablet) { @content; } }
+@mixin mobile { @media (max-width: $bp-mobile) { @content; } }
+@mixin mini-mobile { @media (max-width: $bp-mini-mobile) { @content; } }

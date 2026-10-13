@@ -9,7 +9,8 @@
     }
 
     .sorting {
-        width: 1240px;
+        width: 100%;
+        max-width: 1240px;
         display: flex;
         user-select: none;
         margin-bottom: 5px;
